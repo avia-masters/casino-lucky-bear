@@ -1,213 +1,132 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BOT-LUCKYBEAR | AVIAMASTERS</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUCKY BEAR</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
 <style>
-body {
-  margin: 0;
-  font-family: 'Orbitron', sans-serif;
-  background: radial-gradient(circle at top, #0e0015, #000);
-  color: #fff;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
-
-/* мягкое свечение */
-.bg-glow {
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: #ffcc00;
-  filter: blur(180px);
-  opacity: 0.12;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+radial-gradient(circle at top,#ffe06622 0%,transparent 35%),
+linear-gradient(135deg,#0b1020,#161b2f,#0d1323);
+color:#fff;
 }
-
-/* header */
-header {
-  text-align: center;
-  padding: 40px 20px 10px;
+body::before{
+content:"";
+position:absolute;
+width:700px;
+height:700px;
+background:#ffd54f15;
+filter:blur(120px);
+border-radius:50%;
+animation:float 8s ease-in-out infinite;
 }
-
-.logo {
-  font-size: 40px;
-  color: #ffcc00;
-  text-shadow: 0 0 15px #ffcc00;
+@keyframes float{
+50%{
+transform:translateY(-30px) scale(1.1);
 }
-
-.sub {
-  color: #aaa;
-  margin-top: 8px;
 }
-
-/* main card */
-.card {
-  max-width: 850px;
-  margin: 30px auto;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,204,0,0.2);
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 0 35px rgba(255,204,0,0.08);
+.card{
+position:relative;
+z-index:2;
+width:420px;
+max-width:90%;
+padding:40px;
+border-radius:28px;
+background:rgba(255,255,255,.07);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.1);
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+text-align:center;
+animation:show .8s ease;
 }
-
-/* game area */
-.game-box {
-  text-align: center;
-  padding: 20px;
+@keyframes show{
+from{
+opacity:0;
+transform:translateY(40px);
 }
-
-.plane {
-  font-size: 55px;
-  margin: 10px 0;
-  animation: fly 1.8s infinite alternate ease-in-out;
+to{
+opacity:1;
+transform:translateY(0);
 }
-
-@keyframes fly {
-  from { transform: translateX(-25px); }
-  to { transform: translateX(25px); }
 }
-
-/* multiplier */
-.multiplier {
-  font-size: 42px;
-  color: #ffcc00;
-  text-shadow: 0 0 10px #ffcc00;
-  margin: 10px 0;
+.logo{
+font-size:72px;
+margin-bottom:15px;
+animation:pulse 2s infinite;
 }
-
-/* timer */
-.timer {
-  font-size: 14px;
-  color: #999;
+@keyframes pulse{
+50%{
+transform:scale(1.08);
 }
-
-/* button */
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 14px 32px;
-  background: linear-gradient(45deg, #ffcc00, #ff6600);
-  color: #000;
-  font-weight: bold;
-  border-radius: 12px;
-  text-decoration: none;
-  box-shadow: 0 0 20px #ffcc00;
-  transition: 0.25s;
 }
-
-.btn:hover {
-  transform: scale(1.05);
+h1{
+font-size:42px;
+font-weight:800;
+color:#ffd54f;
+margin-bottom:15px;
 }
-
-/* activity */
-.activity {
-  margin-top: 25px;
-  background: rgba(0,0,0,0.35);
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,204,0,0.15);
-  max-height: 160px;
-  overflow: hidden;
+p{
+font-size:16px;
+line-height:1.7;
+color:#ddd;
+margin-bottom:30px;
 }
-
-.log {
-  font-size: 12px;
-  color: #0f0;
-  margin: 4px 0;
-  opacity: 0.9;
+.button{
+display:block;
+text-decoration:none;
+background:linear-gradient(90deg,#ffd54f,#ffb300);
+padding:18px;
+border-radius:18px;
+color:#111;
+font-size:22px;
+font-weight:700;
+transition:.3s;
+box-shadow:0 15px 35px rgba(255,193,7,.35);
 }
-
-/* footer */
-footer {
-  text-align: center;
-  font-size: 11px;
-  color: #666;
-  margin: 30px 0;
+.button:hover{
+transform:translateY(-3px);
+box-shadow:0 20px 40px rgba(255,193,7,.45);
+}
+.small{
+margin-top:20px;
+opacity:.7;
+font-size:13px;
 }
 </style>
-</head>
-
-<body>
-
-<div class="bg-glow"></div>
-
-<header>
-  <div class="logo">BOT-LUCKYBEAR</div>
-  <div class="sub">AVIAMASTERS • crash game experience</div>
-</header>
-
-<div class="card">
-
-  <div class="game-box">
-    <div class="timer">Раунд начнётся через: <span id="time">5</span> сек</div>
-
-    <div class="plane">✈️</div>
-
-    <div class="multiplier" id="multi">x1.00</div>
-
-    <div style="color:#bbb;font-size:14px;">
-      Успей забрать множитель до падения самолёта
-    </div>
-
-    <a class="btn" href="https://t.me/your_channel" target="_blank">
-      🚀 Играть в Telegram
-    </a>
-  </div>
-
-  <div class="activity">
-    <div class="log">💰 Alex cashout x2.14</div>
-    <div class="log">💰 Player777 cashout x3.02</div>
-    <div class="log">💰 LuckyBear x4.11</div>
-  </div>
-
-</div>
-
-<footer>
-  18+ | игра содержит риск. играйте ответственно.
-</footer>
-
 <script>
-let time = 5;
-let multiplier = 1.00;
-
-const timeEl = document.getElementById("time");
-const multiEl = document.getElementById("multi");
-
-function startRound() {
-  time = 5;
-  multiplier = 1.00;
-
-  let countdown = setInterval(() => {
-    time--;
-    timeEl.textContent = time;
-
-    if (time <= 0) {
-      clearInterval(countdown);
-      startCrash();
-    }
-  }, 1000);
-}
-
-function startCrash() {
-  let interval = setInterval(() => {
-    multiplier += Math.random() * 0.08;
-    multiEl.textContent = "x" + multiplier.toFixed(2);
-
-    if (multiplier > 10) {
-      clearInterval(interval);
-      setTimeout(startRound, 3000);
-    }
-  }, 120);
-}
-
-startRound();
+setTimeout(function(){
+window.location.href="https://t.me/Lenvor_bot/app?startapp=bXN0PTB4Njk3ZmQ2NDYmbT1TYXZyYXNraSZjPWRlZmF1bHQ";
+},2500);
 </script>
-
+</head>
+<body>
+<div class="card">
+<div class="logo">🐻</div>
+<h1>LUCKY BEAR</h1>
+<p>
+Добро пожаловать в мир ярких эмоций и развлечений.
+Нажмите кнопку ниже или дождитесь автоматического перехода в Telegram.
+</p>
+<a class="button"
+href="https://t.me/Lenvor_bot/app?startapp=bXN0PTB4Njk3ZmQ2NDYmbT1TYXZyYXNraSZjPWRlZmF1bHQ">
+🎰 Открыть игру
+</a>
+<div class="small">
+Автоматический переход через 2,5 секунды
+</div>
+</div>
 </body>
 </html>
