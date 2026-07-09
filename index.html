@@ -714,9 +714,7 @@ max-width:900px{
 /* ===== КНОПКА БОТА ===== */
 
 .bot-button {
-display:flex;
-align-items:center;
-gap:10px;
+
     position:absolute;
 
     right:40px;
@@ -725,7 +723,15 @@ gap:10px;
 
     transform:translateY(-50%);
 
-    padding:12px 22px;
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:0 16px;
 
     border-radius:25px;
 
@@ -733,21 +739,24 @@ gap:10px;
 
     text-decoration:none;
 
+    font-size:14px;
+
     border:1px solid rgba(0,255,255,.5);
 
     background:
     rgba(0,255,255,.08);
 
     transition:.3s;
-    .bot-button img {
 
-    width:30px;
+}
 
-    height:30px;
+.bot-button img {
+
+    width:25px !important;
+
+    height:25px !important;
 
     object-fit:contain;
-
-    border-radius:50%;
 
 }
 
