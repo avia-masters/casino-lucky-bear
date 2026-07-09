@@ -515,17 +515,27 @@ max-width:900px{
 
 }
 
-/* ===== КНОПКА-ЛОГОТИП ===== */
+/* ===== ИКОНКА В ШАПКЕ ===== */
+
+.brand-icon {
+
+    position:absolute;
+
+    left:40px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+}
 
 .brand-icon img {
 
-    width:55px;
+    width:80px;
 
-    height:55px;
+    height:80px;
 
     object-fit:contain;
-
-    border-radius:50%;
 
     transition:.3s;
 
@@ -534,6 +544,46 @@ max-width:900px{
 .brand-icon img:hover {
 
     transform:scale(1.1);
+
+}
+
+/* ===== КНОПКА БОТА ===== */
+
+.bot-button {
+
+    position:absolute;
+
+    right:40px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    padding:12px 22px;
+
+    border-radius:25px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    border:1px solid rgba(0,255,255,.5);
+
+    background:
+    rgba(0,255,255,.08);
+
+    transition:.3s;
+
+}
+
+.bot-button:hover {
+
+    background:
+    rgba(0,255,255,.2);
+
+    transform:
+    translateY(-50%)
+    scale(1.05);
 
 }
     </style>
