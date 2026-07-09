@@ -127,19 +127,23 @@ header {
 
     position:relative;
 
-    width:330px;
+    width:380px;
 
-    max-width:80%;
+    max-width:75vw;
 
     z-index:2;
 
-    animation:
+    object-fit:contain;
 
-    logoAppear 2s ease;
+    border-radius:35px;
+
+    animation:
+    logoAppear 2s ease,
+    floatLogo 4s ease-in-out infinite;
 
     filter:
     drop-shadow(
-    0 0 40px rgba(255,215,0,.7)
+    0 0 35px rgba(0,255,255,.35)
     );
 
 }
@@ -148,21 +152,37 @@ header {
 
 from {
 
-opacity:0;
+    opacity:0;
 
-transform:
-translateY(50px)
-scale(.8);
+    transform:
+    translateY(50px)
+    scale(.8);
 
 }
 
 to {
 
-opacity:1;
+    opacity:1;
 
-transform:
-translateY(0)
-scale(1);
+    transform:
+    translateY(0)
+    scale(1);
+
+}
+
+}
+
+@keyframes floatLogo {
+
+0%,100% {
+
+    transform:translateY(0);
+
+}
+
+50% {
+
+    transform:translateY(-12px);
 
 }
 
