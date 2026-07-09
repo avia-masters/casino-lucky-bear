@@ -3,130 +3,603 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUCKY BEAR</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+
+<title>Lucky Bear</title>
+<meta name="description" content="Современная игровая платформа">
+
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
-body{
-height:100vh;
-overflow:hidden;
+
+body {
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#ffd54f33,transparent 35%),
+    linear-gradient(135deg,#080b14,#151b2d,#080b14);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* фоновые частицы */
+
+.bg {
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+}
+
+.circle {
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,213,79,.15);
+    filter:blur(5px);
+    animation:float 10s infinite ease-in-out;
+}
+
+.circle:nth-child(1){
+    width:200px;
+    height:200px;
+    top:10%;
+    left:10%;
+}
+
+.circle:nth-child(2){
+    width:300px;
+    height:300px;
+    right:5%;
+    bottom:10%;
+    animation-delay:3s;
+}
+
+.circle:nth-child(3){
+    width:150px;
+    height:150px;
+    left:45%;
+    bottom:20%;
+    animation-delay:6s;
+}
+
+@keyframes float {
+
+0%,100% {
+    transform:translateY(0);
+}
+
+50% {
+    transform:translateY(-40px);
+}
+
+}
+
+/* контейнер */
+
+.wrapper {
+
+position:relative;
+z-index:2;
+
+min-height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
-background:
-radial-gradient(circle at top,#ffe06622 0%,transparent 35%),
-linear-gradient(135deg,#0b1020,#161b2f,#0d1323);
-color:#fff;
+
+padding:25px;
+
 }
-body::before{
-content:"";
-position:absolute;
-width:700px;
-height:700px;
-background:#ffd54f15;
-filter:blur(120px);
-border-radius:50%;
-animation:float 8s ease-in-out infinite;
-}
-@keyframes float{
-50%{
-transform:translateY(-30px) scale(1.1);
-}
-}
-.card{
-position:relative;
-z-index:2;
+
+/* карточка */
+
+.card {
+
 width:420px;
-max-width:90%;
-padding:40px;
-border-radius:28px;
-background:rgba(255,255,255,.07);
+max-width:100%;
+
+background:
+rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.15);
+
 backdrop-filter:blur(18px);
-border:1px solid rgba(255,255,255,.1);
-box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+border-radius:30px;
+
+padding:40px 30px;
+
 text-align:center;
-animation:show .8s ease;
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.5);
+
+animation:
+show .8s ease;
+
 }
-@keyframes show{
-from{
+
+@keyframes show {
+
+from {
 opacity:0;
 transform:translateY(40px);
 }
-to{
+
+to {
 opacity:1;
 transform:translateY(0);
 }
+
 }
-.logo{
-font-size:72px;
-margin-bottom:15px;
+
+/* логотип */
+
+.logo {
+
+width:120px;
+height:120px;
+
+margin:0 auto 25px;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:65px;
+
+background:
+linear-gradient(145deg,#ffd54f,#ff9800);
+
+box-shadow:
+0 0 40px rgba(255,193,7,.6);
+
 animation:pulse 2s infinite;
+
 }
-@keyframes pulse{
-50%{
+
+@keyframes pulse {
+
+50% {
 transform:scale(1.08);
 }
+
 }
-h1{
+
+h1 {
+
 font-size:42px;
-font-weight:800;
+
+letter-spacing:2px;
+
 color:#ffd54f;
+
 margin-bottom:15px;
+
 }
-p{
-font-size:16px;
-line-height:1.7;
+
+.subtitle {
+
+font-size:18px;
+
 color:#ddd;
+
+line-height:1.6;
+
 margin-bottom:30px;
+
 }
-.button{
-display:block;
-text-decoration:none;
-background:linear-gradient(90deg,#ffd54f,#ffb300);
+  /* кнопка */
+
+.main-btn {
+
+display:inline-flex;
+
+align-items:center;
+justify-content:center;
+
+width:100%;
+
 padding:18px;
+
 border-radius:18px;
+
+background:
+linear-gradient(90deg,#ffd54f,#ffb300);
+
 color:#111;
-font-size:22px;
-font-weight:700;
+
+font-size:20px;
+
+font-weight:800;
+
+text-decoration:none;
+
 transition:.3s;
-box-shadow:0 15px 35px rgba(255,193,7,.35);
+
+box-shadow:
+0 15px 35px rgba(255,193,7,.35);
+
 }
-.button:hover{
-transform:translateY(-3px);
-box-shadow:0 20px 40px rgba(255,193,7,.45);
+
+.main-btn:hover {
+
+transform:translateY(-4px);
+
+box-shadow:
+0 20px 45px rgba(255,193,7,.55);
+
 }
-.small{
+
+/* маленький текст */
+
+.info {
+
 margin-top:20px;
-opacity:.7;
-font-size:13px;
+
+font-size:14px;
+
+color:#aaa;
+
 }
-</style>
-<script>
-setTimeout(function(){
-window.location.href="https://t.me/Lenvor_bot/app?startapp=bXN0PTB4Njk3ZmQ2NDYmbT1TYXZyYXNraSZjPWRlZmF1bHQ";
-},2500);
-</script>
+
+/* блок преимуществ */
+
+.features {
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:1fr;
+
+gap:15px;
+
+}
+
+.feature {
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+text-align:left;
+
+transition:.3s;
+
+}
+
+.feature:hover {
+
+background:
+rgba(255,255,255,.12);
+
+transform:translateX(5px);
+
+}
+
+.icon {
+
+width:45px;
+
+height:45px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:14px;
+
+background:
+rgba(255,213,79,.2);
+
+font-size:22px;
+
+}
+
+.feature h3 {
+
+font-size:16px;
+
+margin-bottom:5px;
+
+}
+
+.feature p {
+
+font-size:13px;
+
+color:#aaa;
+
+}
+
+/* нижний блок */
+
+.footer {
+
+margin-top:35px;
+
+padding-top:20px;
+
+border-top:
+
+1px solid rgba(255,255,255,.1);
+
+font-size:13px;
+
+color:#888;
+
+}
+
+/* дополнительные карточки */
+
+.games {
+
+margin-top:40px;
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+}
+
+.game {
+
+padding:20px 10px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+font-size:28px;
+
+transition:.3s;
+
+}
+
+.game span {
+
+display:block;
+
+font-size:14px;
+
+margin-top:8px;
+
+color:#ddd;
+
+}
+
+.game:hover {
+
+transform:translateY(-8px);
+
+background:
+rgba(255,213,79,.15);
+
+}
+
+/* адаптация */
+
+max-width:480px{
+
+.card {
+
+padding:30px 20px;
+
+}
+
+h1 {
+
+font-size:34px;
+
+}
+
+.logo {
+
+width:100px;
+
+height:100px;
+
+font-size:55px;
+
+}
+
+}
+  </style>
+
 </head>
+
 <body>
+
+<div class="bg">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+</div>
+
+<div class="wrapper">
+
 <div class="card">
-<div class="logo">🐻</div>
-<h1>LUCKY BEAR</h1>
-<p>
-Добро пожаловать в мир ярких эмоций и развлечений.
-Нажмите кнопку ниже или дождитесь автоматического перехода в Telegram.
-</p>
-<a class="button"
-href="https://t.me/Lenvor_bot/app?startapp=bXN0PTB4Njk3ZmQ2NDYmbT1TYXZyYXNraSZjPWRlZmF1bHQ">
-🎰 Открыть игру
+
+<div class="logo">
+🐻
+</div>
+
+<h1>
+LUCKY BEAR
+</h1>
+
+<div class="subtitle">
+Добро пожаловать в современную игровую платформу.
+Яркий дизайн, удобный интерфейс и быстрый доступ с любого устройства.
+</div>
+
+<a href="#" class="main-btn">
+🚀 Начать игру
 </a>
-<div class="small">
-Автоматический переход через 2,5 секунды
+
+<div class="info">
+Нажмите кнопку, чтобы продолжить
 </div>
+
+<div class="features">
+
+<div class="feature">
+
+<div class="icon">
+⚡
 </div>
+
+<div>
+<h3>
+Быстрый запуск
+</h3>
+
+<p>
+Мгновенный доступ с любого устройства
+</p>
+
+</div>
+
+</div>
+
+<div class="feature">
+
+<div class="icon">
+📱
+</div>
+
+<div>
+
+<h3>
+Мобильная версия
+</h3>
+
+<p>
+Оптимизировано для смартфонов
+</p>
+
+</div>
+
+</div>
+
+<div class="feature">
+
+<div class="icon">
+⭐
+</div>
+
+<div>
+
+<h3>
+Удобный интерфейс
+</h3>
+
+<p>
+Простой и понятный дизайн
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="games">
+
+<div class="game">
+🎮
+<span>
+Games
+</span>
+</div>
+
+<div class="game">
+🏆
+<span>
+Rewards
+</span>
+</div>
+
+<div class="game">
+🔥
+<span>
+Events
+</span>
+</div>
+
+<div class="game">
+💎
+<span>
+Premium
+</span>
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Lucky Bear
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// плавное появление элементов
+
+const items = document.querySelectorAll(
+'.feature, .game'
+);
+
+items.forEach((item,index)=>{
+
+item.style.opacity="0";
+
+item.style.transform="translateY(20px)";
+
+setTimeout(()=>{
+
+item.style.transition="0.6s";
+
+item.style.opacity="1";
+
+item.style.transform="translateY(0)";
+
+},300 + index*150);
+
+});
+
+</script>
+
 </body>
+
 </html>
