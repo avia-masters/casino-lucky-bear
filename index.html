@@ -1265,6 +1265,57 @@ section {
     font-size:16px;
 
 }
+    /* ===== ФИРМЕННЫЙ ФОН LUCKY BEAR ===== */
+
+.bear-background {
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:0;
+
+    background-image:
+    url("images/menu-logo.png"),
+    url("images/menu-logo.png"),
+    url("images/menu-logo.png"),
+    url("images/menu-logo.png");
+
+    background-repeat:no-repeat;
+
+    background-position:
+
+    5% 15%,
+    90% 30%,
+    10% 70%,
+    85% 85%;
+
+    background-size:
+
+    260px,
+    320px,
+    220px,
+    280px;
+
+    opacity:.04;
+
+    filter:blur(1px);
+
+}
+
+/* весь сайт выше фоновых изображений */
+
+header,
+section,
+footer {
+
+    position:relative;
+
+    z-index:1;
+
+}
     </style>
 
 </head>
