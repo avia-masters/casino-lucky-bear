@@ -1402,6 +1402,142 @@ footer {
     z-index:1;
 
 }
+    /* ===== LUCKY BEAR PREMIUM FINAL STYLE ===== */
+
+.section-title {
+    font-size: 42px;
+    text-align:center;
+    margin-bottom:25px;
+    color:#f4f5f6;
+    letter-spacing:0.5px;
+}
+
+.section-description {
+
+    max-width:850px;
+
+    margin:0 auto 50px;
+
+    text-align:center;
+
+    color:rgba(255,255,255,.72);
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+/* Общие блоки */
+
+.game-steps,
+.rules-box,
+.bonus-box,
+.faq-box {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:28px;
+
+}
+
+/* Карточки */
+
+.game-step,
+.rule-card,
+.bonus-card,
+.faq-item {
+
+    background:
+    rgba(255,255,255,.06);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    border-radius:24px;
+
+    padding:32px;
+
+    backdrop-filter:blur(12px);
+
+    transition:.35s;
+
+}
+
+.game-step:hover,
+.rule-card:hover,
+.bonus-card:hover,
+.faq-item:hover {
+
+    transform:translateY(-5px);
+
+    background:
+    rgba(255,255,255,.09);
+
+}
+
+/* Заголовки карточек */
+
+.game-step h3,
+.rule-card h3,
+.bonus-card h3,
+.faq-item h3 {
+
+    color:#ffffff;
+
+    font-size:21px;
+
+    margin-bottom:15px;
+
+}
+
+/* Текст */
+
+.game-step p,
+.rule-card p,
+.bonus-card p,
+.faq-item p {
+
+    color:
+    rgba(255,255,255,.72);
+
+    line-height:1.7;
+
+}
+
+/* Убираем старые цвета */
+
+.rule-card,
+.bonus-card {
+
+    border-color:
+    rgba(255,255,255,.12);
+
+}
+
+/* Мобильная версия */
+
+max-width:900px{
+
+.game-steps,
+.rules-box,
+.bonus-box,
+.faq-box {
+
+grid-template-columns:1fr;
+
+}
+
+.section-title {
+
+font-size:32px;
+
+}
+
+}
     </style>
 
 </head>
