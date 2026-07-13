@@ -1677,7 +1677,253 @@ observer.observe(el);
 });
 
 </script>
+<style>
+/* ===========================
+   LUCKY BEAR PREMIUM STYLE
+   =========================== */
 
+:root {
+    --bg-main: #101820;
+    --bg-card: rgba(20, 30, 38, 0.72);
+    --bg-card-hover: rgba(35, 48, 58, 0.85);
+    --text-main: #f2f4f5;
+    --text-soft: #b8c1c8;
+    --border: rgba(255,255,255,0.10);
+    --accent: #9fb7aa;
+    --shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+/* Общий фон */
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    letter-spacing: 0.2px;
+}
+
+/* Контейнеры */
+
+section {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 25px;
+}
+
+/* Заголовки */
+
+h1,
+h2,
+h3 {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+h2 {
+    font-size: 38px;
+    margin-bottom: 25px;
+}
+
+p {
+    color: var(--text-soft);
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+/* Карточки разделов */
+
+.card,
+.feature-card,
+.info-card {
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.03)
+    );
+
+    border:
+    1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 32px;
+
+    backdrop-filter: blur(14px);
+
+    box-shadow: var(--shadow);
+
+    transition:
+    transform .3s ease,
+    background .3s ease,
+    border .3s ease;
+}
+
+.card:hover,
+.feature-card:hover,
+.info-card:hover {
+
+    transform: translateY(-6px);
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.12),
+        rgba(255,255,255,0.05)
+    );
+
+    border-color:
+    rgba(255,255,255,0.18);
+}
+
+/* Сетка карточек */
+
+.cards-wrapper {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+
+}
+
+/* Премиальные иконки */
+
+.icon-box {
+
+    width:58px;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border:
+    1px solid rgba(255,255,255,0.12);
+
+    margin-bottom:22px;
+
+}
+
+/* Кнопка Telegram */
+
+.telegram-button {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+    14px 28px;
+
+    border-radius:14px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    text-decoration:none;
+
+    border:
+    1px solid rgba(255,255,255,0.15);
+
+    transition:.3s;
+
+}
+
+.telegram-button:hover {
+
+    background:
+    rgba(255,255,255,0.16);
+
+    transform:translateY(-2px);
+
+}
+
+/* Логотип */
+
+.logo {
+
+    filter:
+    drop-shadow(0 15px 35px rgba(0,0,0,.45));
+
+    transition:.3s;
+
+}
+
+.logo:hover {
+
+    transform:scale(1.03);
+
+}
+
+/* FAQ */
+
+.faq-item {
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:15px;
+
+}
+
+/* Мобильная версия */
+
+max-width:768px{
+
+    section {
+
+        padding:
+        60px 18px;
+
+    }
+
+    h2 {
+
+        font-size:30px;
+
+    }
+
+    p {
+
+        font-size:16px;
+
+    }
+
+    .card,
+    .feature-card,
+    .info-card {
+
+        padding:24px;
+
+    }
+
+}
+
+</style>
 </body>
 
 </html>
