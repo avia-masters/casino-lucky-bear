@@ -1547,117 +1547,138 @@ header {
 #rules {
     background: rgba(255,0,0,.1);
 }
-    /* ===== PREMIUM RULES STYLE ===== */
+   /* ===== NEW RULES DESIGN ===== */
 
-#rules .info-grid {
+#rules {
 
-    max-width:1100px;
-    margin:40px auto 0;
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    gap:28px;
+    max-width:1200px;
+    margin:auto;
 
 }
 
-#rules .info-card {
+#rules .section-title {
 
-    padding:32px;
-
-    min-height:260px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.025)
-    );
-
-    border:1px solid rgba(255,255,255,.12);
-
-    border-radius:24px;
-
-    backdrop-filter:blur(15px);
-
-    transition:.35s ease;
+    margin-bottom:20px;
 
 }
 
-#rules .info-card:hover {
+#rules .section-description {
 
-    transform:translateY(-8px);
+    max-width:850px;
 
-    border-color:
-    rgba(0,255,255,.35);
+    margin:0 auto 60px;
 
-    box-shadow:
-    0 20px 50px rgba(0,255,255,.12);
+    text-align:center;
 
-}
+    color:rgba(255,255,255,.7);
 
-#rules .info-card h3 {
-
-    color:#ffffff;
-
-    font-size:24px;
-
-    margin-bottom:18px;
-
-}
-
-#rules .info-card p {
-
-    color:
-    rgba(255,255,255,.72);
-
-    font-size:16px;
+    font-size:18px;
 
     line-height:1.8;
 
 }
 
-#rules .info-card h3::before {
+/* верхние правила */
 
-    content:"✦";
+#rules .info-grid {
 
-    color:#00ffff;
+    display:flex;
 
-    margin-right:10px;
+    flex-direction:column;
+
+    gap:20px;
+
+    max-width:950px;
+
+    margin:auto;
 
 }
 
+#rules .info-card {
+
+    display:grid;
+
+    grid-template-columns:220px 1fr;
+
+    align-items:center;
+
+    gap:35px;
+
+    padding:35px 40px;
+
+    background:
+
+    rgba(255,255,255,.035);
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+    border-radius:26px;
+
+}
+
+#rules .info-card h3 {
+
+    font-size:25px;
+
+    color:white;
+
+    margin:0;
+
+}
+
+#rules .info-card p {
+
+    color:#c4ccd4;
+
+    line-height:1.8;
+
+    font-size:16px;
+
+}
+
+/* нижние блоки */
+
 .rules-extra {
 
-    max-width:1100px;
+    max-width:950px;
 
-    margin:40px auto 0;
+    margin:50px auto 0;
 
     display:grid;
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:25px;
+    gap:22px;
 
 }
 
 .rules-extra .rule-card {
 
-    padding:28px;
+    padding:30px;
 
     background:
-    rgba(255,255,255,.05);
+
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,.025)
+    );
 
     border:
-    1px solid rgba(255,255,255,.12);
 
-    border-radius:22px;
+    1px solid rgba(255,255,255,.1);
+
+    border-radius:24px;
 
 }
 
 .rules-extra .rule-card h3 {
 
-    color:#00ffff;
+    color:white;
+
+    font-size:20px;
 
     margin-bottom:15px;
 
@@ -1665,15 +1686,20 @@ header {
 
 .rules-extra .rule-card p {
 
-    color:#c5cbd2;
+    color:#b9c1c8;
 
     line-height:1.7;
 
 }
 
-max-width:900px{
+max-width:800px{
 
-    #rules .info-grid,
+    #rules .info-card {
+
+        grid-template-columns:1fr;
+
+    }
+
     .rules-extra {
 
         grid-template-columns:1fr;
