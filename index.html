@@ -1545,7 +1545,7 @@ header {
 #rules {
     background: rgba(255,0,0,.1);
 }
-/* ===== CLEAN PREMIUM TEXT SECTIONS ===== */
+/* ===== PREMIUM RULES STYLE ===== */
 
 #rules .info-grid {
 
@@ -1563,12 +1563,11 @@ header {
 
     border:none !important;
 
-    border-radius:0;
+    border-bottom:1px solid rgba(255,255,255,.12) !important;
 
-    padding:35px 0;
+    border-radius:0 !important;
 
-    border-bottom:
-    1px solid rgba(255,255,255,.12) !important;
+    padding:35px 0 !important;
 
 }
 
@@ -1584,45 +1583,27 @@ header {
 
     color:#ffffff;
 
-    margin-bottom:15px;
-
-    position:relative;
-
-}
-
-#rules .info-card h3:before {
-
-    content:"";
-
-    display:inline-block;
-
-    width:35px;
-
-    height:2px;
-
-    background:#00ffff;
-
-    margin-right:15px;
-
-    vertical-align:middle;
+    margin-bottom:18px;
 
 }
 
 #rules .info-card p {
 
-    max-width:760px;
-
     color:rgba(255,255,255,.72);
 
     font-size:17px;
 
-    line-height:1.9;
+    line-height:1.8;
 
-    margin-bottom:10px;
+    max-width:800px;
 
 }
 
-/* нижние правила */
+#rules .step-icon {
+
+    display:none;
+
+}
 
 .rules-extra {
 
@@ -1634,7 +1615,7 @@ header {
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:40px;
+    gap:35px;
 
 }
 
@@ -1644,7 +1625,7 @@ header {
 
     border:none !important;
 
-    padding:0;
+    padding:0 !important;
 
 }
 
@@ -1668,20 +1649,11 @@ header {
 
 max-width:800px{
 
-.rules-extra{
+    .rules-extra{
 
-    grid-template-columns:1fr;
+        grid-template-columns:1fr;
 
-}
-
-}
-    #rules .info-card {
-
-    background:red !important;
-
-    padding:40px !important;
-
-    border-radius:0 !important;
+    }
 
 }
     </style>
