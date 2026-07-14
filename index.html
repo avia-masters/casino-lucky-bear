@@ -2326,6 +2326,158 @@ max-width:900px{
 
     box-shadow:none !important;
 
+}/* ===== LUCKY BEAR BRAND TYPOGRAPHY ===== */
+
+.section-title {
+
+    font-size:46px !important;
+
+    font-weight:800 !important;
+
+    letter-spacing:1px !important;
+
+    color:#ffffff !important;
+
+    text-transform:none;
+
+    margin-bottom:30px !important;
+
+}
+
+.section-description {
+
+    max-width:850px !important;
+
+    margin:0 auto 70px !important;
+
+    color:rgba(255,255,255,.62) !important;
+
+    font-size:19px !important;
+
+    line-height:1.9 !important;
+
+}
+
+/* Все внутренние блоки */
+
+.info-block,
+.info-card,
+.about-card,
+.bonus-card,
+.rule-card,
+.faq-item,
+.game-step {
+
+    position:relative;
+
+    padding:45px 0 !important;
+
+    background:transparent !important;
+
+    border:none !important;
+
+}
+
+/* Фирменная линия */
+
+.info-block::after,
+.info-card::after,
+.about-card::after,
+.bonus-card::after,
+.rule-card::after,
+.faq-item::after,
+.game-step::after {
+
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    width:70px;
+
+    height:2px;
+
+    background:#00ffff;
+
+    opacity:.5;
+
+}
+
+/* Последний блок без линии */
+
+.info-block:last-child::after,
+.info-card:last-child::after,
+.about-card:last-child::after,
+.bonus-card:last-child::after,
+.rule-card:last-child::after,
+.faq-item:last-child::after,
+.game-step:last-child::after {
+
+    display:none;
+
+}
+
+/* Заголовки внутри */
+
+.info-block h3,
+.info-card h3,
+.about-card h3,
+.bonus-card h3,
+.rule-card h3,
+.faq-item h3,
+.game-step h3 {
+
+    font-size:30px !important;
+
+    font-weight:800 !important;
+
+    color:#ffffff !important;
+
+    margin-bottom:20px !important;
+
+    letter-spacing:.3px;
+
+}
+
+/* Текст */
+
+.info-block p,
+.info-card p,
+.about-card p,
+.bonus-card p,
+.rule-card p,
+.faq-item p,
+.game-step p {
+
+    max-width:850px;
+
+    color:rgba(255,255,255,.68) !important;
+
+    font-size:18px !important;
+
+    line-height:1.9 !important;
+
+    letter-spacing:.1px;
+
+}
+
+/* Убираем старые эффекты карточек */
+
+.info-block:hover,
+.info-card:hover,
+.about-card:hover,
+.bonus-card:hover,
+.rule-card:hover,
+.faq-item:hover,
+.game-step:hover {
+
+    transform:none !important;
+
+    box-shadow:none !important;
+
 }
     </style>
 
