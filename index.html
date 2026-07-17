@@ -2478,58 +2478,30 @@ max-width:900px{
 
     box-shadow:none !important;
 
-}/* Фиксация меню сверху */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    border-bottom: 1px solid #4a8bb3;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: #4a8bb3;
-}
-
-/* Мобильная адаптация (в одну строку) */
 max-width: 768px {
-    .nav-links {
-        gap: 10px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding-bottom: 5px;
-    }
-    .nav-links a {
-        font-size: 14px;
-        padding: 4px 8px;
-    }
     .navbar {
-        padding: 8px 15px;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        padding: 10px 15px !important;
+        align-items: center !important;
     }
-    body {
-        padding-top: 70px;
+    
+    .nav-links {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .nav-links a,
+    .navbar a {
+        font-size: 14px !important;
+        padding: 4px 8px !important;
+        white-space: nowrap !important;
     }
 }
     </style>
