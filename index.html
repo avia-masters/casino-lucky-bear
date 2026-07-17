@@ -2602,6 +2602,33 @@ a[href*="Играть"]::before, a[href*="Telegram"]::before {
 .navbar, .nav-links, .navbar a, .nav-links a,
 .navbar .btn, .nav-links .btn {
     all: revert !important;
+}h1, h2, h3, h4, h5, h6 {
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    margin: 20px 0 15px 0 !important;
+}
+h1 { font-size: 32px !important; }
+h2 { font-size: 26px !important; }
+h3 { font-size: 20px !important; }
+
+.btn, a[href*="Играть"], a[href*="Telegram"] {
+    display: inline-block !important;
+    padding: 10px 24px !important;
+    border: 2px solid #4a8bb3 !important;
+    border-radius: 30px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    transition: 0.3s !important;
+    white-space: nowrap !important;
+}
+.btn:hover, a[href*="Играть"]:hover, a[href*="Telegram"]:hover {
+    background: #4a8bb3 !important;
+    color: #000000 !important;
+}
+.btn::before, a[href*="Играть"]::before, a[href*="Telegram"]::before {
+    content: "🐻 " !important;
 }
     </style>
 
