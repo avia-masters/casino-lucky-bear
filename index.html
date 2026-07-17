@@ -2503,6 +2503,57 @@ max-width: 768px {
         padding: 4px 8px !important;
         white-space: nowrap !important;
     }
+}/* ЗАГОЛОВКИ - единый жирный белый стиль */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arial', sans-serif !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    margin: 20px 0 15px 0 !important;
+    letter-spacing: 1px !important;
+}
+
+h1 { font-size: 36px !important; }
+h2 { font-size: 28px !important; }
+h3 { font-size: 22px !important; }
+h4 { font-size: 18px !important; }
+
+/* ВСЕ КНОПКИ (кроме меню) - стиль как у мишки */
+a.btn, .btn, 
+a[href*="Играть"], 
+a[href*="Telegram"] {
+    display: inline-block !important;
+    padding: 10px 24px !important;
+    background: transparent !important;
+    border: 2px solid #4a8bb3 !important;
+    border-radius: 30px !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+    margin: 5px !important;
+}
+
+a.btn:hover, .btn:hover,
+a[href*="Играть"]:hover,
+a[href*="Telegram"]:hover {
+    background: #4a8bb3 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 15px rgba(74, 139, 179, 0.5) !important;
+}
+
+/* Иконка мишки перед текстом кнопок */
+a.btn::before, .btn::before,
+a[href*="Играть"]::before,
+a[href*="Telegram"]::before {
+    content: "🐻 " !important;
+}
+
+/* ЗАЩИТА МЕНЮ - не трогаем */
+.navbar a, .nav-links a, .navbar .btn {
+    all: revert !important;
 }
     </style>
 
