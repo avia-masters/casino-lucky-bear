@@ -194,7 +194,7 @@ header {
     justify-content: center;
     padding: 15px 34px;
     border-radius: 16px;
-  text-decoration: none;
+   text-decoration: none;
     font-size: 16px;
     color: #ffffff;
     background: rgba(255,255,255,.08);
@@ -264,6 +264,7 @@ section {
 .bonus-card:last-child,
 .rule-card:last-child,
 .faq-item:last-child,
+.faq-card:last-child,
 .game-step:last-child,
 .rules-card:last-child,
 .promo-card:last-child,
@@ -277,6 +278,7 @@ section {
 .bonus-card::after,
 .rule-card::after,
 .faq-item::after,
+.faq-card::after,
 .game-step::after,
 .rules-card::after,
 .promo-card::after,
@@ -297,6 +299,7 @@ section {
 .bonus-card:last-child::after,
 .rule-card:last-child::after,
 .faq-item:last-child::after,
+.faq-card:last-child::after,
 .game-step:last-child::after,
 .rules-card:last-child::after,
 .promo-card:last-child::after,
@@ -311,6 +314,7 @@ section {
 .bonus-card h3,
 .rule-card h3,
 .faq-item h3,
+.faq-card h3,
 .game-step h3,
 .rules-card h3,
 .promo-card h3,
@@ -328,6 +332,7 @@ section {
 .bonus-card p,
 .rule-card p,
 .faq-item p,
+.faq-card p,
 .game-step p,
 .rules-card p,
 .promo-card p,
@@ -378,11 +383,12 @@ section {
     padding: 30px 0 !important;
 }
 .rules-extra-card h3 {
-    font-size: 22px !important;
+   font-size: 22px !important;
 }
 .rules-extra-card p {
     color: rgba(255,255,255,.65) !important;
 }
+
 /* ===== FOOTER ===== */
 footer {
     height: 120px;
@@ -405,7 +411,6 @@ footer {
         backdrop-filter: blur(15px);
     }
 
-    /* ЛОГОТИП — достаточно заметный, но не широкий */
     .brand-icon {
         position: relative !important;
         left: auto !important;
@@ -419,7 +424,6 @@ footer {
         height: 55px !important;
     }
 
-    /* МЕНЮ — компактное, без наезжаний */
     .nav {
         position: relative !important;
         left: auto !important;
@@ -447,7 +451,6 @@ footer {
         color: #00ffff;
     }
 
-    /* КНОПКА «ИГРАТЬ» — заметная, но компактная */
     .bot-button {
         position: relative !important;
         right: auto !important;
@@ -476,128 +479,8 @@ footer {
         transform: scale(1.02) !important;
     }
 
-    /* ОСТАЛЬНЫЕ СЕКЦИИ */
     .hero {
         padding-top: 120px;
-    }
-    .title {
-        font-size: 28px !important;
-        letter-spacing: 2px;
-    }
-    .subtitle {
-        font-size: 15px !important;
-    }/* ===== АДАПТИВ ===== */
-@media (max-width: 768px) {
-    header {
-        height: 80px !important;
-        min-height: auto !important;
-        flex-direction: row !important;
-        padding: 0 12px !important;
-        background: rgba(0,0,0,.65);
-        backdrop-filter: blur(15px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    /* ЛОГОТИП СЛЕВА */
-    .brand-icon {
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        flex-shrink: 0;
-        margin-right: 8px;
-    }
-    .brand-icon img {
-        width: 70px !important;
-        height: 70px !important;
-        display: block;
-    }
-
-    /* МЕНЮ-КАРУСЕЛЬ ПО ЦЕНТРУ */
-    .nav {
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        display: flex !important;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 20px;
-        padding: 0 10px;
-        margin: 0 10px;
-        flex: 1 1 auto;
-        justify-content: flex-start;
-        align-items: center;
-        height: 100%;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE */
-    }
-    .nav::-webkit-scrollbar {
-        display: none; /* Chrome/Safari */
-    }
-    .nav a {
-        scroll-snap-align: center;
-        flex: 0 0 auto;
-        font-size: 16px !important;
-        font-weight: 700;
-        color: rgba(255,255,255,0.5);
-        text-decoration: none;
-        padding: 6px 0;
-        white-space: nowrap;
-        transition: color 0.3s ease, transform 0.2s ease;
-        letter-spacing: 0.5px;
-        border-bottom: 2px solid transparent;
-    }
-    .nav a.active {
-        color: #ffffff !important;
-        border-bottom: 2px solid #00ffff;
-        transform: scale(1.05);
-    }
-    .nav a:hover {
-        color: #ffffff;
-    }
-
-    /* КНОПКА «ИГРАТЬ» СПРАВА */
-    .bot-button {
-        position: relative !important;
-        right: auto !important;
-        top: auto !important;
-        transform: none !important;
-        height: 44px !important;
-        padding: 0 14px !important;
-        font-size: 14px !important;
-        flex-shrink: 0;
-        border-radius: 30px;
-        background: rgba(0,255,255,.2);
-        border: 2px solid rgba(0,255,255,.6);
-        color: #ffffff;
-        font-weight: 700;
-        gap: 6px;
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        transition: 0.3s;
-        margin-left: 6px;
-    }
-    .bot-button img {
-        width: 26px !important;
-        height: 26px !important;
-        object-fit: contain;
-    }
-    .bot-button span {
-        display: inline-block;
-    }
-    .bot-button:hover {
-        background: rgba(0,255,255,.35);
-        transform: scale(1.05) !important;
-    }
-
-    /* ОСТАЛЬНЫЕ СЕКЦИИ */
-    .hero {
-        padding-top: 130px;
     }
     .title {
         font-size: 28px !important;
@@ -616,15 +499,22 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
 /* ===== ФОНОВЫЕ МЕДВЕДИ ===== */
 .bear-background {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 9999 !important;
-    background-color: red !important;
-    background-image: none !important;
-    opacity: 1 !important;
+    z-index: -1 !important;
+    background-image: url("images/menu-logo.png"),
+                     url("images/menu-logo.png"),
+                     url("images/menu-logo.png"),
+                     url("images/menu-logo.png");
+    background-repeat: no-repeat;
+    background-position: 5% 15%, 90% 30%, 10% 70%, 85% 85%;
+    background-size: 260px, 320px, 220px, 280px;
+    opacity: 0.12;
+    filter: blur(1px);
 }
 section, footer {
     position: relative;
