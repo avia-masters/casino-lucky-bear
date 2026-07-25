@@ -399,23 +399,26 @@ footer {
         height: 70px !important;
         min-height: auto !important;
         flex-direction: row !important;
-        padding: 0 12px !important;
+        padding: 0 8px !important;
         background: rgba(0,0,0,.65);
         backdrop-filter: blur(15px);
     }
 
+    /* ЛОГОТИП — достаточно заметный, но не широкий */
     .brand-icon {
         position: relative !important;
         left: auto !important;
         top: auto !important;
         transform: none !important;
         flex-shrink: 0;
+        margin-right: 4px;
     }
     .brand-icon img {
-        width: 50px !important;
-        height: 50px !important;
+        width: 55px !important;
+        height: 55px !important;
     }
 
+    /* МЕНЮ — компактное, без наезжаний */
     .nav {
         position: relative !important;
         left: auto !important;
@@ -423,50 +426,58 @@ footer {
         transform: none !important;
         display: flex !important;
         flex-wrap: nowrap;
-        gap: 8px !important;
+        gap: 6px !important;
         width: auto;
         margin-top: 0;
         overflow-x: auto;
         justify-content: center;
-        padding: 0 5px;
+        padding: 0 3px;
+        flex: 1 1 auto;
     }
     .nav a {
-        font-size: 13px !important;
-        padding: 4px 6px;
+        font-size: 12px !important;
+        padding: 3px 5px;
         white-space: nowrap;
-        color: rgba(255,255,255,0.8);
+        color: rgba(255,255,255,0.9);
+        font-weight: 600;
+        letter-spacing: 0.3px;
     }
     .nav a:hover {
         color: #00ffff;
     }
 
+    /* КНОПКА «ИГРАТЬ» — заметная, но компактная */
     .bot-button {
         position: relative !important;
         right: auto !important;
         top: auto !important;
         transform: none !important;
-        height: 34px !important;
-        padding: 0 10px !important;
-        font-size: 11px !important;
+        height: 36px !important;
+        padding: 0 12px !important;
+        font-size: 12px !important;
         flex-shrink: 0;
-        border-radius: 16px;
-        background: rgba(0,255,255,.15);
-        border: 1px solid rgba(0,255,255,.4);
+        border-radius: 20px;
+        background: rgba(0,255,255,.2);
+        border: 1.5px solid rgba(0,255,255,.6);
+        color: #ffffff;
+        font-weight: 700;
+        gap: 4px;
     }
     .bot-button img {
-        width: 20px !important;
-        height: 20px !important;
+        width: 22px !important;
+        height: 22px !important;
     }
     .bot-button span {
         display: inline-block;
     }
     .bot-button:hover {
-        background: rgba(0,255,255,.3);
+        background: rgba(0,255,255,.35);
         transform: scale(1.02) !important;
     }
 
+    /* ОСТАЛЬНЫЕ СЕКЦИИ */
     .hero {
-        padding-top: 130px;
+        padding-top: 120px;
     }
     .title {
         font-size: 28px !important;
