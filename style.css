@@ -396,63 +396,95 @@ footer {
 /* ===== АДАПТИВ ===== */
 @media (max-width: 768px) {
     header {
-        height: auto !important;
-        min-height: 120px;
-        flex-direction: column;
-        padding: 10px !important;
+        height: 70px !important;
+        min-height: auto !important;
+        flex-direction: row !important;
+        padding: 0 12px !important;
+        background: rgba(0,0,0,.65);
+        backdrop-filter: blur(15px);
     }
+
     .brand-icon {
         position: relative !important;
         left: auto !important;
         top: auto !important;
         transform: none !important;
+        flex-shrink: 0;
     }
     .brand-icon img {
-        width: 70px !important;
-        height: 70px !important;
+        width: 50px !important;
+        height: 50px !important;
     }
+
     .nav {
         position: relative !important;
         left: auto !important;
         top: auto !important;
         transform: none !important;
         display: flex !important;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        gap: 8px !important;
+        width: auto;
+        margin-top: 0;
+        overflow-x: auto;
         justify-content: center;
-        gap: 10px;
-        width: 100%;
-        margin-top: 5px;
+        padding: 0 5px;
     }
     .nav a {
-        font-size: 14px !important;
+        font-size: 13px !important;
+        padding: 4px 6px;
+        white-space: nowrap;
+        color: rgba(255,255,255,0.8);
     }
+    .nav a:hover {
+        color: #00ffff;
+    }
+
     .bot-button {
         position: relative !important;
         right: auto !important;
         top: auto !important;
         transform: none !important;
-        margin: 5px auto;
+        height: 34px !important;
+        padding: 0 10px !important;
+        font-size: 11px !important;
+        flex-shrink: 0;
+        border-radius: 16px;
+        background: rgba(0,255,255,.15);
+        border: 1px solid rgba(0,255,255,.4);
     }
+    .bot-button img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    .bot-button span {
+        display: inline-block;
+    }
+    .bot-button:hover {
+        background: rgba(0,255,255,.3);
+        transform: scale(1.02) !important;
+    }
+
     .hero {
-        padding-top: 170px;
+        padding-top: 130px;
     }
     .title {
-        font-size: 32px !important;
+        font-size: 28px !important;
+        letter-spacing: 2px;
     }
     .subtitle {
-        font-size: 16px !important;
+        font-size: 15px !important;
     }
     .section-title {
-        font-size: 30px !important;
+        font-size: 28px !important;
     }
     section {
-        padding: 100px 20px 60px !important;
+        padding: 80px 18px 40px !important;
     }
     .rules-extra {
         grid-template-columns: 1fr;
     }
 }
-
 /* ===== ФОНОВЫЕ МЕДВЕДИ ===== */
 .bear-background {
     position: fixed;
