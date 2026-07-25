@@ -621,16 +621,10 @@ footer {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: -1 !important;
-    background-image: url("images/menu-logo.png"),
-                     url("images/menu-logo.png"),
-                     url("images/menu-logo.png"),
-                     url("images/menu-logo.png");
-    background-repeat: no-repeat;
-    background-position: 5% 15%, 90% 30%, 10% 70%, 85% 85%;
-    background-size: 260px, 320px, 220px, 280px;
-    opacity: 0.12;
-    filter: blur(1px);
+    z-index: 9999 !important;
+    background-color: red !important;
+    background-image: none !important;
+    opacity: 1 !important;
 }
 section, footer {
     position: relative;
