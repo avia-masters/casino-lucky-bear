@@ -629,7 +629,7 @@ footer {
     background-repeat: no-repeat;
     background-position: 5% 15%, 90% 30%, 10% 70%, 85% 85%;
     background-size: 260px, 320px, 220px, 280px;
-    opacity: .04;
+    opacity: 0.12;
     filter: blur(1px);
 }
 section, footer {
