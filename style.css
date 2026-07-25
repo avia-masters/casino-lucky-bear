@@ -485,6 +485,125 @@ footer {
     }
     .subtitle {
         font-size: 15px !important;
+    }/* ===== АДАПТИВ ===== */
+@media (max-width: 768px) {
+    header {
+        height: 80px !important;
+        min-height: auto !important;
+        flex-direction: row !important;
+        padding: 0 12px !important;
+        background: rgba(0,0,0,.65);
+        backdrop-filter: blur(15px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* ЛОГОТИП СЛЕВА */
+    .brand-icon {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        flex-shrink: 0;
+        margin-right: 8px;
+    }
+    .brand-icon img {
+        width: 70px !important;
+        height: 70px !important;
+        display: block;
+    }
+
+    /* МЕНЮ-КАРУСЕЛЬ ПО ЦЕНТРУ */
+    .nav {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        display: flex !important;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding: 0 10px;
+        margin: 0 10px;
+        flex: 1 1 auto;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE */
+    }
+    .nav::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+    .nav a {
+        scroll-snap-align: center;
+        flex: 0 0 auto;
+        font-size: 16px !important;
+        font-weight: 700;
+        color: rgba(255,255,255,0.5);
+        text-decoration: none;
+        padding: 6px 0;
+        white-space: nowrap;
+        transition: color 0.3s ease, transform 0.2s ease;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid transparent;
+    }
+    .nav a.active {
+        color: #ffffff !important;
+        border-bottom: 2px solid #00ffff;
+        transform: scale(1.05);
+    }
+    .nav a:hover {
+        color: #ffffff;
+    }
+
+    /* КНОПКА «ИГРАТЬ» СПРАВА */
+    .bot-button {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+        height: 44px !important;
+        padding: 0 14px !important;
+        font-size: 14px !important;
+        flex-shrink: 0;
+        border-radius: 30px;
+        background: rgba(0,255,255,.2);
+        border: 2px solid rgba(0,255,255,.6);
+        color: #ffffff;
+        font-weight: 700;
+        gap: 6px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-left: 6px;
+    }
+    .bot-button img {
+        width: 26px !important;
+        height: 26px !important;
+        object-fit: contain;
+    }
+    .bot-button span {
+        display: inline-block;
+    }
+    .bot-button:hover {
+        background: rgba(0,255,255,.35);
+        transform: scale(1.05) !important;
+    }
+
+    /* ОСТАЛЬНЫЕ СЕКЦИИ */
+    .hero {
+        padding-top: 130px;
+    }
+    .title {
+        font-size: 28px !important;
+        letter-spacing: 2px;
+    }
+    .subtitle {
+        font-size: 15px !important;
     }
     .section-title {
         font-size: 28px !important;
