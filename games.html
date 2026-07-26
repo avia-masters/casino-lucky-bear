@@ -108,17 +108,21 @@
         /* ===== КАРТОЧКИ С ФОТО ===== */
         .card-image {
             width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
             border-radius: 16px;
             overflow: hidden;
             margin-bottom: 15px;
-            background: rgba(0,0,0,0.2);
             flex-shrink: 0;
-            aspect-ratio: 16/9;
         }
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .card-image img {max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             display: block;
         }
         
@@ -132,7 +136,7 @@
             margin-bottom: 15px;
         }
 
-        /* ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ ===== */
+        /* ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ (КАРУСЕЛЬ) ===== */
         .winners-container {
             background: rgba(255,255,255,0.04);
             border-radius: 20px;
@@ -144,13 +148,15 @@
         
         .winners-table-wrap {
             overflow: hidden;
-            height: 320px;
+            height: 340px;
             position: relative;
         }
         
         .winners-table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 600px;
+            position: relative;
         }
         
         .winners-table th {
@@ -160,15 +166,19 @@
             padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.06);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
         
         .winners-table td {
-            color: #ddd;
+            color: #999;
             padding: 10px 12px;
             border-bottom: 1px solid rgba(255,255,255,0.03);
             font-size: 14px;
             vertical-align: middle;
+            transition: background 0.3s ease;
         }
         
         .winners-table tr {
@@ -184,14 +194,14 @@
             gap: 10px;
         }
         .winner-game img {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 6px;
             object-fit: cover;
             flex-shrink: 0;
         }
         .winner-game span {
-            color: #fff;
+            color: #ccc;
             font-weight: 500;
             font-size: 13px;
         }
@@ -202,34 +212,44 @@
         }
         
         .winner-amount {
-            color: #4caf50;
+            color: #f0c040;
             font-weight: 600;
         }
         
         .winner-btn {
             display: inline-block;
-            padding: 5px 16px;
+            padding: 4px 16px;
             background: #3a7cc2;
             color: #fff;
             border-radius: 20px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             transition: 0.3s;
             white-space: nowrap;
+            line-height: 1.8;
+            text-align: center;
         }
         .winner-btn:hover {
             background: #4a8cd2;
             transform: scale(1.05);
         }
         
-        /* Строка активна (показывается) */
+        /* Анимация появления строки */
         .winner-row {
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .winner-row.active {
             opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .winner-row.slide-out {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .winner-row.slide-in {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         @media (max-width: 768px) {
@@ -242,8 +262,8 @@
                 font-size: 11px;
             }
             .winner-game img {
-                width: 20px;
-                height: 20px;
+                width: 24px;
+                height: 24px;
             }
             .winner-btn {
                 padding: 3px 10px;
@@ -252,8 +272,10 @@
             .winners-container {
                 padding: 15px;
             }
-        }
-    </style>
+            .card-image {
+                height: 140px;
+            }
+        }</style>
 </head>
 <body>
     <div class="bear-background"></div>
@@ -269,8 +291,7 @@
             <a href="games.html" class="nav-link active">Игры</a>
             <a href="index.html#faq" class="nav-link">FAQ</a>
         </nav>
-        <a href="https://lbgame3131.
-            fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="bot-button" rel="noreferrer noopener">
+        <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="bot-button" rel="noreferrer noopener">
             <img src="images/logo.png" alt="LUCKY BEAR" />
             <span>Играть</span>
         </a>
@@ -337,8 +358,7 @@
                     <h3 style="color: #ffffff; font-size: 22px; margin-bottom: 8px;">Anubis Wrath</h3>
                     <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">RTP 96.3%</span>
-                        <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.
-                            9</span>
+                        <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.9</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Джекпот</span>
                     </div>
                     <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Погрузитесь в мир Древнего Египта с богом Анубисом. Мощные бонусные раунды, множители до x50 и прогрессивный джекпот.</p>
@@ -381,8 +401,7 @@
             </div>
 
             <!-- Слот 4 -->
-            <div class="game-card">
-                <div class="card-image">
+            <div class="game-card"><div class="card-image">
                     <img src="images/falling-pickaxe.jpg" alt="Falling Pickaxe" />
                 </div>
                 <div class="card-content">
@@ -434,7 +453,7 @@
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Шоу-игра</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Live</span>
                     </div>
-                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Яркое шоу с большим колесом фортуны. Четыре бонусных раунда, множители до x10000 и атмосфера праздника.</p>
+                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Яркое шоу с большим колесом фортуны.Четыре бонусных раунда, множители до x10000 и атмосфера праздника.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
@@ -489,8 +508,7 @@
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.8</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Классика</span>
                     </div>
-                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Игра на удачу, где нужно открывать ячейки и избегать мин. Чем больше открываете — тем выше выигрыш.</p>
-                    <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
+                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Игра на удачу, где нужно открывать ячейки и избегать мин. Чем больше открываете — тем выше выигрыш.</p><a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
 
@@ -545,9 +563,7 @@
     <!-- ===== СТАВКИ НА СПОРТ ===== -->
     <section id="sport" style="max-width: 1100px; margin: 0 auto 60px; padding: 0 20px;">
         <h2 style="font-size: 32px; color: #ffffff; text-align: center; margin-bottom: 10px;">Ставки на спорт</h2>
-        <p style="text-align: center; color: #aaa; font-size: 18px; margin-bottom: 40px;">Более 20 видов спорта с высокими коэффициентами</p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <p style="text-align: center; color: #aaa; font-size: 18px; margin-bottom: 40px;">Более 20 видов спорта с высокими коэффициентами</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
 
             <div class="sport-card">
                 <h4 style="color: #fff; margin: 0; font-size: 18px;">Футбол</h4>
@@ -558,6 +574,7 @@
                 <h4 style="color: #fff; margin: 0; font-size: 18px;">Баскетбол</h4>
                 <p style="color: #aaa; font-size: 13px; margin-top: 8px;">NBA, Евролига, live-ставки</p>
             </div>
+
             <div class="sport-card">
                 <h4 style="color: #fff; margin: 0; font-size: 18px;">Хоккей</h4>
                 <p style="color: #aaa; font-size: 13px; margin-top: 8px;">КХЛ, NHL, мировые турниры</p>
@@ -580,13 +597,13 @@
         </div>
     </section>
 
-    <!-- ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ ===== -->
+    <!-- ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ (КАРУСЕЛЬ) ===== -->
     <section style="max-width: 1100px; margin: 0 auto 60px; padding: 0 20px;">
         <h2 style="font-size: 28px; color: #ffffff; text-align: center; margin-bottom: 10px;">🏆 Победители Lucky Bear</h2>
         <p style="text-align: center; color: #aaa; font-size: 16px; margin-bottom: 30px;">Реальные выигрыши игроков в реальном времени</p>
 
         <div class="winners-container">
-            <div class="winners-table-wrap" id="winnersScroll">
+            <div class="winners-table-wrap" id="winnersWrap">
                 <table class="winners-table">
                     <thead>
                         <tr>
@@ -598,7 +615,7 @@
                         </tr>
                     </thead>
                     <tbody id="winnersBody">
-                        <!-- Строки добавляются через JavaScript -->
+                        <!-- Заполняется через JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -616,8 +633,7 @@
                 В нашем каталоге представлены <strong>топовые слоты</strong> от ведущих провайдеров: Anubis Wrath, Wild Bounty Snowdown, Treasures of Aztec и многие другие. Любите атмосферу настоящего казино? Попробуйте <strong>Crazy Time, Speed Roulette или Blackjack First Person</strong> с живыми дилерами.
             </p>
             <p style="font-size: 18px; line-height: 1.7; color: #ddd;">
-                Для поклонников спорта доступны <strong>ставки на футбол, баскетбол, хоккей, теннис</strong> и киберспорт. Выбирайте игру, делайте ставки и выигрывайте в Lucky Bear! Помните об ответственном подходе к азартным играм.
-            </p>
+                Для поклонников спорта доступны <strong>ставки на футбол, баскетбол, хоккей, теннис</strong> и киберспорт. Выбирайте игру, делайте ставки и выигрывайте в Lucky Bear! Помните об ответственном подходе к азартным играм.</p>
         </div>
     </section>
 
@@ -634,9 +650,9 @@
             let scroll = window.scrollY;
             let opacity = 1 - scroll / 500;
             let scale = 1 - scroll / 1500;
-            if(opacity < 0) opacity = 0;
-            if(scale < 0.7) scale = 0.7;
-            if(logo) {
+            if (opacity < 0) opacity = 0;
+            if (scale < 0.7) scale = 0.7;
+            if (logo) {
                 logo.style.opacity = opacity;
                 logo.style.transform = scale(${scale});
             }
@@ -646,7 +662,7 @@
         const cards = document.querySelectorAll('.game-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
+                if (entry.isIntersecting) {
                     entry.target.style.opacity = "1";
                     entry.target.style.transform = "translateY(0)";
                 }
@@ -660,8 +676,9 @@
             observer.observe(el);
         });
 
-        // ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ =====
-        const games = [
+        // ===== КАРУСЕЛЬ ТАБЛИЦЫ ПОБЕДИТЕЛЕЙ =====
+        // Список игр
+        const gamesList = [
             { name: 'Anubis Wrath', img: 'anubis-wrath.jpg' },
             { name: 'Wild Bounty', img: 'wild-bounty-snowdown.jpg' },
             { name: 'Treasures of Aztec', img: 'treasures-of-aztec.jpg' },
@@ -676,45 +693,54 @@
             { name: 'Candy Hole', img: 'candy-hole.jpg' }
         ];
 
-        const players = [
+        // Список игроков (40+ уникальных)
+        const playersList = [
             'Владислав И.', 'zub666', 'Студент 2.0', 'KpocaBu4', 'xX_Pro100_Xx',
             'Алексей М.', 'Dragon22', 'LuckyOne', 'BIG_WINNER', 'Ставка_Мастер',
             'Иван П.', 'CrazyFox', 'Роман С.', 'Den4ik', 'MegaPulse',
-            'Сергей К.', 'PokerFace', 'Виталий С', 'Alex_pro', 'Злой_Медведь'
+            'Сергей К.', 'PokerFace', 'Виталий С', 'Alex_pro', 'Злой_Медведь',
+            'Евгений Т.', 'NightWolf', 'Кирилл Д.', 'WinnerPro', 'Андрей К.',
+            'HellRaiser', 'Михаил С.', 'Artem33', 'GoldenEye', 'Дмитрий Л.',
+            'Ruslan_007', 'Павел Г.', 'Sniper22', 'Игорь Н.', 'CrazyBoss',
+            'Антон Ж.', 'Legendary', 'Олег М.', 'Flash99', 'Колян'
         ];
 
-        const multipliers = [
+        // Множители (20+)
+        const multipliersList = [
             'x165', 'x16.5', 'x215', 'x61.2', 'x325', 'x8.7', 'x142', 'x53', 'x9', 'x78',
-            'x234', 'x12.3', 'x456', 'x31', 'x189', 'x7.5', 'x98', 'x276', 'x44', 'x512'
+            'x234', 'x12.3', 'x456', 'x31', 'x189', 'x7.5', 'x98', 'x276', 'x44', 'x512',
+            'x38', 'x624', 'x14.2', 'x87', 'x203', 'x5.8', 'x156', 'x92', 'x47', 'x371'
         ];
 
-        const amounts = [
+        // Суммы выигрыша (30+)
+        const amountsList = [
             '125 340 ₽', '150 630 ₽', '1 143 000 ₽', '45 200 ₽', '872 500 ₽',
             '32 150 ₽', '210 000 ₽', '560 800 ₽', '89 430 ₽', '1 500 000 ₽',
             '75 600 ₽', '320 000 ₽', '16 800 ₽', '940 000 ₽', '280 500 ₽',
-            '52 100 ₽', '430 000 ₽', '195 700 ₽', '615 000 ₽', '38 400 ₽'
+            '52 100 ₽', '430 000 ₽', '195 700 ₽', '615 000 ₽', '38 400 ₽',
+            '124 800 ₽', '760 000 ₽', '54 200 ₽', '2 100 000 ₽', '87 500 ₽',
+            '346 000 ₽', '19 300 ₽', '510 000 ₽', '63 700 ₽', '1 285 000 ₽'
         ];
 
         function getRandomItem(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        // Генерируем все строки (20 штук)
+        // Генерируем 100 уникальных записей
         function generateAllRows(count) {
             const rows = [];
             for (let i = 0; i < count; i++) {
-                const game = getRandomItem(games);
                 rows.push({
-                    game: game,
-                    player: getRandomItem(players),
-                    multiplier: getRandomItem(multipliers),
-                    amount: getRandomItem(amounts)
+                    game: getRandomItem(gamesList),
+                    player: getRandomItem(playersList),
+                    multiplier: getRandomItem(multipliersList),
+                    amount: getRandomItem(amountsList)
                 });
             }
             return rows;
         }
 
-        const allRows = generateAllRows(20);
+        const allData = generateAllRows(100);
         const tbody = document.getElementById('winnersBody');
         let currentIndex = 0;
         const visibleCount = 5;
@@ -722,11 +748,10 @@
         function renderRows(startIndex) {
             let html = '';
             for (let i = 0; i < visibleCount; i++) {
-                const idx = (startIndex + i) % allRows.length;
-                const row = allRows[idx];
-                const isActive = (i === 0) ? 'active' : '';
+                const idx = (startIndex + i) % allData.length;
+                const row = allData[idx];
                 html += `
-                    <tr class="winner-row ${isActive}">
+                    <tr class="winner-row">
                         <td>
                             <div class="winner-game">
                                 <img src="images/${row.game.img}" alt="${row.game.name}" />
@@ -748,9 +773,9 @@
         // Первый рендер
         renderRows(0);
 
-        // Прокрутка каждые 3 секунды
+        // Каждые 3 секунды сдвигаем на 1 строку вниз
         setInterval(() => {
-            currentIndex = (currentIndex + 1) % allRows.length;
+            currentIndex = (currentIndex + 1) % allData.length;
             renderRows(currentIndex);
         }, 3000);
     </script>
