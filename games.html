@@ -15,11 +15,15 @@
     <link rel="stylesheet" href="style.css" />
     
     <style>
-        /* ===== АНИМАЦИИ ===== */
+        /* ===== ОБЩИЕ АНИМАЦИИ ===== */
         .game-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            background: rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.04);
         }
         .game-card:hover {
             transform: scale(1.02);
@@ -55,12 +59,13 @@
         
         .category-card {
             transition: transform 0.3s ease, background 0.3s ease;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
             border-radius: 20px;
             padding: 25px;
             text-align: center;
             text-decoration: none;
             display: block;
+            border: 1px solid rgba(255,255,255,0.04);
         }
         .category-card:hover {
             transform: scale(1.05);
@@ -69,10 +74,11 @@
         
         .sport-card {
             transition: transform 0.3s ease, background 0.3s ease;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
         }
         .sport-card:hover {
             transform: scale(1.05);
@@ -99,20 +105,21 @@
             transform: scale(1.05);
         }
         
+        /* ===== КАРТОЧКИ С ФОТО ===== */
         .card-image {
             width: 100%;
-            height: 200px;
             border-radius: 16px;
             overflow: hidden;
             margin-bottom: 15px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.2);
             flex-shrink: 0;
+            aspect-ratio: 16/9;
         }
         .card-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background: rgba(0,0,0,0.3);
+            object-fit: cover;
+            display: block;
         }
         
         .card-content {
@@ -122,57 +129,43 @@
         }
         .card-content p {
             flex: 1;
+            margin-bottom: 15px;
         }
 
         /* ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ ===== */
-        .winners-container {background: rgba(0,0,0,0.5);
-            border-radius: 24px;
-            padding: 30px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.05);
+        .winners-container {
+            background: rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.04);
             overflow: hidden;
             position: relative;
         }
         
         .winners-table-wrap {
             overflow: hidden;
-            max-height: 400px;
+            height: 320px;
             position: relative;
-        }
-        
-        .winners-table-wrap::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            pointer-events: none;
         }
         
         .winners-table {
             width: 100%;
             border-collapse: collapse;
-            animation: scrollTable 20s linear infinite;
         }
         
         .winners-table th {
             color: #7ab7ef;
             font-weight: 600;
-            font-size: 14px;
-            padding: 12px 15px;
+            font-size: 13px;
+            padding: 10px 12px;
             text-align: left;
-            border-bottom: 2px solid rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.3);
-            position: sticky;
-            top: 0;
-            z-index: 2;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.2);
         }
         
         .winners-table td {
             color: #ddd;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-bottom: 1px solid rgba(255,255,255,0.03);
             font-size: 14px;
             vertical-align: middle;
@@ -182,7 +175,7 @@
             transition: background 0.2s;
         }
         .winners-table tr:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
         }
         
         .winner-game {
@@ -191,14 +184,16 @@
             gap: 10px;
         }
         .winner-game img {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 6px;
             object-fit: cover;
+            flex-shrink: 0;
         }
         .winner-game span {
             color: #fff;
             font-weight: 500;
+            font-size: 13px;
         }
         
         .winner-multiplier {
@@ -213,43 +208,49 @@
         
         .winner-btn {
             display: inline-block;
-            padding: 6px 18px;
+            padding: 5px 16px;
             background: #3a7cc2;
             color: #fff;
             border-radius: 20px;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             transition: 0.3s;
-            animation: float 2.5s ease-in-out infinite;
+            white-space: nowrap;
         }
         .winner-btn:hover {
             background: #4a8cd2;
             transform: scale(1.05);
         }
         
-        @keyframes scrollTable {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
+        /* Строка активна (показывается) */
+        .winner-row {
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
-        
-        .winners-table-wrap.paused .winners-table {
-            animation-play-state: paused;
+        .winner-row.active {
+            opacity: 1;
         }
         
         @media (max-width: 768px) {
+            .winners-table-wrap {
+                height: 280px;
+            }
             .winners-table th,
             .winners-table td {
-                padding: 8px 10px;
-                font-size: 12px;
+                padding: 6px 8px;
+                font-size: 11px;
             }
             .winner-game img {
-                width: 24px;
-                height: 24px;
+                width: 20px;
+                height: 20px;
             }
             .winner-btn {
-                padding: 4px 12px;
-                font-size: 11px;
+                padding: 3px 10px;
+                font-size: 10px;
+            }
+            .winners-container {
+                padding: 15px;
             }
         }
     </style>
@@ -268,7 +269,8 @@
             <a href="games.html" class="nav-link active">Игры</a>
             <a href="index.html#faq" class="nav-link">FAQ</a>
         </nav>
-        <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="bot-button" rel="noreferrer noopener">
+        <a href="https://lbgame3131.
+            fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="bot-button" rel="noreferrer noopener">
             <img src="images/logo.png" alt="LUCKY BEAR" />
             <span>Играть</span>
         </a>
@@ -327,7 +329,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
 
             <!-- Слот 1 -->
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/anubis-wrath.jpg" alt="Anubis Wrath" />
                 </div>
@@ -335,16 +337,17 @@
                     <h3 style="color: #ffffff; font-size: 22px; margin-bottom: 8px;">Anubis Wrath</h3>
                     <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">RTP 96.3%</span>
-                        <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.9</span>
+                        <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.
+                            9</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Джекпот</span>
                     </div>
-                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Погрузитесь в мир Древнего Египта с богом Анубисом. Мощные бонусные раунды, множители до x50 и прогрессивный джекпот. Максимальный выигрыш — x10000 от ставки.</p>
+                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Погрузитесь в мир Древнего Египта с богом Анубисом. Мощные бонусные раунды, множители до x50 и прогрессивный джекпот.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
 
             <!-- Слот 2 -->
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/wild-bounty-snowdown.jpg" alt="Wild Bounty Snowdown" />
                 </div>
@@ -361,7 +364,7 @@
             </div>
 
             <!-- Слот 3 -->
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/treasures-of-aztec.jpg" alt="Treasures of Aztec" />
                 </div>
@@ -378,23 +381,24 @@
             </div>
 
             <!-- Слот 4 -->
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/falling-pickaxe.jpg" alt="Falling Pickaxe" />
                 </div>
-                <div class="card-content"><h3 style="color: #ffffff; font-size: 22px; margin-bottom: 8px;">Falling Pickaxe</h3>
+                <div class="card-content">
+                    <h3 style="color: #ffffff; font-size: 22px; margin-bottom: 8px;">Falling Pickaxe</h3>
                     <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">RTP 96.8%</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.9</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Каскады</span>
                     </div>
-                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Горняцкая тематика с каскадными барабанами. Каждый выигрыш запускает новую волну символов, увеличивая шансы на крупный выигрыш. Множители до x20.</p>
+                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Горняцкая тематика с каскадными барабанами. Каждый выигрыш запускает новую волну символов, увеличивая шансы на крупный выигрыш.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
 
             <!-- Слот 5 -->
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/speed-winner.jpg" alt="Speed Winner" />
                 </div>
@@ -405,7 +409,7 @@
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.6</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Быстрая</span>
                     </div>
-                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Динамичный слот для любителей скорости. Короткие раунды, частые выигрыши и бонусная игра с выбором призов. Идеально для быстрых сессий.</p>
+                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Динамичный слот для любителей скорости. Короткие раунды, частые выигрыши и бонусная игра с выбором призов.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
@@ -420,7 +424,7 @@
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/crazy-time.jpg" alt="Crazy Time" />
                 </div>
@@ -430,12 +434,12 @@
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Шоу-игра</span>
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Live</span>
                     </div>
-                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Яркое шоу с большим колесом фортуны.Четыре бонусных раунда, множители до x10000 и атмосфера праздника.</p>
+                    <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Яркое шоу с большим колесом фортуны. Четыре бонусных раунда, множители до x10000 и атмосфера праздника.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/speed-roulette.jpg" alt="Speed Roulette" />
                 </div>
@@ -450,7 +454,7 @@
                 </div>
             </div>
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/blackjack-first-person.jpg" alt="Blackjack First Person" />
                 </div>
@@ -475,7 +479,7 @@
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/mines.jpg" alt="Mines" />
                 </div>
@@ -483,13 +487,14 @@
                     <h3 style="color: #ffffff; font-size: 22px; margin-bottom: 8px;">Mines</h3>
                     <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">⭐ 4.8</span>
-                        <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Классика</span></div>
+                        <span style="background: rgba(70, 130, 200, 0.2); color: #7ab7ef; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Классика</span>
+                    </div>
                     <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Игра на удачу, где нужно открывать ячейки и избегать мин. Чем больше открываете — тем выше выигрыш.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
                 </div>
             </div>
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/aviamasters-2.jpg" alt="Aviamasters 2" />
                 </div>
@@ -504,7 +509,7 @@
                 </div>
             </div>
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/tower-rush.jpg" alt="Tower Rush" />
                 </div>
@@ -519,7 +524,7 @@
                 </div>
             </div>
 
-            <div class="game-card" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 25px;">
+            <div class="game-card">
                 <div class="card-image">
                     <img src="images/candy-hole.jpg" alt="Candy Hole" />
                 </div>
@@ -531,7 +536,8 @@
                     </div>
                     <p style="color: #ccc; font-size: 15px; line-height: 1.6;">Яркая и сладкая игра, где нужно ловить конфеты и получать множители. Простые правила и быстрый игровой процесс.</p>
                     <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="game-btn">Играть →</a>
-                </div></div>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -552,7 +558,6 @@
                 <h4 style="color: #fff; margin: 0; font-size: 18px;">Баскетбол</h4>
                 <p style="color: #aaa; font-size: 13px; margin-top: 8px;">NBA, Евролига, live-ставки</p>
             </div>
-
             <div class="sport-card">
                 <h4 style="color: #fff; margin: 0; font-size: 18px;">Хоккей</h4>
                 <p style="color: #aaa; font-size: 13px; margin-top: 8px;">КХЛ, NHL, мировые турниры</p>
@@ -589,11 +594,11 @@
                             <th>Игрок</th>
                             <th>Умножил</th>
                             <th>Выиграл</th>
-                            <th>Играть</th>
+                            <th style="text-align: center;">Играть</th>
                         </tr>
                     </thead>
                     <tbody id="winnersBody">
-                        <!-- Строки будут добавлены через JavaScript -->
+                        <!-- Строки добавляются через JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -603,12 +608,12 @@
     <!-- ===== SEO ТЕКСТ ===== -->
     <section style="max-width: 1100px; margin: 0 auto 60px; padding: 0 20px;">
         <h2 style="font-size: 28px; color: #ffffff; text-align: center; margin-bottom: 20px;">Игровой каталог Lucky Bear</h2>
-        <div style="background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px;">
+        <div style="background: rgba(255,255,255,0.04); border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.04);">
             <p style="font-size: 18px; line-height: 1.7; color: #ddd; margin-bottom: 15px;">
                 <strong>Lucky Bear</strong> — это современное казино с огромным выбором игр. Здесь вы найдёте всё: от классических слотов до live-игр с реальными дилерами и ставок на спорт.
             </p>
             <p style="font-size: 18px; line-height: 1.7; color: #ddd; margin-bottom: 15px;">
-                В нашем каталоге представлены <strong>топовые слоты</strong> от ведущих провайдеров: Anubis Wrath, Wild Bounty Snowdown, Treasures of Aztec и многие другие.Любите атмосферу настоящего казино? Попробуйте <strong>Crazy Time, Speed Roulette или Blackjack First Person</strong> с живыми дилерами.
+                В нашем каталоге представлены <strong>топовые слоты</strong> от ведущих провайдеров: Anubis Wrath, Wild Bounty Snowdown, Treasures of Aztec и многие другие. Любите атмосферу настоящего казино? Попробуйте <strong>Crazy Time, Speed Roulette или Blackjack First Person</strong> с живыми дилерами.
             </p>
             <p style="font-size: 18px; line-height: 1.7; color: #ddd;">
                 Для поклонников спорта доступны <strong>ставки на футбол, баскетбол, хоккей, теннис</strong> и киберспорт. Выбирайте игру, делайте ставки и выигрывайте в Lucky Bear! Помните об ответственном подходе к азартным играм.
@@ -672,9 +677,9 @@
         ];
 
         const players = [
-            'Владислав Игоревич', 'zub666', 'Студент 2.0', 'KpocaBu4', 'xX_Pro100_Xx',
+            'Владислав И.', 'zub666', 'Студент 2.0', 'KpocaBu4', 'xX_Pro100_Xx',
             'Алексей М.', 'Dragon22', 'LuckyOne', 'BIG_WINNER', 'Ставка_Мастер',
-            'Иван Петров', 'CrazyFox', 'Роман С.', 'Den4ik', 'MegaPulse',
+            'Иван П.', 'CrazyFox', 'Роман С.', 'Den4ik', 'MegaPulse',
             'Сергей К.', 'PokerFace', 'Виталий С', 'Alex_pro', 'Злой_Медведь'
         ];
 
@@ -694,7 +699,8 @@
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        function generateWinners(count) {
+        // Генерируем все строки (20 штук)
+        function generateAllRows(count) {
             const rows = [];
             for (let i = 0; i < count; i++) {
                 const game = getRandomItem(games);
@@ -702,18 +708,25 @@
                     game: game,
                     player: getRandomItem(players),
                     multiplier: getRandomItem(multipliers),
-                    amount: getRandomItem(amounts)});
+                    amount: getRandomItem(amounts)
+                });
             }
             return rows;
         }
 
-        function renderWinners() {
-            const tbody = document.getElementById('winnersBody');
-            const rows = generateWinners(60);
+        const allRows = generateAllRows(20);
+        const tbody = document.getElementById('winnersBody');
+        let currentIndex = 0;
+        const visibleCount = 5;
+
+        function renderRows(startIndex) {
             let html = '';
-            rows.forEach(row => {
+            for (let i = 0; i < visibleCount; i++) {
+                const idx = (startIndex + i) % allRows.length;
+                const row = allRows[idx];
+                const isActive = (i === 0) ? 'active' : '';
                 html += `
-                    <tr>
+                    <tr class="winner-row ${isActive}">
                         <td>
                             <div class="winner-game">
                                 <img src="images/${row.game.img}" alt="${row.game.name}" />
@@ -723,24 +736,23 @@
                         <td>${row.player}</td>
                         <td class="winner-multiplier">${row.multiplier}</td>
                         <td class="winner-amount">+${row.amount}</td>
-                        <td><a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="winner-btn">Играть</a></td>
+                        <td style="text-align: center;">
+                            <a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="winner-btn">Играть</a>
+                        </td>
                     </tr>
                 `;
-            });
-            // Дублируем для бесконечной прокрутки
-            tbody.innerHTML = html + html;
+            }
+            tbody.innerHTML = html;
         }
 
-        renderWinners();
+        // Первый рендер
+        renderRows(0);
 
-        // Пауза при наведении на таблицу
-        const scrollWrap = document.getElementById('winnersScroll');
-        scrollWrap.addEventListener('mouseenter', () => {
-            scrollWrap.classList.add('paused');
-        });
-        scrollWrap.addEventListener('mouseleave', () => {
-            scrollWrap.classList.remove('paused');
-        });
+        // Прокрутка каждые 3 секунды
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % allRows.length;
+            renderRows(currentIndex);
+        }, 3000);
     </script>
 </body>
 </html>
