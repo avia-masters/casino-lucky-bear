@@ -520,3 +520,9 @@ section, footer {
     position: relative;
     z-index: 1;
 }
+/* ===== ОТСТУП ДЛЯ ТЕЛЕФОНА ===== */
+@media (max-width: 480px) {
+    .hero-buttons {
+        margin-bottom: 25px !important;
+    }
+}
