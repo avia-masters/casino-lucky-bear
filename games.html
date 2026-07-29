@@ -287,10 +287,13 @@
         }
         
         .winners-table-wrap {
-            overflow: hidden;
-            height: 340px;
-            position: relative;
-        }
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    margin: 0 -5px;
+    padding: 0 5px;
+}
         
         .winners-table {
             width: 100%;
