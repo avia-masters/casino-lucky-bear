@@ -105,18 +105,34 @@
             transform: scale(1.05);
         }
         
-      /* ===== КАРТОЧКИ С ФОТО (БЕЗ ОБРЕЗАНИЯ) ===== */
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: rgba(0,0,0,0.05);
-            border-radius: 16px;
+    /* ===== КАРТОЧКИ ИГР (ГОРИЗОНТАЛЬНЫЕ) ===== */
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            background: rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 0;
+            border: 1px solid rgba(255,255,255,0.04);
             overflow: hidden;
-            margin-bottom: 15px;
-            flex-shrink: 0;
+            min-height: 180px;
+        }
+        .game-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        
+        .card-image {
+            width: 220px;
+            min-width: 220px;
+            height: auto;
+            background: rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 15px;
+            flex-shrink: 0;
         }
         .card-image img {
             max-width: 100%;
@@ -125,16 +141,142 @@
             height: auto;
             object-fit: contain;
             display: block;
+            border-radius: 12px;
         }
         
         .card-content {
             flex: 1;
             display: flex;
             flex-direction: column;
+            padding: 20px 25px 20px 20px;
+            justify-content: space-between;
+        }
+        .card-content h3 {
+            color: #ffffff;
+            font-size: 22px;
+            margin: 0 0 8px 0;
         }
         .card-content p {
+            color: #ccc;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
             flex: 1;
-            margin-bottom: 15px;
+        }
+        
+        .card-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .card-tags span {
+            background: rgba(70, 130, 200, 0.2);
+            color: #7ab7ef;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .game-btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background: #3a7cc2;
+            color: #ffffff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            animation: float 2.5s ease-in-out infinite;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        .game-btn:hover {
+            background: #4a8cd2;
+            transform: scale(1.05);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ===== АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ ===== */
+        @media (max-width: 1024px) {
+            .card-image {
+                width: 180px;
+                min-width: 180px;
+                padding: 12px;
+            }
+            .card-content {
+                padding: 15px 20px 15px 15px;
+            }
+            .card-content h3 {
+                font-size: 20px;
+            }
+            .card-content p {
+                font-size: 14px;
+            }
+        }
+
+        /* ===== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ===== */
+        @media (max-width: 768px) {
+            .game-card {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .card-image {
+                width: 100%;
+                min-width: auto;
+                height: 160px;
+                padding: 10px;
+            }
+            .card-image img {
+                max-height: 140px;
+            }
+            .card-content {
+                padding: 15px 18px 18px 18px;
+            }
+            .card-content h3 {
+                font-size: 18px;
+            }
+            .card-content p {
+                font-size: 14px;
+            }
+            .game-btn {
+                padding: 8px 24px;
+                font-size: 14px;
+            }
+        }/* ===== АДАПТАЦИЯ ДЛЯ МАЛЕНЬКИХ ТЕЛЕФОНОВ ===== */
+        @media (max-width: 480px) {
+            .card-image {
+                height: 130px;
+            }
+            .card-image img {
+                max-height: 110px;
+            }
+            .card-content {
+                padding: 12px 14px 14px 14px;
+            }
+            .card-content h3 {
+                font-size: 16px;
+            }
+            .card-content p {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+            .card-tags span {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            .game-btn {
+                padding: 6px 18px;
+                font-size: 12px;
+            }
         }
 
         /* ===== ТАБЛИЦА ПОБЕДИТЕЛЕЙ (КАРУСЕЛЬ) ===== */
