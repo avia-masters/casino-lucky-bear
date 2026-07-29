@@ -709,15 +709,14 @@
                 amount: getRandomItem(amountsList)
             });
         }
-
         var tbody = document.getElementById('winnersBody');
         var currentIndex = 0;
         var visibleCount = 5;
 
-        function renderRows(startIndex) {
+        function renderRows() {
             var html = '';
             for (var i = 0; i < visibleCount; i++) {
-                var idx = (startIndex + i) % allData.length;
+                var idx = (currentIndex + i) % allData.length;
                 var row = allData[idx];
                 html += '<tr class="winner-row">';
                 html += '<td><div class="winner-game"><img src="images/' + row.game.img + '" alt="' + row.game.name + '" /><span>' + row.game.name + '</span></div></td>';
@@ -731,12 +730,12 @@
         }
 
         // Первый рендер
-        renderRows(0);
+        renderRows();
 
         // Каждые 3 секунды сдвигаем на 1 строку вниз
         setInterval(function() {
             currentIndex = (currentIndex + 1) % allData.length;
-            renderRows(currentIndex);
+            renderRows();
         }, 3000);
     </script>
 </body>
