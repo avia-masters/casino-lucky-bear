@@ -618,7 +618,7 @@
     </footer>
 
     <!-- ===== СКРИПТЫ ===== -->
-    <script>
+  <script>
         // ===== ЭФФЕКТ ЛОГОТИПА =====
         const logo = document.querySelector(".logo");
         window.addEventListener("scroll", function() {
@@ -651,7 +651,7 @@
             observer.observe(el);
         });
 
-        // ===== БОЛЬШИЕ СПИСКИ ДЛЯ УНИКАЛЬНЫХ КОМБИНАЦИЙ =====
+        // ===== СПИСКИ =====
         var gamesList = [
             { name: 'Anubis Wrath', img: 'anubis-wrath.jpg' },
             { name: 'Wild Bounty', img: 'wild-bounty-snowdown.jpg' },
@@ -667,7 +667,6 @@
             { name: 'Candy Hole', img: 'candy-hole.jpg' }
         ];
 
-        // 80 уникальных имён
         var playersList = [
             'Владислав И.', 'zub666', 'Студент 2.0', 'KpocaBu4', 'xX_Pro100_Xx',
             'Алексей М.', 'Dragon22', 'LuckyOne', 'BIG_WINNER', 'Ставка_Мастер',
@@ -684,21 +683,22 @@
             'Nikolay_K', 'Pavel_777', 'Andrei_B', 'Misha_Pro', 'Igor_Spb',
             'Анатолий В.', 'Roma_22', 'Кирилл С.', 'Vlad_Pro', 'Сергей М.',
             'Олег К.', 'Max_Pro', 'Денис М.', 'Андрей С.', 'Илья П.',
-            'Станислав Р.', 'Евгений К.', 'Владимир П.', 'Борис Н.', 'Глеб А.'
+            'Станислав Р.', 'Евгений К.', 'Владимир П.', 'Борис Н.', 'Глеб А.',
+            'Алексей К.', 'Михаил П.', 'Денис С.', 'Андрей Б.', 'Сергей Л.',
+            'Игорь В.', 'Павел С.', 'Владимир К.', 'Николай М.', 'Роман П.'
         ];
 
-        // 60 уникальных множителей
         var multipliersList = [
             'x165', 'x16.5', 'x215', 'x61.2', 'x325', 'x8.7', 'x142', 'x53', 'x9', 'x78',
             'x234', 'x12.3', 'x456', 'x31', 'x189', 'x7.5', 'x98', 'x276', 'x44', 'x512',
             'x38', 'x624', 'x14.2', 'x87', 'x203', 'x5.8', 'x156', 'x92', 'x47', 'x371',
             'x18', 'x245', 'x33', 'x512', 'x72', 'x86', 'x134', 'x29', 'x367', 'x42',
             'x289', 'x56', 'x178', 'x93', 'x412', 'x27', 'x318', 'x64', 'x151', 'x87',
-            'x204', 'x76', 'x399', 'x45', 'x283', 'x94', 'x159', 'x67', 'x438', 'x23'
-        ];
+            'x204', 'x76', 'x399', 'x45', 'x283', 'x94', 'x159', 'x67', 'x438', 'x23',
+            'x71', 'x358', 'x49', 'x267', 'x88', 'x145', 'x33', 'x512', 'x98', 'x203'];
 
-        // 50 уникальных сумм
-        var amountsList = ['125 340 ₽', '150 630 ₽', '1 143 000 ₽', '45 200 ₽', '872 500 ₽',
+        var amountsList = [
+            '125 340 ₽', '150 630 ₽', '1 143 000 ₽', '45 200 ₽', '872 500 ₽',
             '32 150 ₽', '210 000 ₽', '560 800 ₽', '89 430 ₽', '1 500 000 ₽',
             '75 600 ₽', '320 000 ₽', '16 800 ₽', '940 000 ₽', '280 500 ₽',
             '52 100 ₽', '430 000 ₽', '195 700 ₽', '615 000 ₽', '38 400 ₽',
@@ -707,66 +707,57 @@
             '78 900 ₽', '432 000 ₽', '156 400 ₽', '823 000 ₽', '49 600 ₽',
             '275 000 ₽', '98 300 ₽', '640 000 ₽', '37 500 ₽', '1 900 000 ₽',
             '183 000 ₽', '760 500 ₽', '42 800 ₽', '325 000 ₽', '68 400 ₽',
-            '215 000 ₽', '540 000 ₽', '92 700 ₽', '470 000 ₽', '134 200 ₽'
+            '215 000 ₽', '540 000 ₽', '92 700 ₽', '470 000 ₽', '134 200 ₽',
+            '381 000 ₽', '68 500 ₽', '912 000 ₽', '57 300 ₽', '746 000 ₽'
         ];
 
-        // ===== ФУНКЦИЯ ПЕРЕМЕШИВАНИЯ МАССИВА =====
-        function shuffleArray(arr) {
-            for (var i = arr.length - 1; i > 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-            return arr;
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
         }
 
         // ===== ГЕНЕРАЦИЯ 250 УНИКАЛЬНЫХ ЗАПИСЕЙ =====
-        function generateUniqueData() {
-            var shuffledGames = shuffleArray([...gamesList]);
-            var shuffledPlayers = shuffleArray([...playersList]);
-            var shuffledMultipliers = shuffleArray([...multipliersList]);
-            var shuffledAmounts = shuffleArray([...amountsList]);
+        var allData = [];
+        var usedKeys = new Set();
+        var attempts = 0;
+        var maxAttempts = 10000;
+
+        while (allData.length < 250 && attempts < maxAttempts) {
+            attempts++;
+            var game = getRandomItem(gamesList);
+            var player = getRandomItem(playersList);
+            var multiplier = getRandomItem(multipliersList);
+            var amount = getRandomItem(amountsList);
             
-            var result = [];
+            var key = game.name + player + multiplier + amount;
             
-            for (var i = 0; i < 250; i++) {
-                result.push({
-                    game: shuffledGames[i % shuffledGames.length],
-                    player: shuffledPlayers[i % shuffledPlayers.length],
-                    multiplier: shuffledMultipliers[i % shuffledMultipliers.length],
-                    amount: shuffledAmounts[i % shuffledAmounts.length]
+            if (!usedKeys.has(key)) {
+                usedKeys.add(key);
+                allData.push({
+                    game: game,
+                    player: player,
+                    multiplier: multiplier,
+                    amount: amount
                 });
             }
-            
-            return shuffleArray(result);
         }
 
-        // ===== СОЗДАЁМ 250 УНИКАЛЬНЫХ ЗАПИСЕЙ =====
-        var allData = generateUniqueData();
-
-        // ===== ПРОВЕРКА НА ДУБЛИКАТЫ =====
-        var seen = new Set();
-        var uniqueData = [];
-
-        for (var i = 0; i < allData.length; i++) {
-            var key = allData[i].game.name + allData[i].player + allData[i].multiplier + allData[i].amount;
-            if (!seen.has(key)) {
-                seen.add(key);
-                uniqueData.push(allData[i]);
-            }
-        }
-
-        while (uniqueData.length < 250) {
-            uniqueData.push({
-                game: gamesList[Math.floor(Math.random() * gamesList.length)],
-                player: playersList[Math.floor(Math.random() * playersList.length)],
-                multiplier: multipliersList[Math.floor(Math.random() * multipliersList.length)],
-                amount: amountsList[Math.floor(Math.random() * amountsList.length)]
+        // Если вдруг не хватило записей — добиваем
+        while (allData.length < 250) {
+            allData.push({
+                game: getRandomItem(gamesList),
+                player: getRandomItem(playersList),
+                multiplier: getRandomItem(multipliersList),
+                amount: getRandomItem(amountsList)
             });
         }
 
-        allData = uniqueData;
+        // ===== ПЕРЕМЕШИВАЕМ =====
+        for (var i = allData.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = allData[i];
+            allData[i] = allData[j];
+            allData[j] = temp;
+        }
 
         // ===== ОТОБРАЖЕНИЕ ТАБЛИЦЫ =====
         var tbody = document.getElementById('winnersBody');
@@ -787,7 +778,9 @@
                 html += '</tr>';
             }
             tbody.innerHTML = html;
-        }// ===== ПЕРВЫЙ РЕНДЕР =====
+        }
+
+        // ===== ПЕРВЫЙ РЕНДЕР =====
         renderRows();
 
         // ===== КАЖДЫЕ 3 СЕКУНДЫ — СДВИГ НА 1 СТРОКУ =====
@@ -796,5 +789,5 @@
             renderRows();
         }, 3000);
     </script>
-</body>
+    </body>
 </html>
