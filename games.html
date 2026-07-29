@@ -105,11 +105,11 @@
             transform: scale(1.05);
         }
         
-       /* ===== КАРТОЧКИ С ФОТО (БЕЗ ОБРЕЗАНИЯ) ===== */
+      /* ===== КАРТОЧКИ С ФОТО (БЕЗ ОБРЕЗАНИЯ) ===== */
         .card-image {
             width: 100%;
-            height: auto;
-            background: transparent;
+            height: 200px;
+            background: rgba(0,0,0,0.05);
             border-radius: 16px;
             overflow: hidden;
             margin-bottom: 15px;
@@ -119,8 +119,11 @@
             justify-content: center;
         }
         .card-image img {
-            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
             height: auto;
+            object-fit: contain;
             display: block;
         }
         
