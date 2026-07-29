@@ -618,7 +618,7 @@
     </footer>
 
     <!-- ===== СКРИПТЫ ===== -->
-  <script>
+ <script>
         // ===== ЭФФЕКТ ЛОГОТИПА =====
         const logo = document.querySelector(".logo");
         window.addEventListener("scroll", function() {
@@ -718,11 +718,8 @@
         // ===== ГЕНЕРАЦИЯ 250 УНИКАЛЬНЫХ ЗАПИСЕЙ =====
         var allData = [];
         var usedKeys = new Set();
-        var attempts = 0;
-        var maxAttempts = 10000;
 
-        while (allData.length < 250 && attempts < maxAttempts) {
-            attempts++;
+        while (allData.length < 250) {
             var game = getRandomItem(gamesList);
             var player = getRandomItem(playersList);
             var multiplier = getRandomItem(multipliersList);
@@ -741,16 +738,6 @@
             }
         }
 
-        // Если вдруг не хватило записей — добиваем
-        while (allData.length < 250) {
-            allData.push({
-                game: getRandomItem(gamesList),
-                player: getRandomItem(playersList),
-                multiplier: getRandomItem(multipliersList),
-                amount: getRandomItem(amountsList)
-            });
-        }
-
         // ===== ПЕРЕМЕШИВАЕМ =====
         for (var i = allData.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -759,35 +746,55 @@
             allData[j] = temp;
         }
 
-        // ===== ОТОБРАЖЕНИЕ ТАБЛИЦЫ =====
+        // ===== СОЗДАЁМ ТАБЛИЦУ =====
         var tbody = document.getElementById('winnersBody');
         var currentIndex = 0;
         var visibleCount = 5;
 
-        function renderRows() {
-            var html = '';
-            for (var i = 0; i < visibleCount; i++) {
-                var idx = (currentIndex + i) % allData.length;
-                var row = allData[idx];
-                html += '<tr class="winner-row">';
-                html += '<td><div class="winner-game"><img src="images/' + row.game.img + '" alt="' + row.game.name + '" /><span>' + row.game.name + '</span></div></td>';
-                html += '<td>' + row.player + '</td>';
-                html += '<td class="winner-multiplier">' + row.multiplier + '</td>';
-                html += '<td class="winner-amount">+' + row.amount + '</td>';
-                html += '<td style="text-align: center;"><a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="winner-btn">Играть</a></td>';
-                html += '</tr>';
-            }
-            tbody.innerHTML = html;
+        // Функция создания одной строки
+        function createRow(data) {
+            var tr = document.createElement('tr');
+            tr.className = 'winner-row';
+            tr.innerHTML = `
+                <td><div class="winner-game"><img src="images/${data.game.img}" alt="${data.game.name}" /><span>${data.game.name}</span></div></td>
+                <td>${data.player}</td>
+                <td class="winner-multiplier">${data.multiplier}</td>
+                <td class="winner-amount">+${data.amount}</td>
+                <td style="text-align: center;"><a href="https://lbgame3131.fit/ru-RU/luckybear?lbex_mst=1706697764&lbex_m=Savraski&lbex_c=GIFT" class="winner-btn">Играть</a></td>
+            `;
+            return tr;
         }
 
-        // ===== ПЕРВЫЙ РЕНДЕР =====
-        renderRows();
+        // Заполняем таблицу первыми 5 строками
+        function initTable() {
+            tbody.innerHTML = '';
+            for (var i = 0; i < visibleCount; i++) {
+                var row = createRow(allData[i]);
+                tbody.appendChild(row);
+            }
+            currentIndex = visibleCount;
+        }
 
-        // ===== КАЖДЫЕ 3 СЕКУНДЫ — СДВИГ НА 1 СТРОКУ =====
-        setInterval(function() {
-            currentIndex = (currentIndex + 1) % allData.length;
-            renderRows();
-        }, 3000);
+        // Добавляем одну строку сверху и удаляем последнюю
+        function shiftRow() {
+            // Берём следующую запись
+            var newData = allData[currentIndex % allData.length];
+            var newRow = createRow(newData);
+            
+            // Добавляем сверху
+            tbody.insertBefore(newRow, tbody.firstChild);
+            
+            // Удаляем последнюю строку
+            tbody.removeChild(tbody.lastChild);
+            
+            currentIndex++;
+        }
+
+        // ===== ПЕРВЫЙ ЗАПУСК =====
+        initTable();
+
+        // ===== КАЖДЫЕ 3 СЕКУНДЫ — ДОБАВЛЯЕМ СВЕРХУ, УДАЛЯЕМ СНИЗУ =====
+        setInterval(shiftRow, 3000);
     </script>
     </body>
 </html>
