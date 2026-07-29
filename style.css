@@ -520,14 +520,3 @@ section, footer {
     position: relative;
     z-index: 1;
 }
-/* ===== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ===== */
-@media (max-width: 480px) {
-    .hero-buttons .main-button {
-        padding: 12px 24px !important;
-        font-size: 15px !important;
-    }
-    .hero-buttons {
-        gap: 12px !important;
-        margin-bottom: 15px !important;
-    }
-}
