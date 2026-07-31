@@ -522,9 +522,9 @@ section, footer {
 }
 @media (max-width: 480px) {
     .bear-background {
-        top: 80px !important;
-        background-position: 10px 80px, right 10px top 100px, 10px bottom 80px, right 10px bottom 80px !important;
-        background-size: 140px, 160px, 120px, 150px !important;
+        top: 120px !important;
+        background-position: 10% 15%, 90% 20%, 10% 80%, 90% 85% !important;
+        background-size: 120px, 140px, 100px, 130px !important;
         opacity: 0.15 !important;
     }
     .hero-buttons {
