@@ -520,15 +520,13 @@ section, footer {
     position: relative;
     z-index: 1;
 }
-/* ===== ТОЛЬКО ДЛЯ ТЕЛЕФОНА ===== */
 @media (max-width: 480px) {
-    /* Опускаем уши медведя */
     .bear-background {
-        top: 120px !important;
-        background-position: center 120px !important;
+        top: 80px !important;
+        background-position: 10px 80px, right 10px top 100px, 10px bottom 80px, right 10px bottom 80px !important;
+        background-size: 140px, 160px, 120px, 150px !important;
+        opacity: 0.15 !important;
     }
-    
-    /* Отодвигаем текст от кнопок */
     .hero-buttons {
         margin-bottom: 40px !important;
     }
