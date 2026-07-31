@@ -511,8 +511,8 @@ footer {
                      url("images/menu-logo.png"),
                      url("images/menu-logo.png");
     background-repeat: no-repeat;
-    background-position: 5% 15%, 90% 30%, 10% 70%, 85% 85%;
-    background-size: 260px, 320px, 220px, 280px;
+    background-position: 30px 30px, right 30px top 80px, 30px bottom 30px, right 30px bottom 30px;
+    background-size: 200px, 240px, 180px, 220px;
     opacity: 0.12;
     filter: blur(1px);
 }
