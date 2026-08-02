@@ -8,38 +8,44 @@
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== СТИЛИ ДЛЯ ТАБЛИЦ ===== */
+        /* ===== СТИЛЬ ДЛЯ ТАБЛИЦ С ПЛАВНОЙ РАМКОЙ ===== */
         .table-wrapper {
             max-width: 900px;
             margin: 40px auto 0;
-            background: rgba(20, 30, 38, 0.8);
+            position: relative;
             border-radius: 16px;
-            padding: 2px; /* Это даст эффект цветной рамки вокруг всей таблицы */
-            background-clip: padding-box;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            overflow: hidden; /* Убираем скролл */
+            padding: 3px; /* Это даст эффект рамки */
+            background: linear-gradient(135deg, #00d4ff, #7b68ee, #ff7f50, #ffd700, #00fa9a, #00d4ff);
+            background-size: 300% 300%;
+            animation: borderGlow 6s ease infinite;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+        }
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .table-inner {
-            background: #0d151c;
+            background: #0d151c; /* Тёмный фон внутри, но он будет виден только как подложка */
             border-radius: 14px;
-            padding: 20px 20px 25px;
+            padding: 20px 15px 25px;
+            overflow: hidden;
         }
 
         .table-wrapper h3 {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #ffffff;
-            margin: 0 0 15px 10px;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            text-align: center;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .table-scroll {
             overflow-x: auto;
-            padding-bottom: 10px;
-            /* Убираем стандартные полосы прокрутки в WebKit */
+            padding-bottom: 8px;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
         }
@@ -60,17 +66,18 @@
             font-size: 15px;
             color: #f2f4f5;
             min-width: 500px;
+            background: transparent;
         }
 
         .bonus-table thead th {
             padding: 14px 12px;
             text-align: center;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             color: #a0b4c4;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bonus-table tbody td {
@@ -78,35 +85,18 @@
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: rgba(255, 255, 255, 0.9);
-            font-weight: 400;
         }
 
         .bonus-table tbody tr:last-child td {
             border-bottom: none;
         }
 
-        /* ===== ЦВЕТНЫЕ РАМКИ ДЛЯ СТРОК (как на фото) ===== */
-        .bonus-table tbody tr {
-            border-left: 3px solid transparent;
-            transition: 0.2s;
-        }
-        .bonus-table tbody tr:nth-child(1) { border-left-color: #00d4ff; } /* Голубая */
-        .bonus-table tbody tr:nth-child(2) { border-left-color: #7b68ee; } /* Фиолетовая */
-        .bonus-table tbody tr:nth-child(3) { border-left-color: #ff7f50; } /* Оранжевая */
-        .bonus-table tbody tr:nth-child(4) { border-left-color: #ffd700; } /* Золотая */
-        .bonus-table tbody tr:nth-child(5) { border-left-color: #00fa9a; } /* Мятная */
-        .bonus-table tbody tr:nth-child(6) { border-left-color: #ff69b4; } /* Розовая */
-        .bonus-table tbody tr:nth-child(7) { border-left-color: #00d4ff; }
-        .bonus-table tbody tr:nth-child(8) { border-left-color: #7b68ee; }
-        .bonus-table tbody tr:nth-child(9) { border-left-color: #ff7f50; }
-        .bonus-table tbody tr:nth-child(10) { border-left-color: #ffd700; }
-        .bonus-table tbody tr:nth-child(11) { border-left-color: #00fa9a; }
-
         /* ===== ГОЛУБАЯ КНОПКА ===== */
         .table-button {
             display: block;
             width: fit-content;
-            margin: 25px auto 5px;padding: 14px 50px;
+            margin: 25px auto 5px;
+            padding: 14px 50px;
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             border: none;
             border-radius: 30px;
@@ -115,13 +105,13 @@
             font-weight: 700;
             text-decoration: none;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 114, 255, 0.4);
+            box-shadow: 0 4px 25px rgba(0, 114, 255, 0.5);
             transition: 0.3s ease;
             letter-spacing: 0.5px;
         }
         .table-button:hover {
             transform: scale(1.03);
-            box-shadow: 0 6px 30px rgba(0, 114, 255, 0.6);
+            box-shadow: 0 6px 35px rgba(0, 114, 255, 0.7);
         }
 
         .table-note {
@@ -132,9 +122,7 @@
             letter-spacing: 0.3px;
         }
 
-        /* ===== АДАПТИВ ===== */
-        @media (max-width: 768px) {
-            .bonus-table {
+        @media (max-width: 768px) {.bonus-table {
                 font-size: 13px;
                 min-width: 400px;
             }
@@ -144,8 +132,6 @@
             }
             .table-wrapper h3 {
                 font-size: 20px;
-                margin-left: 0;
-                text-align: center;
             }
             .table-button {
                 padding: 12px 30px;
@@ -206,7 +192,9 @@
         <div class="info-block">
             <h3>Перевод с Т-банка</h3>
             <p>Лимиты: от 1 064 ₽ до 300 000 ₽. Зачисление происходит в течение нескольких минут после перевода.</p>
-        </div><div class="info-block">
+        </div>
+
+        <div class="info-block">
             <h3>Сбербанк (перевод за рубеж)</h3>
             <p>Лимиты: от 1 064 ₽ до 300 000 ₽. Поддерживается отправка переводов на счета за пределами России.</p>
         </div>
@@ -228,7 +216,7 @@
 
         <div class="info-block">
             <h3>Перевод по номеру карты</h3>
-            <p>Лимиты: от 2 064 ₽ до 300 000 ₽. Переведите средства на указанную карту, и они будут зачислены на счёт.</p>
+            <p>Лимиты: от 2 064 ₽ до 300 000 ₽.Переведите средства на указанную карту, и они будут зачислены на счёт.</p>
         </div>
 
         <div class="info-block" style="border-bottom: none;">
@@ -318,9 +306,7 @@
             Вывод доступен на те же реквизиты, с которых был внесён депозит. Средства зачисляются в течение 24 часов.
         </p>
 
-        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3>
-
-        <div class="info-block">
+        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3><div class="info-block">
             <h3>Система быстрых платежей (СБП)</h3>
             <p>Лимиты: от 2 200 ₽ до 150 000 ₽. Быстрый вывод на банковские счета.</p>
         </div>
@@ -350,7 +336,7 @@
             <p>Лимиты: от 20 USDT до 10 000 USDT. Удобный способ вывода на встроенные кошельки.</p>
         </div>
 
-        <!-- ===== ТАБЛИЦА 2: VIP-ПРОГРАММА (ОБЪЕДИНЁННАЯ) ===== -->
+        <!-- ===== ТАБЛИЦА 2: VIP-ПРОГРАММА ===== -->
         <div class="table-wrapper" style="margin-top: 60px;">
             <div class="table-inner">
                 <h3>VIP-программа Lucky Bear</h3>
@@ -374,7 +360,8 @@
                             <tr><td>VIP2</td><td>750</td><td>15</td><td>15</td><td>15</td><td>75</td><td>0.2%</td><td>8.5%</td></tr>
                             <tr><td>VIP3</td><td>1500</td><td>30</td><td>20</td><td>30</td><td>150</td><td>0.25%</td><td>8.5%</td></tr>
                             <tr><td>VIP4</td><td>7500</td><td>45</td><td>50</td><td>60</td><td>200</td><td>0.3%</td><td>8%</td></tr>
-                            <tr><td>VIP5</td><td>45000</td><td>270</td><td>100</td><td>120</td><td>300</td><td>0.35%</td><td>7.5%</td></tr><tr><td>VIP6</td><td>150000</td><td>900</td><td>200</td><td>180</td><td>500</td><td>0.4%</td><td>7%</td></tr>
+                            <tr><td>VIP5</td><td>45000</td><td>270</td><td>100</td><td>120</td><td>300</td><td>0.35%</td><td>7.5%</td></tr>
+                            <tr><td>VIP6</td><td>150000</td><td>900</td><td>200</td><td>180</td><td>500</td><td>0.4%</td><td>7%</td></tr>
                             <tr><td>VIP7</td><td>750000</td><td>4500</td><td>400</td><td>450</td><td>1000</td><td>0.45%</td><td>6.5%</td></tr>
                             <tr><td>VIP8</td><td>1500000</td><td>9000</td><td>1000</td><td>1200</td><td>2000</td><td>0.45%</td><td>6%</td></tr>
                             <tr><td>VIP9</td><td>3750000</td><td>22500</td><td>1500</td><td>1800</td><td>3000</td><td>0.45%</td><td>6%</td></tr>
@@ -382,8 +369,7 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="https://lb777.xyz/5dsgV7" class="table-button" rel="noreferrer noopener">Пополнить баланс</a>
-                <div class="table-note">* Для повышения VIP-уровня необходимо выполнить условия по пополнению и ставкам</div>
+                <a href="https://lb777.xyz/5dsgV7" class="table-button" rel="noreferrer noopener">Пополнить баланс</a><div class="table-note">* Для повышения VIP-уровня необходимо выполнить условия по пополнению и ставкам</div>
             </div>
         </div>
 
