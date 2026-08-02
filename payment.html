@@ -8,25 +8,44 @@
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== ТАБЛИЦА С ТОНКОЙ РАМКОЙ ===== */
+        /* ===== ТАБЛИЦА С ТОНКИМ ПЕРЕЛИВАЮЩИМСЯ КОНТУРОМ ===== */
         .table-wrapper {
             max-width: 900px;
             margin: 40px auto 0;
+            position: relative;
             border-radius: 16px;
-            padding: 1px; /* Очень тонкая рамка */
-            background: linear-gradient(135deg, #00d4ff, #7b68ee, #ffd700, #00d4ff);
-            background-size: 300% 300%;
-            animation: borderGlow 8s ease infinite;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+            padding: 1px; /* Только контур */
+            background: transparent; /* Сам блок прозрачный */
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
         }
+
+        /* Псевдоэлемент для переливающегося контура */
+        .table-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -1px; /* Чтобы контур был ровно по краям */
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, #00d4ff, #7b68ee, #ffd700, #00fa9a, #00d4ff);
+            background-size: 300% 300%;
+            animation: borderGlow 6s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         @keyframes borderGlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* ===== ПРОЗРАЧНЫЙ ФОН ===== */
         .table-inner {
+            position: relative;
+            z-index: 1;
             background: transparent; /* Полностью прозрачный */
             border-radius: 16px;
             padding: 20px 15px 25px;
@@ -49,7 +68,7 @@
             font-size: 15px;
             color: #f2f4f5;
             min-width: 500px;
-            background: transparent; /* Прозрачный фон у таблицы */
+            background: transparent; /* Прозрачный фон */
         }
 
         .bonus-table thead th {
@@ -90,6 +109,8 @@
             text-align: center;
             box-shadow: 0 4px 25px rgba(0, 114, 255, 0.5);
             transition: 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
         .table-button:hover {
             transform: scale(1.03);
@@ -98,8 +119,7 @@
 
         .table-note {
             text-align: center;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);font-size: 13px;
             margin-top: 12px;
         }
 
@@ -129,7 +149,8 @@
     <header>
         <a href="index.html" class="brand-icon">
             <img src="images/menu-logo.png" alt="LUCKY BEAR">
-        </a><nav class="nav" id="mobileNav">
+        </a>
+        <nav class="nav" id="mobileNav">
             <a href="index.html#start" class="nav-link">Как играть</a>
             <a href="index.html#rules" class="nav-link">Правила</a>
             <a href="games.html" class="nav-link">Игры</a>
@@ -193,8 +214,7 @@
 
         <div class="info-block">
             <h3>Перевод по номеру телефона</h3>
-            <p>Лимиты: от 2 064 ₽ до 300 000 ₽. Удобный способ без необходимости вводить реквизиты карты.</p>
-        </div>
+            <p>Лимиты: от 2 064 ₽ до 300 000 ₽. Удобный способ без необходимости вводить реквизиты карты.</p></div>
 
         <div class="info-block">
             <h3>Перевод по номеру карты</h3>
@@ -212,7 +232,8 @@
                 <h3>Акция пополнения</h3>
                 <div style="overflow-x: auto; padding-bottom: 8px;">
                     <table class="bonus-table">
-                        <thead><tr>
+                        <thead>
+                            <tr>
                                 <th>Сумма пополнения</th>
                                 <th>Процент бонуса</th>
                                 <th>Бонусная сумма</th>
@@ -285,9 +306,7 @@
         <h2 class="section-title">Вывод средств</h2>
         <p class="section-description">
             Вывод доступен на те же реквизиты, с которых был внесён депозит. Средства зачисляются в течение 24 часов.
-        </p>
-
-        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3>
+        </p><h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3>
 
         <div class="info-block">
             <h3>Система быстрых платежей (СБП)</h3>
@@ -302,7 +321,9 @@
         <div class="info-block" style="border-bottom: none;">
             <h3>Перевод по номеру карты</h3>
             <p>Лимиты: от 3 300 ₽ до 150 000 ₽. Вывод на банковскую карту любого банка.</p>
-        </div><h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в криптовалюте</h3>
+        </div>
+
+        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в криптовалюте</h3>
         <p style="color: rgba(255,255,255,0.62); font-size: 19px; line-height: 1.9; margin-bottom: 30px;">
             Мгновенное зачисление, комиссия не взимается.
         </p>
@@ -359,7 +380,8 @@
         <div style="max-width: 900px; margin: 50px auto 0; padding: 30px 20px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); text-align: center;">
             <p style="color: rgba(255,255,255,0.8); font-size: 18px; max-width: 700px; margin: 0 auto 25px;">
                 Выберите удобный способ пополнения и начните игру в Lucky Bear уже сегодня.
-            </p><a href="https://lb777.xyz/5dsgV7" class="main-button" rel="noreferrer noopener" style="display: inline-block;">
+            </p>
+            <a href="https://lb777.xyz/5dsgV7" class="main-button" rel="noreferrer noopener" style="display: inline-block;">
                 Перейти к пополнению
             </a>
         </div>
