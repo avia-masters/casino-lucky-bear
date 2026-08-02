@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+. <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -8,17 +8,17 @@
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== СТИЛЬ ДЛЯ ТАБЛИЦ С ПЛАВНОЙ РАМКОЙ ===== */
+        /* ===== СТИЛЬ ДЛЯ ТАБЛИЦ С ТОНКОЙ РАМКОЙ ===== */
         .table-wrapper {
             max-width: 900px;
             margin: 40px auto 0;
             position: relative;
             border-radius: 16px;
-            padding: 3px; /* Это даст эффект рамки */
-            background: linear-gradient(135deg, #00d4ff, #7b68ee, #ff7f50, #ffd700, #00fa9a, #00d4ff);
+            padding: 1px; /* ОЧЕНЬ ТОНКАЯ РАМКА */
+            background: linear-gradient(135deg, #00d4ff, #7b68ee, #00d4ff);
             background-size: 300% 300%;
-            animation: borderGlow 6s ease infinite;
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+            animation: borderGlow 8s ease infinite;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
         }
         @keyframes borderGlow {
             0% { background-position: 0% 50%; }
@@ -26,9 +26,10 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* ===== ПРОЗРАЧНЫЙ ФОН (как в первом варианте) ===== */
         .table-inner {
-            background: #0d151c; /* Тёмный фон внутри, но он будет виден только как подложка */
-            border-radius: 14px;
+            background: transparent; /* ПОЛНОСТЬЮ ПРОЗРАЧНЫЙ */
+            border-radius: 16px;
             padding: 20px 15px 25px;
             overflow: hidden;
         }
@@ -40,7 +41,7 @@
             text-align: center;
             margin: 0 0 20px 0;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
 
         .table-scroll {
@@ -66,7 +67,7 @@
             font-size: 15px;
             color: #f2f4f5;
             min-width: 500px;
-            background: transparent;
+            background: transparent; /* ПРОЗРАЧНЫЙ ФОН У ТАБЛИЦЫ */
         }
 
         .bonus-table thead th {
@@ -120,9 +121,8 @@
             font-size: 13px;
             margin-top: 12px;
             letter-spacing: 0.3px;
-        }
-
-        @media (max-width: 768px) {.bonus-table {
+        }@media (max-width: 768px) {
+            .bonus-table {
                 font-size: 13px;
                 min-width: 400px;
             }
@@ -215,8 +215,7 @@
         </div>
 
         <div class="info-block">
-            <h3>Перевод по номеру карты</h3>
-            <p>Лимиты: от 2 064 ₽ до 300 000 ₽.Переведите средства на указанную карту, и они будут зачислены на счёт.</p>
+            <h3>Перевод по номеру карты</h3><p>Лимиты: от 2 064 ₽ до 300 000 ₽. Переведите средства на указанную карту, и они будут зачислены на счёт.</p>
         </div>
 
         <div class="info-block" style="border-bottom: none;">
@@ -306,7 +305,9 @@
             Вывод доступен на те же реквизиты, с которых был внесён депозит. Средства зачисляются в течение 24 часов.
         </p>
 
-        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3><div class="info-block">
+        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3>
+
+        <div class="info-block">
             <h3>Система быстрых платежей (СБП)</h3>
             <p>Лимиты: от 2 200 ₽ до 150 000 ₽. Быстрый вывод на банковские счета.</p>
         </div>
