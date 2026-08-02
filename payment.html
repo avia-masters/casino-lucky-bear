@@ -8,6 +8,85 @@
 
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== СТИЛЬ ДЛЯ ТАБЛИЦ ===== */
+        .table-wrapper {
+            max-width: 900px;
+            margin: 40px auto 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 20px 20px 30px;
+            overflow-x: auto;
+        }
+        .table-wrapper h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: .3px;
+        }
+        .bonus-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            color: #f2f4f5;
+            min-width: 600px;
+        }
+        .bonus-table thead th {
+            background: rgba(255,255,255,0.06);
+            padding: 14px 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid rgba(255,255,255,0.15);
+            color: #ffffff;
+        }
+        .bonus-table tbody td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 15px;
+            color: rgba(255,255,255,0.85);
+        }
+        .bonus-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .bonus-table tbody tr:hover {
+            background: rgba(255,255,255,0.04);
+        }
+        .table-button {
+            display: block;
+            width: fit-content;
+            margin: 25px auto 5px;
+            padding: 12px 40px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s ease;
+            text-align: center;
+        }
+        .table-button:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .bonus-table {
+                font-size: 14px;
+                min-width: 480px;
+            }
+            .bonus-table thead th,
+            .bonus-table tbody td {
+                padding: 10px 6px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="bear-background"></div>
@@ -35,8 +114,7 @@
     <section class="hero" id="home">
         <img src="images/logo.png" alt="LUCKY BEAR" class="logo">
         <div class="title">LUCKY BEAR</div>
-        <div class="subtitle">Пополнение счёта и вывод средств</div>
-        <p class="hero-description">
+        <div class="subtitle">Пополнение счёта и вывод средств</div><p class="hero-description">
             Все финансовые операции на платформе Lucky Bear проходят быстро, безопасно и прозрачно. 
             Доступны пополнение и вывод в рублях через банковские переводы и СБП, а также криптовалютные транзакции.
         </p>
@@ -84,12 +162,34 @@
         </div>
 
         <div class="info-block">
-            <h3>Перевод по номеру карты</h3><p>Лимиты: от 2 064 ₽ до 300 000 ₽. Переведите средства на указанную карту, и они будут зачислены на счёт.</p>
+            <h3>Перевод по номеру карты</h3>
+            <p>Лимиты: от 2 064 ₽ до 300 000 ₽. Переведите средства на указанную карту, и они будут зачислены на счёт.</p>
         </div>
 
         <div class="info-block" style="border-bottom: none;">
             <h3>Перевод с Альфа-банка</h3>
             <p>Лимиты: от 1 064 ₽ до 300 000 ₽. Переводы обрабатываются в режиме реального времени.</p>
+        </div>
+
+        <!-- ===== ТАБЛИЦА 1: АКЦИЯ ПОПОЛНЕНИЯ ===== -->
+        <div class="table-wrapper">
+            <h3>Акция пополнения</h3>
+            <table class="bonus-table">
+                <thead>
+                    <tr>
+                        <th>Сумма пополнения</th>
+                        <th>Процент бонуса</th>
+                        <th>Бонусная сумма</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1 000 ₽</td><td>120%</td><td>1 200 ₽</td></tr>
+                    <tr><td>2 000 ₽</td><td>180%</td><td>3 600 ₽</td></tr>
+                    <tr><td>5 000 ₽</td><td>240%</td><td>12 000 ₽</td></tr>
+                    <tr><td>8 000 ₽</td><td>300%</td><td>24 000 ₽</td></tr>
+                </tbody>
+            </table>
+            <a href="https://lb777.xyz/5dsgV7" class="table-button" rel="noreferrer noopener">Пополнить баланс</a>
         </div>
     </section>
 
@@ -98,9 +198,7 @@
         <h2 class="section-title">Пополнение в криптовалюте</h2>
         <p class="section-description">
             Для пополнения счёта доступны популярные криптовалюты. Средства зачисляются после подтверждения сети, комиссия не взимается.
-        </p>
-
-        <div class="info-block">
+        </p><div class="info-block">
             <h3>USDT (BNB Smart Chain/BEP20, TON, TRC20/TRON, BSC/BNB)</h3>
             <p>Лимиты: от 10 USDT до 5 000 USDT. Зачисление происходит после 2-3 подтверждений в сети.</p>
         </div>
@@ -175,11 +273,44 @@
             <p>Лимиты: от 20 USDT до 10 000 USDT. Вывод осуществляется в течение нескольких минут.</p>
         </div>
 
-        <div class="info-block" style="border-bottom: none;"><h3>Криптовалютные кошельки (TonWallet, CryptoBot)</h3>
+        <div class="info-block" style="border-bottom: none;">
+            <h3>Криптовалютные кошельки (TonWallet, CryptoBot)</h3>
             <p>Лимиты: от 20 USDT до 10 000 USDT. Удобный способ вывода на встроенные кошельки.</p>
         </div>
 
-        <!-- ===== НОВЫЙ БЛОК С КНОПКОЙ ВНИЗУ ===== -->
+        <!-- ===== ТАБЛИЦА 2: VIP-ПРОГРАММА (ОБЪЕДИНЁННАЯ) ===== -->
+        <div class="table-wrapper" style="margin-top: 60px;">
+            <h3>VIP-программа Lucky Bear</h3>
+            <table class="bonus-table">
+                <thead>
+                    <tr>
+                        <th>VIP уровень</th>
+                        <th>Требование к пополнению</th>
+                        <th>Требование к ставке</th>
+                        <th>Еженедельные бонусы</th>
+                        <th>Ежемесячные бонусы</th>
+                        <th>Награды за уровень</th><th>Коэффициент разблокировки</th>
+                        <th>Комиссия за вывод</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>VIP0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0%</td><td>9%</td></tr>
+                    <tr><td>VIP1</td><td>100</td><td>10</td><td>10</td><td>10</td><td>0</td><td>0.1%</td><td>9%</td></tr>
+                    <tr><td>VIP2</td><td>750</td><td>15</td><td>15</td><td>15</td><td>75</td><td>0.2%</td><td>8.5%</td></tr>
+                    <tr><td>VIP3</td><td>1500</td><td>30</td><td>20</td><td>30</td><td>150</td><td>0.25%</td><td>8.5%</td></tr>
+                    <tr><td>VIP4</td><td>7500</td><td>45</td><td>50</td><td>60</td><td>200</td><td>0.3%</td><td>8%</td></tr>
+                    <tr><td>VIP5</td><td>45000</td><td>270</td><td>100</td><td>120</td><td>300</td><td>0.35%</td><td>7.5%</td></tr>
+                    <tr><td>VIP6</td><td>150000</td><td>900</td><td>200</td><td>180</td><td>500</td><td>0.4%</td><td>7%</td></tr>
+                    <tr><td>VIP7</td><td>750000</td><td>4500</td><td>400</td><td>450</td><td>1000</td><td>0.45%</td><td>6.5%</td></tr>
+                    <tr><td>VIP8</td><td>1500000</td><td>9000</td><td>1000</td><td>1200</td><td>2000</td><td>0.45%</td><td>6%</td></tr>
+                    <tr><td>VIP9</td><td>3750000</td><td>22500</td><td>1500</td><td>1800</td><td>3000</td><td>0.45%</td><td>6%</td></tr>
+                    <tr><td>VIP10</td><td>7500000</td><td>45000</td><td>2000</td><td>1800</td><td>5000</td><td>1%</td><td>6%</td></tr>
+                </tbody>
+            </table>
+            <a href="https://lb777.xyz/5dsgV7" class="table-button" rel="noreferrer noopener">Пополнить баланс</a>
+        </div>
+
+        <!-- ===== МОТИВАЦИОННЫЙ БЛОК С КНОПКОЙ ===== -->
         <div style="max-width: 900px; margin: 50px auto 0; padding: 30px 20px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); text-align: center;">
             <p style="color: rgba(255,255,255,0.8); font-size: 18px; max-width: 700px; margin: 0 auto 25px;">
                 Выберите удобный способ пополнения и начните игру в Lucky Bear уже сегодня.
@@ -207,7 +338,7 @@
         });
 
         // ===== ПОЯВЛЕНИЕ БЛОКОВ ПРИ СКРОЛЛЕ =====
-        const elements = document.querySelectorAll(".info-block");
+        const elements = document.querySelectorAll(".info-block, .table-wrapper");
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
