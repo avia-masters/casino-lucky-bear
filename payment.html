@@ -14,16 +14,15 @@
             margin: 40px auto 0;
             position: relative;
             border-radius: 16px;
-            padding: 1px; /* Только контур */
-            background: transparent; /* Сам блок прозрачный */
+            padding: 1px;
+            background: transparent;
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
         }
 
-        /* Псевдоэлемент для переливающегося контура */
         .table-wrapper::before {
             content: '';
             position: absolute;
-            inset: -1px; /* Чтобы контур был ровно по краям */
+            inset: -1px;
             border-radius: 16px;
             padding: 1px;
             background: linear-gradient(135deg, #00d4ff, #7b68ee, #ffd700, #00fa9a, #00d4ff);
@@ -46,7 +45,7 @@
         .table-inner {
             position: relative;
             z-index: 1;
-            background: transparent; /* Полностью прозрачный */
+            background: transparent;
             border-radius: 16px;
             padding: 20px 15px 25px;
             overflow: hidden;
@@ -68,7 +67,7 @@
             font-size: 15px;
             color: #f2f4f5;
             min-width: 500px;
-            background: transparent; /* Прозрачный фон */
+            background: transparent;
         }
 
         .bonus-table thead th {
@@ -93,6 +92,27 @@
             border-bottom: none;
         }
 
+        /* ===== ПРОЗРАЧНЫЙ СКРОЛЛБАР ===== */
+        .table-scroll {
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+        .table-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .table-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .table-scroll::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 10px;
+        }
+        .table-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         /* ===== КНОПКА ===== */
         .table-button {
             display: block;
@@ -103,8 +123,7 @@
             border: none;
             border-radius: 30px;
             color: #ffffff;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 16px;font-weight: 700;
             text-decoration: none;
             text-align: center;
             box-shadow: 0 4px 25px rgba(0, 114, 255, 0.5);
@@ -119,11 +138,11 @@
 
         .table-note {
             text-align: center;
-            color: rgba(255, 255, 255, 0.4);font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
             margin-top: 12px;
         }
 
-        /* ===== АДАПТИВ ===== */
         @media (max-width: 768px) {
             .bonus-table {
                 font-size: 13px;
@@ -204,7 +223,7 @@
 
         <div class="info-block">
             <h3>Перевод через ВТБ</h3>
-            <p>Лимиты: от 1 064 ₽ до 300 000 ₽. Переводы обрабатываются в штатном режиме банка.</p>
+            <p>Лимиты: от 1 064 ₽ до 300 000 ₽.Переводы обрабатываются в штатном режиме банка.</p>
         </div>
 
         <div class="info-block">
@@ -214,7 +233,8 @@
 
         <div class="info-block">
             <h3>Перевод по номеру телефона</h3>
-            <p>Лимиты: от 2 064 ₽ до 300 000 ₽. Удобный способ без необходимости вводить реквизиты карты.</p></div>
+            <p>Лимиты: от 2 064 ₽ до 300 000 ₽. Удобный способ без необходимости вводить реквизиты карты.</p>
+        </div>
 
         <div class="info-block">
             <h3>Перевод по номеру карты</h3>
@@ -230,7 +250,7 @@
         <div class="table-wrapper">
             <div class="table-inner">
                 <h3>Акция пополнения</h3>
-                <div style="overflow-x: auto; padding-bottom: 8px;">
+                <div class="table-scroll">
                     <table class="bonus-table">
                         <thead>
                             <tr>
@@ -295,8 +315,7 @@
             <p>Лимиты: от 10 USDC до 5 000 USDC. Поддерживается в нескольких сетях, что даёт гибкость в выборе.</p>
         </div>
 
-        <div class="info-block" style="border-bottom: none;">
-            <h3>Криптовалютные кошельки (CryptoBot, TonWallet)</h3>
+        <div class="info-block" style="border-bottom: none;"><h3>Криптовалютные кошельки (CryptoBot, TonWallet)</h3>
             <p>Лимиты: от 10 USDT до 5 000 USDT. Пополнение через встроенные криптокошельки.</p>
         </div>
     </section>
@@ -306,7 +325,9 @@
         <h2 class="section-title">Вывод средств</h2>
         <p class="section-description">
             Вывод доступен на те же реквизиты, с которых был внесён депозит. Средства зачисляются в течение 24 часов.
-        </p><h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3>
+        </p>
+
+        <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; margin: 40px 0 20px; letter-spacing: .3px;">Вывод в рублях</h3>
 
         <div class="info-block">
             <h3>Система быстрых платежей (СБП)</h3>
@@ -342,7 +363,7 @@
         <div class="table-wrapper" style="margin-top: 60px;">
             <div class="table-inner">
                 <h3>VIP-программа Lucky Bear</h3>
-                <div style="overflow-x: auto; padding-bottom: 8px;">
+                <div class="table-scroll">
                     <table class="bonus-table">
                         <thead>
                             <tr>
@@ -364,8 +385,7 @@
                             <tr><td>VIP4</td><td>7500</td><td>45</td><td>50</td><td>60</td><td>200</td><td>0.3%</td><td>8%</td></tr>
                             <tr><td>VIP5</td><td>45000</td><td>270</td><td>100</td><td>120</td><td>300</td><td>0.35%</td><td>7.5%</td></tr>
                             <tr><td>VIP6</td><td>150000</td><td>900</td><td>200</td><td>180</td><td>500</td><td>0.4%</td><td>7%</td></tr>
-                            <tr><td>VIP7</td><td>750000</td><td>4500</td><td>400</td><td>450</td><td>1000</td><td>0.45%</td><td>6.5%</td></tr>
-                            <tr><td>VIP8</td><td>1500000</td><td>9000</td><td>1000</td><td>1200</td><td>2000</td><td>0.45%</td><td>6%</td></tr>
+                            <tr><td>VIP7</td><td>750000</td><td>4500</td><td>400</td><td>450</td><td>1000</td><td>0.45%</td><td>6.5%</td></tr><tr><td>VIP8</td><td>1500000</td><td>9000</td><td>1000</td><td>1200</td><td>2000</td><td>0.45%</td><td>6%</td></tr>
                             <tr><td>VIP9</td><td>3750000</td><td>22500</td><td>1500</td><td>1800</td><td>3000</td><td>0.45%</td><td>6%</td></tr>
                             <tr><td>VIP10</td><td>7500000</td><td>45000</td><td>2000</td><td>1800</td><td>5000</td><td>1%</td><td>6%</td></tr>
                         </tbody>
