@@ -4,9 +4,6 @@
 <head>
     <link rel="icon" type="image/png" href="/images/logo.png">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <!-- Яндекс.Метрика (скопируйте с index.html, если она там есть) -->
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,7 +16,7 @@
 <body>
     <div class="bear-background"></div>
 
-    <!-- ===== ХЕДЕР (ТОЧНО КАК НА ДРУГИХ СТРАНИЦАХ) ===== -->
+    <!-- ===== ХЕДЕР ===== -->
     <header>
         <a href="index.html" class="brand-icon">
             <img src="images/menu-logo.png" alt="LUCKY BEAR">
@@ -27,12 +24,12 @@
 
         <nav class="nav" id="mobileNav">
             <a href="how-to-play.html" class="nav-link active">Как играть</a>
-            <a href="rules.html" class="nav-link">Правила</a>
+            <a href="#rules" class="nav-link">Правила</a>
             <a href="games.html" class="nav-link">Игры</a>
             <a href="bonus.html" class="nav-link">Бонусы</a>
             <a href="payment.html" class="nav-link">Пополнение</a>
             <a href="responsible.html" class="nav-link">Советы</a>
-            <a href="faq.html" class="nav-link">FAQ</a>
+            <a href="#faq" class="nav-link">FAQ</a>
         </nav>
 
         <a href="https://lb777.xyz/5dsgV7" class="bot-button" rel="noreferrer noopener">
@@ -41,7 +38,7 @@
         </a>
     </header>
 
-    <!-- ===== ГЛАВНЫЙ ЭКРАН (МИШКА, ЗАГОЛОВКИ) ===== -->
+    <!-- ===== ГЛАВНЫЙ ЭКРАН (МИШКА) ===== -->
     <section class="hero" id="home">
         <img src="images/logo.png" alt="LUCKY BEAR" class="logo">
         <div class="title">КАК ИГРАТЬ</div>
@@ -61,7 +58,7 @@
         Участие в азартных играх не гарантирует выигрыш и может привести к потере денежных средств. Играйте ответственно.
     </div>
 
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ (ПОШАГОВАЯ ИНСТРУКЦИЯ) ===== -->
+    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <section id="how-to-play">
         <h2 class="section-title">Как начать играть в Lucky Bear</h2>
         <p class="section-description">
@@ -70,23 +67,22 @@
 
         <!-- ШАГ 1 -->
         <div class="info-block">
-            <h3>Шаг 1: Перейдите на сайт или в Telegram-бот</h3>
+            <h3>Шаг 1: Перейдите на сайт Lucky Bear</h3>
             <p>
-                Используйте официальный сайт Lucky Bear или Telegram-бот для доступа к платформе. Оба способа дают полный доступ к играм, ставкам и бонусам.
+                Используйте официальный сайт Lucky Bear для доступа к платформе. Здесь вы найдёте все игры, ставки на спорт, бонусы и акции.
             </p>
             <p>
-                <strong>Сайт:</strong> <a href="https://casino-lucky-bear.ru" style="color: #00ffff; text-decoration: none;">casino-lucky-bear.ru</a><br>
-                <strong>Telegram-бот:</strong> доступен через официальный канал Lucky Bear.
+                <strong>Сайт:</strong> <a href="https://casino-lucky-bear.ru" style="color: #00ffff; text-decoration: none;">casino-lucky-bear.ru</a>
             </p>
         </div>
 
         <!-- ШАГ 2 -->
-        <div class="info-block"><h3>Шаг 2: Пополните баланс</h3>
+        <div class="info-block">
+            <h3>Шаг 2: Пополните баланс</h3>
             <p>
                 Для игры нужен депозит. Lucky Bear поддерживает пополнение рублями через Т-банк, Сбербанк, ВТБ, Альфа-банк, СБП, а также криптовалютой: USDT, BTC, ETH, TRX, SOL, BNB, USDC.
             </p>
-            <p>
-                Перейдите на страницу <a href="payment.html" style="color: #00ffff; text-decoration: none;">«Пополнение»</a>, выберите удобный способ и внесите деньги на счёт.
+            <p>Перейдите на страницу <a href="payment.html" style="color: #00ffff; text-decoration: none;">«Пополнение»</a>, выберите удобный способ и внесите деньги на счёт.
             </p>
         </div>
 
@@ -150,7 +146,7 @@
         LUCKY BEAR © 2026
     </footer>
 
-    <!-- ===== СКРИПТЫ (КОПИРУЕМ С INDEX.HTML) ===== -->
+    <!-- ===== СКРИПТЫ ===== -->
     <script>
         // ===== ЭФФЕКТ РАСТВОРЕНИЯ ЛОГОТИПА ПРИ СКРОЛЛЕ =====
         const logo = document.querySelector(".logo");
@@ -171,7 +167,8 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";entry.target.style.transform = "translateY(0)";
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
                 }
             });
         }, { threshold: 0.15 });
@@ -179,8 +176,7 @@
         elements.forEach(el => {
             el.style.opacity = "0";
             el.style.transform = "translateY(40px)";
-            el.style.transition = "0.7s ease";
-            observer.observe(el);
+            el.style.transition = "0.7s ease";observer.observe(el);
         });
 
         // ===== ПОДСВЕТКА АКТИВНОГО ПУНКТА МЕНЮ =====
