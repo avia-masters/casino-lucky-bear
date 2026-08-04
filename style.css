@@ -124,10 +124,10 @@ header {
     position: absolute;
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(0,255,255,.18), transparent 65%);
+    background: radial-gradient(circle, rgba(0,255,255,.10), transparent 70%);
     filter: blur(60px);
+    opacity: 0.5;
 }
-
 .logo {
     position: relative;
     width: 260px;
