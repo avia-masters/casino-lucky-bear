@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* ===== ТОЛЬКО ДЛЯ VIP ===== */
         .vip-hero-description {
             max-width: 700px;
             margin: 20px auto 0;
@@ -145,15 +144,13 @@
             position: relative;
         }
 
-        .vip-info-block ul li::before {
-            content: "—";
+        .vip-info-block ul li::before {content: "—";
             position: absolute;
             left: 0;
             color: #00ffff;
             opacity: 0.6;
         }
 
-        /* ===== ТАБЛИЦА ===== */
         .table-wrapper {
             max-width: 1000px;
             margin: 40px auto 0;
@@ -281,8 +278,7 @@
             z-index: 2;
         }
         .table-button:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 35px rgba(0, 114, 255, 0.7);
+            transform: scale(1.03);box-shadow: 0 6px 35px rgba(0, 114, 255, 0.7);
         }
 
         .table-note {
@@ -292,7 +288,6 @@
             margin-top: 12px;
         }
 
-        /* ===== АДАПТАЦИЯ ТОЛЬКО ДЛЯ VIP ===== */
         @media (max-width: 768px) {
             .vip-privileges {
                 grid-template-columns: 1fr !important;
@@ -394,9 +389,49 @@
                 font-size: 16px !important;
                 padding: 0 5px !important;
             }
-        }
 
-        @media (max-width: 400px) {
+            .hero {
+                padding-top: 100px !important;
+                min-height: 80vh !important;
+                height: auto !important;
+                padding-bottom: 10px !important;
+            }
+
+            .logo {
+                width: 160px !important;
+                max-width: 45vw !important;
+                margin-top: 0 !important;
+                margin-bottom: 5px !important;
+            }
+
+            .title {
+                font-size: 24px !important;
+                margin-top: 5px !important;
+            }
+
+            .subtitle {
+                font-size: 14px !important;
+                margin-top: 5px !important;
+            }
+
+            .hero-buttons {
+                margin-top: 15px !important;
+                margin-bottom: 5px !important;
+                gap: 12px !important;
+            }
+
+            .main-button {
+                padding: 12px 24px !important;
+                font-size: 14px !important;
+            }
+
+            .hero + div {
+                margin-top: 5px !important;
+                margin-bottom: 15px !important;
+                padding: 5px 0 !important;
+                font-size: 13px !important;
+            }
+        }@media (max-width: 400px) {
             .vip-privilege-card h3 {
                 font-size: 16px !important;
             }
@@ -453,13 +488,31 @@
             .section-description {
                 font-size: 14px !important;
             }
+
+            .hero {
+                padding-top: 90px !important;
+                min-height: 70vh !important;
+            }
+
+            .logo {
+                width: 130px !important;
+                max-width: 40vw !important;
+            }
+
+            .title {
+                font-size: 20px !important;
+            }
+
+            .main-button {
+                padding: 10px 18px !important;
+                font-size: 13px !important;
+            }
         }
     </style>
 </head>
 <body>
     <div class="bear-background"></div>
 
-    <!-- ===== ХЕДЕР ===== -->
     <header>
         <a href="index.html" class="brand-icon">
             <img src="images/menu-logo.png" alt="LUCKY BEAR">
@@ -480,25 +533,20 @@
         </a>
     </header>
 
-    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
-    <section class="hero" id="home">
-        <img src="images/logo.png" alt="LUCKY BEAR" class="logo">
+    <section class="hero" id="home" style="padding-top: 110px; min-height: 90vh; height: auto; padding-bottom: 20px;">
+        <img src="images/logo.png" alt="LUCKY BEAR" class="logo" style="width: 260px; max-width: 50vw; margin-top: 0; margin-bottom: 5px;">
         <div class="title">VIP КЛУБ</div>
         <div class="subtitle">LUCKY BEAR</div>
-        <p class="vip-hero-description">
+        <p class="vip-hero-description" style="margin-top: 15px;">
             VIP-клуб Lucky Bear создан для самых активных и преданных игроков. Участие в программе лояльности открывает доступ к эксклюзивным привилегиям: повышенному кэшбэку, увеличенным лимитам на вывод средств, персональному менеджеру и индивидуальным бонусам. Чем выше ваш статус, тем больше возможностей получает каждый игрок. Программа включает 11 уровней, каждый из которых даёт новые преимущества и награды. Стань частью элитного сообщества Lucky Bear и играй с максимальной выгодой.
         </p>
-        <div class="hero-buttons">
+        <div class="hero-buttons" style="margin-top: 25px; margin-bottom: 10px;">
             <a href="https://lb777.xyz/5dsgV7" class="main-button" rel="noreferrer noopener">Стать VIP</a>
         </div>
-    </section>
-
-    <!-- ===== ПРЕДУПРЕЖДЕНИЕ ===== -->
-    <div style="max-width: 900px; margin: 0 auto 30px; padding: 8px 0; text-align: center; font-size: 16px; color: rgba(255,255,255,0.25); letter-spacing: 0.3px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    </section><div style="max-width: 900px; margin: 10px auto 30px; padding: 8px 0; text-align: center; font-size: 16px; color: rgba(255,255,255,0.25); letter-spacing: 0.3px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
         Участие в азартных играх не гарантирует выигрыш и может привести к потере денежных средств. Играйте ответственно.
     </div>
 
-    <!-- ===== ПРИВИЛЕГИИ VIP ===== -->
     <section id="privileges">
         <h2 class="section-title">Привилегии VIP-клуба</h2>
         <p class="section-description">
@@ -512,7 +560,7 @@
             </div>
             <div class="vip-privilege-card">
                 <h3>Кэшбэк до 15%</h3>
-                <p>Одно из главных преимуществ VIP-программы — еженедельный кэшбэк.Возврат средств начисляется от суммы всех ставок, сделанных за неделю. Чем выше ваш VIP-уровень, тем больше процент кэшбэка: от 5% на начальных уровнях до 15% на максимальных. Кэшбэк зачисляется автоматически на бонусный счёт в начале каждой недели. Средства можно использовать для ставок на любые игры платформы — слоты, live-казино, быстрые игры и ставки на спорт.</p>
+                <p>Одно из главных преимуществ VIP-программы — еженедельный кэшбэк. Возврат средств начисляется от суммы всех ставок, сделанных за неделю. Чем выше ваш VIP-уровень, тем больше процент кэшбэка: от 5% на начальных уровнях до 15% на максимальных. Кэшбэк зачисляется автоматически на бонусный счёт в начале каждой недели. Средства можно использовать для ставок на любые игры платформы — слоты, live-казино, быстрые игры и ставки на спорт.</p>
             </div>
             <div class="vip-privilege-card">
                 <h3>Личный менеджер 24/7</h3>
@@ -521,7 +569,6 @@
         </div>
     </section>
 
-    <!-- ===== ПОДРОБНЕЕ О VIP ===== -->
     <section id="vip-details">
         <h2 class="section-title">Что даёт VIP-статус</h2>
         <p class="section-description">
@@ -538,8 +585,7 @@
             <p>Стандартная комиссия за вывод средств в Lucky Bear составляет 9%. Однако для VIP-игроков комиссия снижается пропорционально уровню. На VIP-уровне 10 комиссия составляет всего 6%, а на более высоких уровнях — ещё меньше. Это означает, что вы получаете больше средств при каждом выводе, что особенно актуально для крупных сумм.</p>
         </div>
 
-        <div class="vip-info-block">
-            <h3>Еженедельные и ежемесячные бонусы</h3>
+        <div class="vip-info-block"><h3>Еженедельные и ежемесячные бонусы</h3>
             <p>Помимо кэшбэка, VIP-игроки получают дополнительные бонусы еженедельно и ежемесячно. Бонусы начисляются автоматически в зависимости от вашего уровня и активности. Чем выше уровень, тем больше сумма бонуса. Эти средства можно использовать для игры без дополнительных условий вейджера, что делает игру ещё более выгодной.</p>
         </div>
 
@@ -549,7 +595,6 @@
         </div>
     </section>
 
-    <!-- ===== VIP-ТАБЛИЦА ===== -->
     <section id="vip-table">
         <h2 class="section-title">Уровни VIP-программы</h2>
         <p class="section-description">
@@ -562,7 +607,8 @@
                 <div class="table-scroll">
                     <table class="bonus-table">
                         <thead>
-                            <tr><th>VIP уровень</th>
+                            <tr>
+                                <th>VIP уровень</th>
                                 <th>Требование к пополнению</th>
                                 <th>Требование к ставке</th>
                                 <th>Еженедельные бонусы</th>
@@ -593,7 +639,6 @@
         </div>
     </section>
 
-    <!-- ===== КАК ПОЛУЧИТЬ VIP ===== -->
     <section id="how-to-get-vip">
         <h2 class="section-title">Как получить VIP-статус</h2>
         <p class="section-description">
@@ -609,7 +654,7 @@
             <div class="vip-step">
                 <div class="step-number">2</div>
                 <h3>Пополняйте счёт и совершайте ставки</h3>
-                <p>Для повышения VIP-уровня необходимо выполнить требования по пополнению счёта и общей сумме ставок. Каждый уровень имеет свои условия, которые вы можете видеть в таблице выше. Чем выше сумма пополнений и ставок, тем быстрее вы будете подниматься по уровням.Пополнение счёта доступно в рублях через банковские переводы и СБП, а также в криптовалюте. Все способы пополнения мгновенны и безопасны.</p>
+                <p>Для повышения VIP-уровня необходимо выполнить требования по пополнению счёта и общей сумме ставок. Каждый уровень имеет свои условия, которые вы можете видеть в таблице выше. Чем выше сумма пополнений и ставок, тем быстрее вы будете подниматься по уровням. Пополнение счёта доступно в рублях через банковские переводы и СБП, а также в криптовалюте. Все способы пополнения мгновенны и безопасны.</p>
             </div>
             <div class="vip-step">
                 <div class="step-number">3</div>
@@ -626,7 +671,6 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // ===== ЭФФЕКТ РАСТВОРЕНИЯ ЛОГОТИПА =====
         const logo = document.querySelector(".logo");
         const hero = document.querySelector(".hero");
 
@@ -642,7 +686,6 @@
             logo.style.transform = scale(${scale});
         });
 
-        // ===== ПОЯВЛЕНИЕ БЛОКОВ ПРИ СКРОЛЛЕ =====
         const elements = document.querySelectorAll(
             ".vip-privilege-card, .vip-step, .table-wrapper, .vip-info-block"
         );
@@ -666,7 +709,6 @@
             observer.observe(el);
         });
 
-        // ===== ПОДСВЕТКА АКТИВНОГО ПУНКТА МЕНЮ =====
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.nav-link');
@@ -679,6 +721,6 @@
                 }
             });
         });
-     </script>
+    </script>
 </body>
 </html>
