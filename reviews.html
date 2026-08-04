@@ -8,8 +8,6 @@
     <link rel="canonical" href="https://casino-lucky-bear.ru/reviews.html" />
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
-    <!-- Подключаем Swiper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         .reviews-hero-description {
             max-width: 700px;
@@ -20,36 +18,54 @@
             text-align: center;
         }
 
-        .swiper-container {
-            width: 100%;
+        .carousel-wrapper {
             max-width: 1000px;
             margin: 0 auto;
             padding: 40px 0;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            height: 460px;
         }
 
-        .swiper-wrapper {
-            align-items: center;
+        .carousel-track {
+            display: flex;
+            transition: transform 0.02s linear;
+            will-change: transform;
+            padding: 20px 0;
+            position: relative;
+            left: 0;
+            gap: 20px;
         }
 
-        .swiper-slide {
-            width: 400px;
-            opacity: 0.3;
-            transform: scale(0.8);
+        .carousel-slide {
+            flex: 0 0 400px;
+            box-sizing: border-box;
+            position: relative;
             transition: all 0.3s ease;
-            padding: 10px;
         }
 
-        .swiper-slide-active {
+        .carousel-slide[data-depth="0"] {
             opacity: 1;
             transform: scale(1);
+            z-index: 10;
         }
 
-        .swiper-slide-prev,
-        .swiper-slide-next {
-            opacity: 0.6;
-            transform: scale(0.9);
+        .carousel-slide[data-depth="1"] {
+            opacity: 0.5;
+            transform: scale(0.85);
+            z-index: 5;
+        }
+
+        .carousel-slide[data-depth="2"] {
+            opacity: 0.2;
+            transform: scale(0.7);
+            z-index: 3;
+        }
+
+        .carousel-slide[data-depth="3"] {
+            opacity: 0.08;
+            transform: scale(0.55);
+            z-index: 1;
         }
 
         .review-card {
@@ -57,16 +73,15 @@
             border-radius: 20px;
             padding: 28px 24px;
             border: 1px solid rgba(255,255,255,0.08);
-            transition: all 0.3s ease;
-            height: 340px;
+            height: 350px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             backdrop-filter: blur(5px);
         }
 
-        .swiper-slide-active .review-card {
-            background: rgba(255,255,255,0.1);
+        .carousel-slide[data-depth="0"] .review-card {
+            background: rgba(255,255,255,0.12);
             border-color: rgba(0, 255, 255, 0.25);
             box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
         }
@@ -111,7 +126,7 @@
             -webkit-box-orient: vertical;
         }
 
-        .swiper-slide-active .review-card .review-text {
+        .carousel-slide[data-depth="0"] .review-card .review-text {
             -webkit-line-clamp: 6;
         }
 
@@ -151,83 +166,73 @@
         }
 
         @media (max-width: 768px) {
-            .swiper-slide {
-                width: 280px;
+            .carousel-slide {
+                flex: 0 0 280px;
             }
-
+            .carousel-wrapper {
+                height: 400px;
+            }
             .review-card {
-                height: 290px;
+                height: 300px;
                 padding: 20px;
             }
-
             .review-card .review-name {
                 font-size: 15px;
             }
-
             .review-card .review-text {
                 font-size: 13px;
                 -webkit-line-clamp: 4;
             }
-
-            .swiper-slide-active .review-card .review-text {
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 5;
             }
-
             .review-card .stars {
                 font-size: 16px;
                 letter-spacing: 2px;
             }
-
             .reviews-hero-description {
                 font-size: 15px !important;
                 padding: 0 15px !important;
             }
-
             .reviews-cta h3 {
                 font-size: 22px;
             }
-
             .reviews-cta p {
                 font-size: 15px;
             }
         }
 
         @media (max-width: 400px) {
-            .swiper-slide {
-                width: 220px;
+            .carousel-slide {
+                flex: 0 0 220px;
             }
-
+            .carousel-wrapper {
+                height: 360px;
+            }
             .review-card {
-                height: 250px;
+                height: 260px;
                 padding: 16px;
             }
-
             .review-card .review-name {
                 font-size: 14px;
             }
-
             .review-card .review-text {
                 font-size: 12px;
                 -webkit-line-clamp: 3;
             }
-
-            .swiper-slide-active .review-card .review-text {
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 4;
             }
-
             .review-card .stars {
                 font-size: 14px;
                 letter-spacing: 2px;
             }
-
             .review-card .review-date {
                 font-size: 10px;
             }
-
             .reviews-cta h3 {
                 font-size: 19px;
             }
-
             .reviews-cta p {
                 font-size: 14px;
             }
@@ -280,8 +285,8 @@
             Реальные истории и мнения игроков Lucky Bear. Здесь вы найдёте честные отзывы о выводах, бонусах, поддержке и игре.
         </p>
 
-        <div class="swiper-container" id="reviewsSwiper">
-            <div class="swiper-wrapper" id="swiperWrapper"></div>
+        <div class="carousel-wrapper" id="carouselWrapper">
+            <div class="carousel-track" id="carouselTrack"></div>
         </div>
     </section>
 
@@ -297,8 +302,6 @@
 
     <footer>LUCKY BEAR © 2026</footer>
 
-    <!-- Подключаем Swiper -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         // ===== 50 ОТЗЫВОВ =====
         const reviews = [
@@ -354,14 +357,25 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== ИНИЦИАЛИЗАЦИЯ SWIPER =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const wrapper = document.getElementById('swiperWrapper');
-            
-            // Рендерим отзывы
-            reviews.forEach(review => {
+        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ЛЕНТА =====
+        const track = document.getElementById('carouselTrack');
+        const wrapper = document.getElementById('carouselWrapper');
+        let offset = 0;
+        let isPaused = false;
+        let animId = null;
+        let lastTime = 0;
+
+        const SLIDE_WIDTH = 420; // ширина слайда + gap
+        const SPEED = 0.04; // пикселей за миллисекунду
+
+        function renderReviews() {
+            track.innerHTML = '';
+            // Дублируем отзывы 3 раза для бесконечного эффекта
+            const extendedReviews = [...reviews, ...reviews, ...reviews];
+            extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
-                slide.className = 'swiper-slide';
+                slide.className = 'carousel-slide';
+                slide.dataset.index = index;
                 slide.innerHTML = `
                     <div class="review-card">
                         <div class="review-header">
@@ -373,42 +387,97 @@
                         <span class="review-game">Играл(а) в ${review.game}</span>
                     </div>
                 `;
-                wrapper.appendChild(slide);
+                track.appendChild(slide);
             });
+            // Устанавливаем начальное смещение
+            const totalSlides = extendedReviews.length;
+            offset = (totalSlides / 3) * SLIDE_WIDTH;
+            track.style.transform = `translateX(-${offset}px)`;
+        }
 
-            // Запускаем Swiper
-            const swiper = new Swiper('.swiper-container', {
-                slidesPerView: 'auto',
-                centeredSlides: true,
-                loop: true,
-                speed: 800,
-                autoplay: {
-                    delay: 2500,
-                    disableOnInteraction: false,
-                },
-                breakpoints: {
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 10,
-                    },
-                    640: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 30,
-                    },
-                },
-                on: {
-                    touchStart: function() {
-                        this.autoplay.stop();
-                    },
-                    touchEnd: function() {
-                        this.autoplay.start();
-                    }
-                }
+        function updateCarousel() {
+            const slides = track.querySelectorAll('.carousel-slide');
+            const total = slides.length;
+            
+            // Вычисляем центральный индекс
+            const centerIndex = (total / 2) + offset / SLIDE_WIDTH;
+            const centerInt = Math.round(centerIndex);
+
+            slides.forEach((slide, index) => {
+                const distance = index - centerInt;
+                const absDist = Math.abs(distance);
+
+                let depth = 4;
+                if (absDist <= 0.5) depth = 0;
+                else if (absDist <= 1.5) depth = 1;
+                else if (absDist <= 2.5) depth = 2;
+                else if (absDist <= 4) depth = 3;
+
+                slide.dataset.depth = depth;
             });
+        }
+
+        function animate(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            const delta = timestamp - lastTime;
+            lastTime = timestamp;
+
+            if (!isPaused) {
+                offset += SPEED * delta;
+                // Бесконечный цикл
+                const totalSlides = track.querySelectorAll('.carousel-slide').length;
+                const maxOffset = (totalSlides / 3) * SLIDE_WIDTH;
+                if (offset > maxOffset) {
+                    offset -= maxOffset / 2;
+                }
+                track.style.transform = `translateX(-${offset}px)`;
+                updateCarousel();
+            }
+
+            animId = requestAnimationFrame(animate);
+        }
+
+        function pauseAutoPlay(pause) {
+            isPaused = pause;
+        }
+
+        // ===== ОСТАНОВКА ПРИ ХОВЕРЕ =====
+        wrapper.addEventListener('mouseenter', () => pauseAutoPlay(true));
+        wrapper.addEventListener('mouseleave', () => pauseAutoPlay(false));
+
+        // ===== ОСТАНОВКА ПРИ КАСАНИИ НА ТЕЛЕФОНЕ =====
+        wrapper.addEventListener('touchstart', () => pauseAutoPlay(true));
+        wrapper.addEventListener('touchend', () => pauseAutoPlay(false));
+
+        // ===== СВАЙП =====
+        let startX = 0;
+        let startOffset = 0;
+        let isSwiping = false;
+
+        wrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startOffset = offset;
+            isSwiping = true;
+            pauseAutoPlay(true);
+        });
+
+        wrapper.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            const diff = (startX - e.touches[0].clientX);
+            offset = startOffset + diff;
+            track.style.transform = `translateX(-${offset}px)`;
+            updateCarousel();
+        });
+
+        wrapper.addEventListener('touchend', () => {
+            isSwiping = false;
+            pauseAutoPlay(false);
+        });
+
+        // ===== ЗАПУСК =====
+        document.addEventListener('DOMContentLoaded', () => {
+            renderReviews();
+            animId = requestAnimationFrame(animate);
 
             // Подсветка активного меню
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
