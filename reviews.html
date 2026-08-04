@@ -25,6 +25,7 @@
             position: relative;
             overflow: hidden;
             height: 480px;
+            perspective: 1200px;
         }
 
         .carousel-track {
@@ -36,6 +37,8 @@
             left: 50%;
             transform: translateX(-50%);
             gap: 20px;
+            transform-style: preserve-3d;
+            align-items: center;
         }
 
         .carousel-slide {
@@ -43,31 +46,59 @@
             box-sizing: border-box;
             transition: all 0.3s ease;
             position: relative;
+            transform-style: preserve-3d;
         }
 
-        /* ===== 3D ЭФФЕКТ ГЛУБИНЫ ===== */
+        /* ===== 3D ЭФФЕКТ ДУГИ И ГЛУБИНЫ ===== */
         .carousel-slide[data-depth="0"] {
             opacity: 1 !important;
-            transform: scale(1) !important;
+            transform: scale(1) translateZ(0px) !important;
             z-index: 10;
         }
 
         .carousel-slide[data-depth="1"] {
             opacity: 0.5 !important;
-            transform: scale(0.88) !important;
+            transform: scale(0.88) translateZ(-60px) translateX(0px) !important;
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
             opacity: 0.2 !important;
-            transform: scale(0.75) !important;
+            transform: scale(0.75) translateZ(-120px) translateX(0px) !important;
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
             opacity: 0.06 !important;
-            transform: scale(0.6) !important;
+            transform: scale(0.6) translateZ(-180px) translateX(0px) !important;
             z-index: 1;
+        }
+
+        /* Фоновые отзывы (ещё дальше) */
+        .carousel-slide[data-depth="4"] {
+            opacity: 0 !important;
+            transform: scale(0.4) translateZ(-240px) translateX(0px) !important;
+            z-index: 0;
+        }
+
+        /* Смещение для создания дуги */
+        .carousel-slide[data-depth="1"][data-side="left"] {
+            transform: scale(0.88) translateZ(-60px) translateX(-15px) !important;
+        }
+        .carousel-slide[data-depth="1"][data-side="right"] {
+            transform: scale(0.88) translateZ(-60px) translateX(15px) !important;
+        }
+        .carousel-slide[data-depth="2"][data-side="left"] {
+            transform: scale(0.75) translateZ(-120px) translateX(-30px) !important;
+        }
+        .carousel-slide[data-depth="2"][data-side="right"] {
+            transform: scale(0.75) translateZ(-120px) translateX(30px) !important;
+        }
+        .carousel-slide[data-depth="3"][data-side="left"] {
+            transform: scale(0.6) translateZ(-180px) translateX(-45px) !important;
+        }
+        .carousel-slide[data-depth="3"][data-side="right"] {
+            transform: scale(0.6) translateZ(-180px) translateX(45px) !important;
         }
 
         .review-card {
@@ -194,13 +225,25 @@
                 letter-spacing: 2px;
             }
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.85) !important;
+                transform: scale(0.85) translateZ(-40px) !important;
             }
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.7) !important;
+                transform: scale(0.7) translateZ(-80px) !important;
             }
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.55) !important;
+                transform: scale(0.55) translateZ(-120px) !important;
+            }
+            .carousel-slide[data-depth="1"][data-side="left"] {
+                transform: scale(0.85) translateZ(-40px) translateX(-10px) !important;
+            }
+            .carousel-slide[data-depth="1"][data-side="right"] {
+                transform: scale(0.85) translateZ(-40px) translateX(10px) !important;
+            }
+            .carousel-slide[data-depth="2"][data-side="left"] {
+                transform: scale(0.7) translateZ(-80px) translateX(-20px) !important;
+            }
+            .carousel-slide[data-depth="2"][data-side="right"] {
+                transform: scale(0.7) translateZ(-80px) translateX(20px) !important;
             }
             .reviews-hero-description {
                 font-size: 15px !important;
@@ -243,13 +286,25 @@
                 font-size: 10px;
             }
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.8) !important;
+                transform: scale(0.8) translateZ(-30px) !important;
             }
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.65) !important;
+                transform: scale(0.65) translateZ(-60px) !important;
             }
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.5) !important;
+                transform: scale(0.5) translateZ(-90px) !important;
+            }
+            .carousel-slide[data-depth="1"][data-side="left"] {
+                transform: scale(0.8) translateZ(-30px) translateX(-8px) !important;
+            }
+            .carousel-slide[data-depth="1"][data-side="right"] {
+                transform: scale(0.8) translateZ(-30px) translateX(8px) !important;
+            }
+            .carousel-slide[data-depth="2"][data-side="left"] {
+                transform: scale(0.65) translateZ(-60px) translateX(-15px) !important;
+            }
+            .carousel-slide[data-depth="2"][data-side="right"] {
+                transform: scale(0.65) translateZ(-60px) translateX(15px) !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -387,7 +442,7 @@
         let lastTime = 0;
 
         const SLIDE_WIDTH = 420; // ширина слайда + gap
-        const SPEED = 0.025; // пикселей за миллисекунду
+        const SPEED = 0.06; // пикселей за миллисекунду (увеличил скорость)
 
         function renderReviews() {
             track.innerHTML = '';
@@ -429,12 +484,24 @@
                 const absDist = Math.abs(distance);
 
                 let depth = 4;
-                if (absDist <= 0.5) depth = 0;
-                else if (absDist <= 1.5) depth = 1;
-                else if (absDist <= 2.5) depth = 2;
-                else if (absDist <= 4) depth = 3;
+                let side = 'center';
+                
+                if (absDist <= 0.5) {
+                    depth = 0;
+                    side = 'center';
+                } else if (absDist <= 1.5) {
+                    depth = 1;
+                    side = distance > 0 ? 'right' : 'left';
+                } else if (absDist <= 2.5) {
+                    depth = 2;
+                    side = distance > 0 ? 'right' : 'left';
+                } else if (absDist <= 4) {
+                    depth = 3;
+                    side = distance > 0 ? 'right' : 'left';
+                }
 
                 slide.dataset.depth = depth;
+                slide.dataset.side = side;
             });
         }
 
