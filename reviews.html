@@ -22,69 +22,114 @@
         .carousel-wrapper {
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 40px 0;
             position: relative;
             overflow: hidden;
             touch-action: pan-y;
+            height: 420px;
+            perspective: 1000px;
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.05s linear;
             will-change: transform;
             padding: 20px 0;
+            transform-style: preserve-3d;
+            align-items: center;
         }
 
         .carousel-slide {
-            flex: 0 0 60%;
-            padding: 0 12px;
-            opacity: 0.3;
-            transform: scale(0.85);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            pointer-events: none;
+            flex: 0 0 50%;
+            padding: 0 8px;
             box-sizing: border-box;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
         }
 
-        .carousel-slide.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
+        /* ===== ЭФФЕКТ 3D ДУГИ ===== */
+        .carousel-slide[data-depth="0"] {
+            opacity: 0.95;
+            transform: scale(1) translateZ(0px);
+            z-index: 10;
         }
 
-        .carousel-slide.prev,
-        .carousel-slide.next {
+        .carousel-slide[data-depth="1"] {
             opacity: 0.6;
-            transform: scale(0.92);
-            pointer-events: auto;
+            transform: scale(0.85) translateZ(-50px) translateX(0px);
+            z-index: 5;
+        }
+
+        .carousel-slide[data-depth="2"] {
+            opacity: 0.35;
+            transform: scale(0.7) translateZ(-100px) translateX(0px);
+            z-index: 3;
+        }
+
+        .carousel-slide[data-depth="3"] {
+            opacity: 0.15;
+            transform: scale(0.55) translateZ(-150px) translateX(0px);
+            z-index: 1;
+        }
+
+        /* Боковые отзывы чуть смещены по X, чтобы создать дугу */
+        .carousel-slide[data-side="left"] {
+            transform-origin: right center;
+        }
+
+        .carousel-slide[data-side="right"] {
+            transform-origin: left center;
+        }
+
+        .carousel-slide[data-depth="1"][data-side="left"] {
+            transform: scale(0.85) translateZ(-50px) translateX(-10px);
+        }
+
+        .carousel-slide[data-depth="1"][data-side="right"] {
+            transform: scale(0.85) translateZ(-50px) translateX(10px);
+        }
+
+        .carousel-slide[data-depth="2"][data-side="left"] {
+            transform: scale(0.7) translateZ(-100px) translateX(-20px);
+        }
+
+        .carousel-slide[data-depth="2"][data-side="right"] {
+            transform: scale(0.7) translateZ(-100px) translateX(20px);
+        }
+
+        .carousel-slide[data-depth="3"][data-side="left"] {
+            transform: scale(0.55) translateZ(-150px) translateX(-30px);
+        }
+
+        .carousel-slide[data-depth="3"][data-side="right"] {
+            transform: scale(0.55) translateZ(-150px) translateX(30px);
         }
 
         .review-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
             border-radius: 20px;
-            padding: 30px 25px;
-            border: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s ease;
-            height: 350px;
+            height: 320px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
-        .review-card:hover {
+        .carousel-slide[data-depth="0"] .review-card {
             background: rgba(255,255,255,0.08);
-            border-color: rgba(0, 255, 255, 0.15);
-        }
-
-        .carousel-slide.active .review-card {
-            border-color: rgba(0, 255, 255, 0.25);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.06);
+            border-color: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.05);
         }
 
         .review-card .stars {
             color: #f0c040;
-            font-size: 20px;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
             flex-shrink: 0;
         }
 
@@ -92,41 +137,45 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
             flex-shrink: 0;
         }
 
         .review-card .review-name {
             color: #ffffff;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
         }
 
         .review-card .review-date {
             color: rgba(255,255,255,0.3);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .review-card .review-text {
-            color: rgba(255,255,255,0.72);
-            font-size: 15px;
-            line-height: 1.8;
-            margin: 0 0 12px 0;
+            color: rgba(255,255,255,0.75);
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0 0 10px 0;
             flex: 1;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
+        }
+
+        .carousel-slide[data-depth="0"] .review-card .review-text {
+            -webkit-line-clamp: 6;
         }
 
         .review-card .review-game {
             display: inline-block;
             background: rgba(0, 255, 255, 0.08);
             color: #7ab7ef;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             flex-shrink: 0;
             align-self: flex-start;
@@ -156,28 +205,49 @@
         }
 
         @media (max-width: 768px) {
+            .carousel-wrapper {
+                height: 380px;
+                padding: 20px 0;
+            }
+
             .carousel-slide {
-                flex: 0 0 80%;
-                padding: 0 8px;
+                flex: 0 0 70%;
+                padding: 0 6px;
             }
 
             .review-card {
-                height: 300px;
+                height: 280px;
                 padding: 20px;
             }
 
             .review-card .review-name {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .review-card .review-text {
-                font-size: 14px;
+                font-size: 13px;
+                -webkit-line-clamp: 4;
+            }
+
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 5;
             }
 
             .review-card .stars {
-                font-size: 17px;
-                letter-spacing: 3px;
+                font-size: 16px;
+                letter-spacing: 2px;
+            }
+
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.8) translateZ(-30px) !important;
+            }
+
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.65) translateZ(-60px) !important;
+            }
+
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.5) translateZ(-90px) !important;
             }
 
             .reviews-hero-description {
@@ -195,13 +265,17 @@
         }
 
         @media (max-width: 400px) {
+            .carousel-wrapper {
+                height: 340px;
+            }
+
             .carousel-slide {
-                flex: 0 0 90%;
-                padding: 0 5px;
+                flex: 0 0 80%;
+                padding: 0 4px;
             }
 
             .review-card {
-                height: 260px;
+                height: 250px;
                 padding: 16px;
             }
 
@@ -210,17 +284,33 @@
             }
 
             .review-card .review-text {
-                font-size: 13px;
+                font-size: 12px;
+                -webkit-line-clamp: 3;
+            }
+
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 4;
             }
 
             .review-card .stars {
-                font-size: 15px;
+                font-size: 14px;
                 letter-spacing: 2px;
             }
 
             .review-card .review-date {
-                font-size: 11px;
+                font-size: 10px;
+            }
+
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.75) translateZ(-20px) !important;
+            }
+
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.6) translateZ(-40px) !important;
+            }
+
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.45) translateZ(-60px) !important;
             }
 
             .reviews-cta h3 {
@@ -351,20 +441,26 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== КАРУСЕЛЬ =====
-        let currentIndex = 0;
+        // ===== КАРУСЕЛЬ С 3D ЭФФЕКТОМ =====
+        let currentOffset = 0;
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
-        let intervalId = null;
+        let animationId = null;
         let isPaused = false;
+        let lastTimestamp = 0;
+        const SPEED = 0.03; // пикселей за миллисекунду
+
+        // Создаем бесконечный массив отзывов (дублируем 3 раза для плавности)
+        const extendedReviews = [...reviews, ...reviews, ...reviews];
 
         function renderReviews() {
             track.innerHTML = '';
-            const extendedReviews = [...reviews, ...reviews.slice(0, 3)];
             extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.dataset.index = index;
+                slide.dataset.depth = '0';
+                slide.dataset.side = 'center';
                 slide.innerHTML = `
                     <div class="review-card">
                         <div class="review-header">
@@ -378,85 +474,105 @@
                 `;
                 track.appendChild(slide);
             });
-            currentIndex = 0;
-            updateCarousel(false);
+            updateDepth();
         }
 
-        function updateCarousel(animate = true) {
+        function updateDepth() {
             const slides = track.querySelectorAll('.carousel-slide');
             const totalSlides = slides.length;
+            const centerIndex = totalSlides / 2;
             
             slides.forEach((slide, index) => {
-                slide.className = 'carousel-slide';
-                if (index === currentIndex) {
-                    slide.classList.add('active');
-                } else if (index === currentIndex - 1 || (currentIndex === 0 && index === totalSlides - 1)) {
-                    slide.classList.add('prev');
-                } else if (index === currentIndex + 1 || (currentIndex === totalSlides - 1 && index === 0)) {
-                    slide.classList.add('next');
+                const distance = index - centerIndex + currentOffset;
+                const absDistance = Math.abs(distance);
+                
+                // Определяем глубину (0 - центр, 1 - рядом, 2 - дальше, 3 - самые дальние)
+                let depth = 0;
+                let side = 'center';
+                
+                if (absDistance < 0.8) {
+                    depth = 0;
+                    side = 'center';
+                } else if (absDistance < 1.8) {
+                    depth = 1;
+                    side = distance > 0 ? 'right' : 'left';
+                } else if (absDistance < 2.8) {
+                    depth = 2;
+                    side = distance > 0 ? 'right' : 'left';
+                } else if (absDistance < 4) {
+                    depth = 3;
+                    side = distance > 0 ? 'right' : 'left';
+                } else {
+                    // Скрываем очень далекие отзывы
+                    slide.style.opacity = '0';
+                    slide.style.transform = 'scale(0.3) translateZ(-200px)';
+                    return;
                 }
+                
+                slide.dataset.depth = depth;
+                slide.dataset.side = side;
+                slide.style.opacity = '';
+                
+                // Применяем трансформацию в зависимости от глубины и стороны
+                let transform = '';
+                let opacity = 1;
+                let scale = 1;
+                let translateZ = 0;
+                let translateX = 0;
+                
+                switch(depth) {
+                    case 0:
+                        scale = 1;
+                        translateZ = 0;
+                        translateX = 0;
+                        opacity = 0.95;
+                        break;
+                    case 1:
+                        scale = 0.85;
+                        translateZ = -50;
+                        translateX = side === 'left' ? -10 : 10;
+                        opacity = 0.6;
+                        break;
+                    case 2:
+                        scale = 0.7;
+                        translateZ = -100;
+                        translateX = side === 'left' ? -20 : 20;
+                        opacity = 0.35;
+                        break;
+                    case 3:
+                        scale = 0.55;
+                        translateZ = -150;
+                        translateX = side === 'left' ? -30 : 30;
+                        opacity = 0.15;
+                        break;
+                }
+                
+                slide.style.transform = `scale(${scale}) translateZ(${translateZ}px) translateX(${translateX}px)`;
+                slide.style.opacity = opacity;
+                slide.style.zIndex = 10 - depth;
             });
-            
-            if (!animate) {
-                track.style.transition = 'none';
-            } else {
-                track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            }
-            
-            track.style.transform = `translateX(-${currentIndex * 60}%)`;
-            
-            if (currentIndex >= reviews.length) {
-                setTimeout(() => {
-                    track.style.transition = 'none';
-                    currentIndex = currentIndex - reviews.length;
-                    track.style.transform = `translateX(-${currentIndex * 60}%)`;
-                    slides.forEach((slide, index) => {
-                        slide.className = 'carousel-slide';
-                        if (index === currentIndex) {
-                            slide.classList.add('active');
-                        } else if (index === currentIndex - 1 || (currentIndex === 0 && index === slides.length - 1)) {
-                            slide.classList.add('prev');
-                        } else if (index === currentIndex + 1 || (currentIndex === slides.length - 1 && index === 0)) {
-                            slide.classList.add('next');
-                        }
-                    });
-                    setTimeout(() => {
-                        track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    }, 50);
-                }, 50);
-            }
         }
 
-        function nextSlide() {
-            if (isPaused) return;
-            currentIndex = (currentIndex + 1) % (reviews.length + 3);
-            updateCarousel(true);
-        }
-
-        function startAutoPlay() {
-            if (intervalId) {
-                clearInterval(intervalId);
-                intervalId = null;
-            }
+        function animate(timestamp) {
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            const delta = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+            
             if (!isPaused) {
-                intervalId = setInterval(nextSlide, 2000);
+                currentOffset += SPEED * delta;
+                updateDepth();
+                
+                // Сбрасываем смещение, чтобы не уйти в бесконечность
+                if (currentOffset > 1) {
+                    currentOffset = 0;
+                }
             }
-        }
-
-        function stopAutoPlay() {
-            if (intervalId) {
-                clearInterval(intervalId);
-                intervalId = null;
-            }
+            
+            animationId = requestAnimationFrame(animate);
         }
 
         function pauseAutoPlay(pause) {
             isPaused = pause;
-            if (pause) {
-                stopAutoPlay();
-            } else {
-                startAutoPlay();
-            }
         }
 
         // ===== ОСТАНОВКА ПРИ ХОВЕРЕ =====
@@ -468,60 +584,41 @@
         });
 
         // ===== ОСТАНОВКА ПРИ КАСАНИИ НА ТЕЛЕФОНЕ =====
-        let touchTimeout = null;
         wrapper.addEventListener('touchstart', () => {
             pauseAutoPlay(true);
-            if (touchTimeout) {
-                clearTimeout(touchTimeout);
-                touchTimeout = null;
-            }
         });
         wrapper.addEventListener('touchend', () => {
-            touchTimeout = setTimeout(() => {
-                pauseAutoPlay(false);
-            }, 3000);
+            pauseAutoPlay(false);
         });
 
         // ===== СВАЙП ДЛЯ ТЕЛЕФОНА =====
         let startX = 0;
         let isSwiping = false;
-        let swipeTimeout = null;
+        let startOffset = 0;
 
         wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             isSwiping = true;
+            startOffset = currentOffset;
+            pauseAutoPlay(true);
         });
 
         wrapper.addEventListener('touchmove', (e) => {
             if (!isSwiping) return;
-            const diff = startX - e.touches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                isSwiping = false;
-                if (diff > 0) {
-                    nextSlide();
-                } else {
-                    currentIndex = (currentIndex - 1 + (reviews.length + 3)) % (reviews.length + 3);
-                    updateCarousel(true);
-                }
-                pauseAutoPlay(true);
-                if (swipeTimeout) {
-                    clearTimeout(swipeTimeout);
-                    swipeTimeout = null;
-                }
-                swipeTimeout = setTimeout(() => {
-                    pauseAutoPlay(false);
-                }, 3000);
-            }
+            const diff = (startX - e.touches[0].clientX) / 500; // чувствительность
+            currentOffset = startOffset + diff;
+            updateDepth();
         });
 
         wrapper.addEventListener('touchend', () => {
             isSwiping = false;
+            pauseAutoPlay(false);
         });
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             renderReviews();
-            startAutoPlay();
+            animationId = requestAnimationFrame(animate);
 
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
             const navLinks = document.querySelectorAll('.nav-link');
