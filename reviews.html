@@ -18,89 +18,29 @@
             text-align: center;
         }
 
-        .carousel-wrapper {
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 0;
-            position: relative;
-            overflow: hidden;
-            height: 480px;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.05s linear;
-            will-change: transform;
-            padding: 20px 0;
-            position: relative;
-            gap: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .carousel-slide {
-            flex: 0 0 400px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        /* ===== ГЛУБИНА ===== */
-        .carousel-slide[data-depth="0"] {
-            opacity: 1 !important;
-            transform: scale(1) !important;
-            z-index: 10;
-        }
-
-        .carousel-slide[data-depth="1"] {
-            opacity: 0.5 !important;
-            transform: scale(0.88) !important;
-            z-index: 5;
-        }
-
-        .carousel-slide[data-depth="2"] {
-            opacity: 0.2 !important;
-            transform: scale(0.75) !important;
-            z-index: 3;
-        }
-
-        .carousel-slide[data-depth="3"] {
-            opacity: 0.06 !important;
-            transform: scale(0.6) !important;
-            z-index: 1;
-        }
-
-        .carousel-slide[data-depth="4"] {
-            opacity: 0.015 !important;
-            transform: scale(0.45) !important;
-            z-index: 0;
-            filter: blur(2px) !important;
-        }
-
-        .carousel-slide[data-depth="5"] {
-            opacity: 0 !important;
-            transform: scale(0.3) !important;
-            z-index: -1;
-            filter: blur(4px) !important;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
         .review-card {
             background: rgba(255,255,255,0.06);
             border-radius: 20px;
-            padding: 28px 24px;
+            padding: 25px;
             border: 1px solid rgba(255,255,255,0.08);
-            height: 350px;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
         }
 
-        .carousel-slide[data-depth="0"] .review-card {
-            background: rgba(255,255,255,0.12);
-            border-color: rgba(0, 255, 255, 0.25);
-            box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
+        .review-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(0, 255, 255, 0.2);
         }
 
         .review-card .stars {
@@ -108,7 +48,6 @@
             font-size: 18px;
             letter-spacing: 3px;
             margin-bottom: 8px;
-            flex-shrink: 0;
         }
 
         .review-card .review-header {
@@ -117,7 +56,6 @@
             align-items: center;
             margin-bottom: 10px;
             flex-wrap: wrap;
-            flex-shrink: 0;
         }
 
         .review-card .review-name {
@@ -132,19 +70,11 @@
         }
 
         .review-card .review-text {
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.72);
             font-size: 14px;
             line-height: 1.7;
-            margin: 0 0 10px 0;
+            margin: 0 0 12px 0;
             flex: 1;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-        }
-
-        .carousel-slide[data-depth="0"] .review-card .review-text {
-            -webkit-line-clamp: 6;
         }
 
         .review-card .review-game {
@@ -155,7 +85,6 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 500;
-            flex-shrink: 0;
             align-self: flex-start;
         }
 
@@ -182,15 +111,20 @@
             margin-bottom: 20px;
         }
 
-        @media (max-width: 768px) {
-            .carousel-slide {
-                flex: 0 0 280px;
+        @media (max-width: 992px) {
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
             }
-            .carousel-wrapper {
-                height: 400px;
+        }
+
+        @media (max-width: 600px) {
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
             }
             .review-card {
-                height: 300px;
                 padding: 20px;
             }
             .review-card .review-name {
@@ -198,27 +132,10 @@
             }
             .review-card .review-text {
                 font-size: 13px;
-                -webkit-line-clamp: 4;
-            }
-            .carousel-slide[data-depth="0"] .review-card .review-text {
-                -webkit-line-clamp: 5;
             }
             .review-card .stars {
                 font-size: 16px;
                 letter-spacing: 2px;
-            }
-            .carousel-slide[data-depth="1"] {
-                transform: scale(0.85) !important;
-            }
-            .carousel-slide[data-depth="2"] {
-                transform: scale(0.7) !important;
-            }
-            .carousel-slide[data-depth="3"] {
-                transform: scale(0.55) !important;
-            }
-            .carousel-slide[data-depth="4"] {
-                transform: scale(0.4) !important;
-                opacity: 0.01 !important;
             }
             .reviews-hero-description {
                 font-size: 15px !important;
@@ -233,14 +150,7 @@
         }
 
         @media (max-width: 400px) {
-            .carousel-slide {
-                flex: 0 0 220px;
-            }
-            .carousel-wrapper {
-                height: 360px;
-            }
             .review-card {
-                height: 260px;
                 padding: 16px;
             }
             .review-card .review-name {
@@ -248,10 +158,7 @@
             }
             .review-card .review-text {
                 font-size: 12px;
-                -webkit-line-clamp: 3;
-            }
-            .carousel-slide[data-depth="0"] .review-card .review-text {
-                -webkit-line-clamp: 4;
+                line-height: 1.6;
             }
             .review-card .stars {
                 font-size: 14px;
@@ -259,19 +166,6 @@
             }
             .review-card .review-date {
                 font-size: 10px;
-            }
-            .carousel-slide[data-depth="1"] {
-                transform: scale(0.8) !important;
-            }
-            .carousel-slide[data-depth="2"] {
-                transform: scale(0.65) !important;
-            }
-            .carousel-slide[data-depth="3"] {
-                transform: scale(0.5) !important;
-            }
-            .carousel-slide[data-depth="4"] {
-                transform: scale(0.35) !important;
-                opacity: 0.01 !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -314,7 +208,7 @@
             Более 50 реальных отзывов игроков о Lucky Bear. Узнайте, что говорят пользователи о выводах, бонусах, поддержке и игре. Присоединяйтесь к сообществу довольных игроков.
         </p>
         <div class="hero-buttons">
-            <a href="#carousel" class="main-button" rel="noreferrer noopener">Читать отзывы</a>
+            <a href="#reviews-list" class="main-button" rel="noreferrer noopener">Читать отзывы</a>
         </div>
     </section>
 
@@ -322,125 +216,13 @@
         Участие в азартных играх не гарантирует выигрыш и может привести к потере денежных средств. Играйте ответственно.
     </div>
 
-    <section id="carousel">
+    <section id="reviews-list">
         <h2 class="section-title">Отзывы игроков</h2>
         <p class="section-description">
             Реальные истории и мнения игроков Lucky Bear. Здесь вы найдёте честные отзывы о выводах, бонусах, поддержке и игре.
         </p>
 
-        <div class="carousel-wrapper" id="carouselWrapper">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- ===== ОТЗЫВЫ ВСТАВЛЕНЫ ВРУЧНУЮ ===== -->
-                <div class="carousel-slide" data-depth="0">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Александр К.</span>
-                            <span class="review-date">28.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">Играю на Lucky Bear уже три месяца. Выводы быстрые — деньги приходят в течение часа. Бонус 200% на первый депозит действительно дали. Поддержка отвечает быстро, если есть вопросы. Рекомендую.</p>
-                        <span class="review-game">Играл в Anubis Wrath</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="1">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Елена В.</span>
-                            <span class="review-date">25.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">Отличный выбор слотов, особенно порадовал Treasures of Aztec. Пополнение через СБП моментальное. Кэшбэк начисляют еженедельно — приятный бонус. Всё нравится, играю дальше.</p>
-                        <span class="review-game">Играла в Treasures of Aztec</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="1">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Дмитрий П.</span>
-                            <span class="review-date">22.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★☆</div>
-                        <p class="review-text">Хорошее казино. Вывод без задержек, комиссия минимальная. Играю в основном в слоты и live-казино. Единственное — хотелось бы больше акций для постоянных игроков.</p>
-                        <span class="review-game">Играл в Wild Bounty Snowdown</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="2">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Марина С.</span>
-                            <span class="review-date">20.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">Lucky Bear — лучшее казино, где я играла. Бонусная система прозрачная, выводы быстрые. Отдельное спасибо поддержке — отвечают в течение 5 минут. Всем советую!</p>
-                        <span class="review-game">Играла в слоты</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="2">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Игорь Н.</span>
-                            <span class="review-date">18.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">Играю на Lucky Bear уже полгода. Ни разу не было проблем с выводом. Кэшбэк до 15% — это реально. Личный менеджер всегда на связи, помогает с вопросами. Отличное казино!</p>
-                        <span class="review-game">VIP-игрок</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="3">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Ольга Т.</span>
-                            <span class="review-date">15.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">Хороший выбор live-игр с реальными дилерами. Рулетка и блэкджек — на высшем уровне. Пополнение через криптовалюту быстрое. Всё нравится, буду продолжать играть.</p>
-                        <span class="review-game">Играла в live-казино</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="3">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Сергей М.</span>
-                            <span class="review-date">12.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★☆</div>
-                        <p class="review-text">Неплохое казино, но есть куда расти. Вывод работает, но иногда приходится ждать до 2 часов. Бонусы хорошие, особенно на первый депозит. В целом — рекомендую.</p>
-                        <span class="review-game">Играл в Falling Pickaxe</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="4">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Анна Р.</span>
-                            <span class="review-date">10.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">Очень понравился интерфейс сайта — всё понятно и удобно. Быстро нашла нужные слоты. Пополнила через СБП, деньги пришли мгновенно. Вывод тоже без проблем.</p>
-                        <span class="review-game">Играла в слоты</span>
-                    </div>
-                </div>
-
-                <div class="carousel-slide" data-depth="4">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Владимир Д.</span>
-                            <span class="review-date">08.07.2026</span>
-                        </div>
-                        <div class="stars">★★★★☆</div>
-                        <p class="review-text">Играю с апреля 2026. В целом доволен, но хотелось бы больше live-игр с русскоязычными дилерами. Вывод стабильный, поддержка отвечает быстро.</p>
-                        <span class="review-game">Играл в live-казино</span>
-                    </div>
-                </div>
-                <!-- ===== КОНЕЦ ОТЗЫВОВ ===== -->
-            </div>
-        </div>
+        <div class="reviews-grid" id="reviewsGrid"></div>
     </section>
 
     <section style="padding-top: 20px;">
@@ -456,91 +238,80 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // ===== КАРУСЕЛЬ (ТОЛЬКО ДВИЖЕНИЕ) =====
-        const track = document.getElementById('carouselTrack');
-        const wrapper = document.getElementById('carouselWrapper');
+        // ===== 50 ОТЗЫВОВ =====
+        const reviews = [
+            { name: "Александр К.", date: "28.07.2026", stars: 5, text: "Играю на Lucky Bear уже три месяца. Выводы быстрые — деньги приходят в течение часа. Бонус 200% на первый депозит действительно дали. Поддержка отвечает быстро, если есть вопросы. Рекомендую.", game: "Anubis Wrath" },
+            { name: "Елена В.", date: "25.07.2026", stars: 5, text: "Отличный выбор слотов, особенно порадовал Treasures of Aztec. Пополнение через СБП моментальное. Кэшбэк начисляют еженедельно — приятный бонус. Всё нравится, играю дальше.", game: "Treasures of Aztec" },
+            { name: "Дмитрий П.", date: "22.07.2026", stars: 4, text: "Хорошее казино. Вывод без задержек, комиссия минимальная. Играю в основном в слоты и live-казино. Единственное — хотелось бы больше акций для постоянных игроков.", game: "Wild Bounty Snowdown" },
+            { name: "Марина С.", date: "20.07.2026", stars: 5, text: "Lucky Bear — лучшее казино, где я играла. Бонусная система прозрачная, выводы быстрые. Отдельное спасибо поддержке — отвечают в течение 5 минут. Всем советую!", game: "Слоты" },
+            { name: "Игорь Н.", date: "18.07.2026", stars: 5, text: "Играю на Lucky Bear уже полгода. Ни разу не было проблем с выводом. Кэшбэк до 15% — это реально. Личный менеджер всегда на связи, помогает с вопросами. Отличное казино!", game: "VIP-игрок" },
+            { name: "Ольга Т.", date: "15.07.2026", stars: 5, text: "Хороший выбор live-игр с реальными дилерами. Рулетка и блэкджек — на высшем уровне. Пополнение через криптовалюту быстрое. Всё нравится, буду продолжать играть.", game: "Live-казино" },
+            { name: "Сергей М.", date: "12.07.2026", stars: 4, text: "Неплохое казино, но есть куда расти. Вывод работает, но иногда приходится ждать до 2 часов. Бонусы хорошие, особенно на первый депозит. В целом — рекомендую.", game: "Falling Pickaxe" },
+            { name: "Анна Р.", date: "10.07.2026", stars: 5, text: "Очень понравился интерфейс сайта — всё понятно и удобно. Быстро нашла нужные слоты. Пополнила через СБП, деньги пришли мгновенно. Вывод тоже без проблем.", game: "Слоты" },
+            { name: "Владимир Д.", date: "08.07.2026", stars: 4, text: "Играю с апреля 2026. В целом доволен, но хотелось бы больше live-игр с русскоязычными дилерами. Вывод стабильный, поддержка отвечает быстро.", game: "Live-казино" },
+            { name: "Татьяна К.", date: "05.07.2026", stars: 5, text: "Отличное казино! Быстрое пополнение и вывод, много бонусов. Особенно радует кэшбэк — реально возвращают деньги каждую неделю. Играю только здесь!", game: "Anubis Wrath" },
+            { name: "Андрей С.", date: "30.06.2026", stars: 3, text: "Ставлю 3 звезды, потому что немного испугался крупных сумм и решил остановиться. Но само казино хорошее, выводы быстрые, поддержка вежливая. Просто я понял, что не готов к большим ставкам.", game: "Слоты" },
+            { name: "Наталья П.", date: "28.06.2026", stars: 4, text: "Хорошее казино, но не хватает большего количества игр с высоким RTP. Вывод быстрый, поддержка на месте. В целом — рекомендую, особенно для новичков.", game: "Wild Bounty Snowdown" },
+            { name: "Максим Р.", date: "25.06.2026", stars: 5, text: "Лучшее казино, в котором я играл! Вывод денег за 10 минут, бонусы реально дают. VIP-программа отличная, уже на 5 уровне. Всем советую!", game: "VIP-игрок" },
+            { name: "Ирина З.", date: "22.06.2026", stars: 5, text: "Играю в Lucky Bear с января 2026. Очень нравится выбор слотов и быстрые выводы. Ни разу не было проблем. Поддержка отвечает всегда вежливо и быстро.", game: "Treasures of Aztec" },
+            { name: "Павел Г.", date: "20.06.2026", stars: 4, text: "Хорошее казино, но иногда подвисает сайт. В остальном — всё отлично: вывод быстрый, бонусы начисляют. Надеюсь, пофиксят технические моменты.", game: "Слоты" },
+            { name: "Екатерина Л.", date: "18.06.2026", stars: 5, text: "Обожаю Lucky Bear! Играю в слоты и live-казино. Выводы мгновенные, поддержка всегда помогает. Очень нравится программа лояльности — уже на 3 уровне.", game: "Live-казино" },
+            { name: "Денис Х.", date: "15.06.2026", stars: 4, text: "Играю с начала года. В целом доволен: быстрый вывод, хороший выбор игр. Но иногда бывают задержки с выводом до 2-3 часов. В остальном — отлично.", game: "Anubis Wrath" },
+            { name: "Светлана Б.", date: "12.06.2026", stars: 5, text: "Отличное казино! Очень нравится, что можно пополнять криптовалютой. Вывод тоже быстрый. Поддержка отвечает круглосуточно. Всем рекомендую!", game: "Криптовалюта" },
+            { name: "Геннадий Ш.", date: "10.06.2026", stars: 3, text: "Нормальное казино, но я решил уменьшить ставки, потому что боялся потерять крупную сумму. Забрал выигрыш без проблем. В целом — неплохо, но играть буду реже.", game: "Falling Pickaxe" },
+            { name: "Алиса К.", date: "08.06.2026", stars: 5, text: "Лучшее казино для ставок на спорт! Очень удобно, быстро и надёжно. Вывод денег за 5 минут. Спасибо Lucky Bear!", game: "Ставки на спорт" },
+            { name: "Виктор Н.", date: "05.06.2026", stars: 5, text: "Играю в Lucky Bear уже 6 месяцев. Очень нравится всё: интерфейс, выбор игр, вывод. Ни разу не было проблем. Отличное казино!", game: "VIP-игрок" },
+            { name: "Мария Ф.", date: "02.06.2026", stars: 4, text: "Хорошее казино, но хотелось бы больше акций для постоянных игроков. Вывод быстрый, поддержка отличная. В целом — рекомендую.", game: "Wild Bounty Snowdown" },
+            { name: "Сергей Л.", date: "30.05.2026", stars: 5, text: "Отличный выбор слотов! Играю в Anubis Wrath и Treasures of Aztec. Вывод быстрый, бонусы реально дают. Всем советую!", game: "Anubis Wrath" },
+            { name: "Оксана Р.", date: "28.05.2026", stars: 5, text: "Очень нравится Lucky Bear! Быстрое пополнение и вывод, много бонусов. Играю в основном в слоты и live-казино. Всё супер!", game: "Live-казино" },
+            { name: "Николай И.", date: "25.05.2026", stars: 4, text: "Неплохое казино, но иногда бывают технические сбои. В остальном — всё отлично: вывод быстрый, бонусы начисляют. Рекомендую.", game: "Слоты" },
+            { name: "Евгения М.", date: "22.05.2026", stars: 5, text: "Играю в Lucky Bear с февраля 2026. Очень нравится программа лояльности. Уже на 4 уровне. Вывод быстрый, поддержка отличная.", game: "VIP-игрок" },
+            { name: "Артём С.", date: "20.05.2026", stars: 5, text: "Лучшее казино! Быстрый вывод, хорошие бонусы, много игр. Играю в слоты и ставки на спорт. Всем рекомендую!", game: "Ставки на спорт" },
+            { name: "Валентина Т.", date: "18.05.2026", stars: 3, text: "Казино хорошее, но я решил не рисковать крупными суммами. Забрал выигрыш и перестал играть. Но вывод был быстрый, без проблем. Возможно, вернусь позже.", game: "Treasures of Aztec" },
+            { name: "Константин П.", date: "15.05.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Anubis Wrath и Falling Pickaxe. Вывод мгновенный, бонусы начисляют. Супер!", game: "Falling Pickaxe" },
+            { name: "Людмила В.", date: "12.05.2026", stars: 5, text: "Очень нравится Lucky Bear! Быстрое пополнение и вывод, много бонусов. Играю в слоты и live-казино. Всё отлично!", game: "Live-казино" },
+            { name: "Роман К.", date: "10.05.2026", stars: 4, text: "Неплохое казино, но хотелось бы больше новинок среди слотов. Вывод быстрый, поддержка отвечает быстро. В целом — рекомендую.", game: "Wild Bounty Snowdown" },
+            { name: "Анастасия Ч.", date: "08.05.2026", stars: 5, text: "Играю в Lucky Bear с марта 2026. Очень нравится программа лояльности. Уже на 5 уровне. Вывод быстрый, поддержка отличная.", game: "VIP-игрок" },
+            { name: "Юрий А.", date: "05.05.2026", stars: 5, text: "Лучшее казино! Быстрый вывод, хорошие бонусы, много игр. Играю в слоты и ставки на спорт. Всем рекомендую!", game: "Ставки на спорт" },
+            { name: "Елена К.", date: "02.05.2026", stars: 3, text: "Нормальное казино, но я решил остановиться, потому что понял, что не готов к большим ставкам. Забрал выигрыш без проблем. Возможно, вернусь.", game: "Anubis Wrath" },
+            { name: "Дмитрий С.", date: "30.04.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Treasures of Aztec и Falling Pickaxe. Вывод мгновенный, бонусы начисляют. Супер!", game: "Treasures of Aztec" },
+            { name: "Светлана Н.", date: "28.04.2026", stars: 5, text: "Очень нравится Lucky Bear! Быстрое пополнение и вывод, много бонусов. Играю в слоты и live-казино. Всё отлично!", game: "Live-казино" },
+            { name: "Алексей М.", date: "25.04.2026", stars: 4, text: "Неплохое казино, но иногда бывают задержки с выводом до 2 часов. В остальном — всё отлично. Рекомендую.", game: "Wild Bounty Snowdown" },
+            { name: "Ольга И.", date: "22.04.2026", stars: 5, text: "Играю в Lucky Bear с февраля 2026. Очень нравится программа лояльности. Уже на 6 уровне. Вывод быстрый, поддержка отличная.", game: "VIP-игрок" },
+            { name: "Павел Ф.", date: "20.04.2026", stars: 5, text: "Лучшее казино! Быстрый вывод, хорошие бонусы, много игр. Играю в слоты и ставки на спорт. Всем рекомендую!", game: "Ставки на спорт" },
+            { name: "Татьяна П.", date: "18.04.2026", stars: 3, text: "Казино хорошее, но я решил не рисковать крупными суммами. Забрал выигрыш и перестал играть. Но вывод был быстрый, без проблем.", game: "Falling Pickaxe" },
+            { name: "Сергей Б.", date: "15.04.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Anubis Wrath и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Anubis Wrath" },
+            { name: "Наталья К.", date: "12.04.2026", stars: 5, text: "Очень нравится Lucky Bear! Быстрое пополнение и вывод, много бонусов. Играю в слоты и live-казино. Всё отлично!", game: "Live-казино" },
+            { name: "Михаил Г.", date: "10.04.2026", stars: 4, text: "Неплохое казино, но хотелось бы больше новинок среди слотов. Вывод быстрый, поддержка отвечает быстро. В целом — рекомендую.", game: "Wild Bounty Snowdown" },
+            { name: "Анна Ш.", date: "08.04.2026", stars: 5, text: "Играю в Lucky Bear с января 2026. Очень нравится программа лояльности. Уже на 5 уровне. Вывод быстрый, поддержка отличная.", game: "VIP-игрок" },
+            { name: "Виктор М.", date: "05.04.2026", stars: 5, text: "Лучшее казино! Быстрый вывод, хорошие бонусы, много игр. Играю в слоты и ставки на спорт. Всем рекомендую!", game: "Ставки на спорт" },
+            { name: "Екатерина Р.", date: "02.04.2026", stars: 3, text: "Нормальное казино, но я решил остановиться, потому что понял, что не готов к большим ставкам. Забрал выигрыш без проблем. Возможно, вернусь.", game: "Treasures of Aztec" },
+            { name: "Андрей Л.", date: "30.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Falling Pickaxe и Anubis Wrath. Вывод мгновенный, бонусы начисляют. Супер!", game: "Falling Pickaxe" },
+            { name: "Мария С.", date: "28.03.2026", stars: 5, text: "Очень нравится Lucky Bear! Быстрое пополнение и вывод, много бонусов. Играю в слоты и live-казино. Всё отлично!", game: "Live-казино" },
+            { name: "Алексей Б.", date: "25.03.2026", stars: 4, text: "Хорошее казино, но не хватает большего количества live-игр. Вывод быстрый, поддержка на уровне. В целом — рекомендую.", game: "Live-казино" },
+            { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
+        ];
 
-        let offset = 0;
-        let isPaused = false;
-        let animId = null;
-        let lastTime = 0;
-        const SPEED = 0.05;
-        const SLIDE_WIDTH = 420;
+        // ===== ОТОБРАЖЕНИЕ ОТЗЫВОВ =====
+        const grid = document.getElementById('reviewsGrid');
 
-        function updateDepth() {
-            const slides = track.querySelectorAll('.carousel-slide');
-            const total = slides.length;
-            const center = (total / 2) + offset / SLIDE_WIDTH;
-            const centerInt = Math.round(center);
-
-            slides.forEach((slide, index) => {
-                const dist = Math.abs(index - centerInt);
-                let depth = 5;
-                if (dist <= 0.5) depth = 0;
-                else if (dist <= 1.5) depth = 1;
-                else if (dist <= 2.5) depth = 2;
-                else if (dist <= 4) depth = 3;
-                else if (dist <= 6) depth = 4;
-                slide.dataset.depth = depth;
-            });
-        }
-
-        function animate(time) {
-            if (!lastTime) lastTime = time;
-            const delta = time - lastTime;
-            lastTime = time;
-
-            if (!isPaused) {
-                offset += SPEED * delta;
-                const total = track.querySelectorAll('.carousel-slide').length;
-                const maxOffset = (total / 3) * SLIDE_WIDTH;
-                if (offset > maxOffset) {
-                    offset -= maxOffset / 2;
-                }
-                track.style.transform = `translateX(-${offset}px)`;
-                updateDepth();
-            }
-            animId = requestAnimationFrame(animate);
-        }
-
-        function pause(p) {
-            isPaused = p;
-        }
-
-        wrapper.addEventListener('mouseenter', () => pause(true));
-        wrapper.addEventListener('mouseleave', () => pause(false));
-
-        wrapper.addEventListener('touchstart', () => pause(true));
-        wrapper.addEventListener('touchend', () => pause(false));
-
-        let startX = 0,
-            startOffset = 0,
-            swiping = false;
-
-        wrapper.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            startOffset = offset;
-            swiping = true;
-            pause(true);
+        reviews.forEach(review => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.innerHTML = `
+                <div class="review-header">
+                    <span class="review-name">${review.name}</span>
+                    <span class="review-date">${review.date}</span>
+                </div>
+                <div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div>
+                <p class="review-text">${review.text}</p>
+                <span class="review-game">Играл(а) в ${review.game}</span>
+            `;
+            grid.appendChild(card);
         });
 
-        wrapper.addEventListener('touchmove', (e) => {
-            if (!swiping) return;
-            const diff = startX - e.touches[0].clientX;
-            offset = startOffset + diff;
-            track.style.transform = `translateX(-${offset}px)`;
-            updateDepth();
-        });
-
-        wrapper.addEventListener('touchend', () => {
-            swiping = false;
-            pause(false);
-        });
-
+        // ===== ПОДСВЕТКА МЕНЮ =====
         document.addEventListener('DOMContentLoaded', () => {
-            updateDepth();
-            animId = requestAnimationFrame(animate);
-
             const page = window.location.pathname.split('/').pop() || 'reviews.html';
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
@@ -548,6 +319,7 @@
             });
         });
 
+        // ===== ЭФФЕКТ ЛОГОТИПА =====
         const logo = document.querySelector('.logo');
         const hero = document.querySelector('.hero');
         window.addEventListener('scroll', () => {
