@@ -30,7 +30,7 @@
 
         .carousel-track {
             display: flex;
-            transition: transform 20s linear;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: transform;
             padding: 20px 0;
         }
@@ -297,7 +297,7 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // ===== 50 ОТЗЫВОВ =====
+        // ===== 50 ОТЗЫВОВ (первые 3 для примера) =====
         const reviews = [
             { name: "Александр К.", date: "28.07.2026", stars: 5, text: "Играю на Lucky Bear уже три месяца. Выводы быстрые — деньги приходят в течение часа. Бонус 200% на первый депозит действительно дали. Поддержка отвечает быстро, если есть вопросы. Рекомендую.", game: "Anubis Wrath" },
             { name: "Елена В.", date: "25.07.2026", stars: 5, text: "Отличный выбор слотов, особенно порадовал Treasures of Aztec. Пополнение через СБП моментальное. Кэшбэк начисляют еженедельно — приятный бонус. Всё нравится, играю дальше.", game: "Treasures of Aztec" },
@@ -351,24 +351,20 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ПРОКРУТКА =====
+        // ===== КАРУСЕЛЬ С ПЛАВНОЙ ПРОКРУТКОЙ =====
+        let currentIndex = 0;
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
-        let currentIndex = 0;
+        let autoPlayInterval = null;
         let isPaused = false;
-        let animationId = null;
-        let startTime = 0;
-        const SPEED = 0.015; // скорость прокрутки (пикселей за кадр)
 
         function renderReviews() {
             track.innerHTML = '';
             // Дублируем отзывы для бесконечного эффекта
-            const extendedReviews = [...reviews, ...reviews];
+            const extendedReviews = [...reviews, ...reviews.slice(0, 3)];
             extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                if (index === 0) slide.classList.add('active');
-                if (index === 1) slide.classList.add('next');
                 slide.dataset.index = index;
                 slide.innerHTML = `
                     <div class="review-card">
@@ -383,59 +379,81 @@
                 `;
                 track.appendChild(slide);
             });
-            updateClasses(0);
+            currentIndex = 0;
+            updateCarousel(false);
         }
 
-        function updateClasses(index) {
+        function updateCarousel(animate = true) {
             const slides = track.querySelectorAll('.carousel-slide');
-            const total = slides.length;
+            const totalSlides = slides.length;
             
-            slides.forEach((slide, i) => {
+            slides.forEach((slide, index) => {
                 slide.className = 'carousel-slide';
-                const diff = (i - index + total) % total;
-                if (diff === 0) slide.classList.add('active');
-                else if (diff === 1 || diff === -(total - 1)) slide.classList.add('next');
-                else if (diff === total - 1 || diff === -1) slide.classList.add('prev');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else if (index === currentIndex - 1 || (currentIndex === 0 && index === totalSlides - 1)) {
+                    slide.classList.add('prev');
+                } else if (index === currentIndex + 1 || (currentIndex === totalSlides - 1 && index === 0)) {
+                    slide.classList.add('next');
+                }
             });
+            
+            if (!animate) {
+                track.style.transition = 'none';
+            } else {
+                track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+            
+            track.style.transform = `translateX(-${currentIndex * 60}%)`;
+            
+            // Бесконечный цикл
+            if (currentIndex >= reviews.length) {
+                setTimeout(() => {
+                    track.style.transition = 'none';
+                    currentIndex = currentIndex - reviews.length;
+                    track.style.transform = `translateX(-${currentIndex * 60}%)`;
+                    // Обновляем классы
+                    slides.forEach((slide, index) => {
+                        slide.className = 'carousel-slide';
+                        if (index === currentIndex) {
+                            slide.classList.add('active');
+                        } else if (index === currentIndex - 1 || (currentIndex === 0 && index === slides.length - 1)) {
+                            slide.classList.add('prev');
+                        } else if (index === currentIndex + 1 || (currentIndex === slides.length - 1 && index === 0)) {
+                            slide.classList.add('next');
+                        }
+                    });
+                    setTimeout(() => {
+                        track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    }, 50);
+                }, 50);
+            }
         }
 
-        function animate(timestamp) {
-            if (!startTime) startTime = timestamp;
-            if (!isPaused) {
-                const progress = (timestamp - startTime) / 1000;
-                const offset = progress * 60; // 60% за 1 секунду
-                const slideWidth = 60; // 60% от ширины контейнера
-                const totalSlides = track.querySelectorAll('.carousel-slide').length;
-                
-                // Бесконечная прокрутка
-                let rawIndex = (currentIndex + offset / slideWidth) % totalSlides;
-                if (rawIndex >= totalSlides) rawIndex -= totalSlides;
-                
-                // Обновляем трансформацию
-                track.style.transform = `translateX(-${rawIndex * slideWidth}%)`;
-                
-                // Обновляем классы для ближайшего слайда
-                const nearestIndex = Math.round(rawIndex);
-                if (nearestIndex !== currentIndex) {
-                    currentIndex = nearestIndex % totalSlides;
-                    updateClasses(currentIndex);
-                }
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % (reviews.length + 3);
+            updateCarousel(true);
+        }
+
+        function resetAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
             }
-            animationId = requestAnimationFrame(animate);
+            if (!isPaused) {
+                autoPlayInterval = setInterval(nextSlide, 3500);
+            }
         }
 
         function pauseAutoPlay(pause) {
             isPaused = pause;
             if (pause) {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
                 }
             } else {
-                startTime = 0;
-                if (!animationId) {
-                    animationId = requestAnimationFrame(animate);
-                }
+                resetAutoPlay();
             }
         }
 
@@ -465,8 +483,6 @@
         // ===== СВАЙП ДЛЯ ТЕЛЕФОНА =====
         let startX = 0;
         let isSwiping = false;
-        const slides = track.querySelectorAll('.carousel-slide');
-        const totalSlides = slides.length;
 
         wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
@@ -479,12 +495,11 @@
             if (Math.abs(diff) > 50) {
                 isSwiping = false;
                 if (diff > 0) {
-                    currentIndex = (currentIndex + 1) % totalSlides;
+                    nextSlide();
                 } else {
-                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                    currentIndex = (currentIndex - 1 + (reviews.length + 3)) % (reviews.length + 3);
+                    updateCarousel(true);
                 }
-                updateClasses(currentIndex);
-                track.style.transform = `translateX(-${currentIndex * 60}%)`;
                 pauseAutoPlay(true);
                 setTimeout(() => pauseAutoPlay(false), 3000);
             }
@@ -497,8 +512,7 @@
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             renderReviews();
-            // Запускаем анимацию
-            animationId = requestAnimationFrame(animate);
+            resetAutoPlay();
 
             // Подсветка активного меню
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
