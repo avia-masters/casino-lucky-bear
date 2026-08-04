@@ -36,9 +36,9 @@
         }
 
         .carousel-slide {
-            flex: 0 0 70%;
-            padding: 0 10px;
-            opacity: 0.35;
+            flex: 0 0 60%;
+            padding: 0 12px;
+            opacity: 0.3;
             transform: scale(0.85);
             transition: all 0.6s ease;
             pointer-events: none;
@@ -61,13 +61,13 @@
         .review-card {
             background: rgba(255,255,255,0.05);
             border-radius: 20px;
-            padding: 30px;
+            padding: 30px 25px;
             border: 1px solid rgba(255,255,255,0.06);
             transition: all 0.3s ease;
-            height: 100%;
+            height: 350px;
             display: flex;
             flex-direction: column;
-            min-height: 280px;
+            overflow: hidden;
         }
 
         .review-card:hover {
@@ -114,6 +114,10 @@
             line-height: 1.8;
             margin: 0 0 12px 0;
             flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
         }
 
         .review-card .review-game {
@@ -153,13 +157,13 @@
 
         @media (max-width: 768px) {
             .carousel-slide {
-                flex: 0 0 85%;
+                flex: 0 0 80%;
                 padding: 0 8px;
             }
 
             .review-card {
+                height: 300px;
                 padding: 20px;
-                min-height: 220px;
             }
 
             .review-card .review-name {
@@ -168,6 +172,7 @@
 
             .review-card .review-text {
                 font-size: 14px;
+                -webkit-line-clamp: 5;
             }
 
             .review-card .stars {
@@ -191,13 +196,13 @@
 
         @media (max-width: 400px) {
             .carousel-slide {
-                flex: 0 0 92%;
+                flex: 0 0 90%;
                 padding: 0 5px;
             }
 
             .review-card {
+                height: 260px;
                 padding: 16px;
-                min-height: 190px;
             }
 
             .review-card .review-name {
@@ -206,7 +211,7 @@
 
             .review-card .review-text {
                 font-size: 13px;
-                line-height: 1.6;
+                -webkit-line-clamp: 4;
             }
 
             .review-card .stars {
@@ -346,15 +351,18 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== КАРУСЕЛЬ =====
+        // ===== БЕСКОНЕЧНАЯ КАРУСЕЛЬ =====
         let currentIndex = 0;
         const track = document.getElementById('carouselTrack');
         let autoPlayInterval = null;
         let isPaused = false;
 
+        // Дублируем отзывы для бесконечного эффекта
         function renderReviews() {
             track.innerHTML = '';
-            reviews.forEach((review, index) => {
+            // Показываем все отзывы + дублируем первые 3 в конце
+            const extendedReviews = [...reviews, ...reviews.slice(0, 3)];
+            extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.dataset.index = index;
@@ -371,27 +379,63 @@
                 `;
                 track.appendChild(slide);
             });
-            updateCarousel();
+            // Начинаем с первого реального отзыва
+            currentIndex = 0;
+            updateCarousel(false);
         }
 
-        function updateCarousel() {
+        function updateCarousel(animate = true) {
             const slides = track.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            
             slides.forEach((slide, index) => {
                 slide.className = 'carousel-slide';
                 if (index === currentIndex) {
                     slide.classList.add('active');
-                } else if (index === currentIndex - 1 || (currentIndex === 0 && index === slides.length - 1)) {
+                } else if (index === currentIndex - 1 || (currentIndex === 0 && index === totalSlides - 1)) {
                     slide.classList.add('prev');
-                } else if (index === currentIndex + 1 || (currentIndex === slides.length - 1 && index === 0)) {
+                } else if (index === currentIndex + 1 || (currentIndex === totalSlides - 1 && index === 0)) {
                     slide.classList.add('next');
                 }
             });
-            track.style.transform = `translateX(-${currentIndex * 70}%)`;
+            
+            if (!animate) {
+                track.style.transition = 'none';
+            } else {
+                track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+            
+            // Сдвигаем на 60% (ширина слайда)
+            track.style.transform = `translateX(-${currentIndex * 60}%)`;
+            
+            // Если дошли до дублированных отзывов — возвращаемся к реальным без анимации
+            if (currentIndex >= reviews.length) {
+                setTimeout(() => {
+                    track.style.transition = 'none';
+                    currentIndex = currentIndex - reviews.length;
+                    track.style.transform = `translateX(-${currentIndex * 60}%)`;
+                    // Обновляем классы
+                    slides.forEach((slide, index) => {
+                        slide.className = 'carousel-slide';
+                        if (index === currentIndex) {
+                            slide.classList.add('active');
+                        } else if (index === currentIndex - 1 || (currentIndex === 0 && index === slides.length - 1)) {
+                            slide.classList.add('prev');
+                        } else if (index === currentIndex + 1 || (currentIndex === slides.length - 1 && index === 0)) {
+                            slide.classList.add('next');
+                        }
+                    });
+                    // Восстанавливаем анимацию
+                    setTimeout(() => {
+                        track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    }, 50);
+                }, 50);
+            }
         }
 
         function nextSlide() {
-            currentIndex = (currentIndex + 1) % reviews.length;
-            updateCarousel();
+            currentIndex = (currentIndex + 1) % (reviews.length + 3);
+            updateCarousel(true);
         }
 
         function resetAutoPlay() {
@@ -457,8 +501,8 @@
                 if (diff > 0) {
                     nextSlide();
                 } else {
-                    currentIndex = (currentIndex - 1 + reviews.length) % reviews.length;
-                    updateCarousel();
+                    currentIndex = (currentIndex - 1 + (reviews.length + 3)) % (reviews.length + 3);
+                    updateCarousel(true);
                 }
                 pauseAutoPlay(true);
                 setTimeout(() => pauseAutoPlay(false), 3000);
