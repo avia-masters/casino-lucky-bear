@@ -45,7 +45,7 @@
             position: relative;
         }
 
-        /* ===== ГЛУБИНА ===== */
+        /* ===== ГЛУБИНА (БЕЗ ПРОЗРАЧНОСТИ) ===== */
         .carousel-slide[data-depth="0"] {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -53,35 +53,33 @@
         }
 
         .carousel-slide[data-depth="1"] {
-            opacity: 0.5 !important;
-            transform: scale(0.88) !important;
+            opacity: 0.7 !important;
+            transform: scale(0.92) !important;
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
-            opacity: 0.2 !important;
-            transform: scale(0.75) !important;
+            opacity: 0.5 !important;
+            transform: scale(0.84) !important;
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
-            opacity: 0.06 !important;
-            transform: scale(0.6) !important;
+            opacity: 0.3 !important;
+            transform: scale(0.76) !important;
             z-index: 1;
         }
 
         .carousel-slide[data-depth="4"] {
-            opacity: 0.015 !important;
-            transform: scale(0.45) !important;
+            opacity: 0.15 !important;
+            transform: scale(0.68) !important;
             z-index: 0;
-            filter: blur(2px) !important;
         }
 
         .carousel-slide[data-depth="5"] {
-            opacity: 0 !important;
-            transform: scale(0.3) !important;
+            opacity: 0.05 !important;
+            transform: scale(0.6) !important;
             z-index: -1;
-            filter: blur(4px) !important;
         }
 
         .review-card {
@@ -208,17 +206,16 @@
                 letter-spacing: 2px;
             }
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.85) !important;
+                transform: scale(0.9) !important;
             }
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.7) !important;
+                transform: scale(0.82) !important;
             }
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.55) !important;
+                transform: scale(0.74) !important;
             }
             .carousel-slide[data-depth="4"] {
-                transform: scale(0.4) !important;
-                opacity: 0.01 !important;
+                transform: scale(0.66) !important;
             }
             .reviews-hero-description {
                 font-size: 15px !important;
@@ -261,17 +258,16 @@
                 font-size: 10px;
             }
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.8) !important;
+                transform: scale(0.88) !important;
             }
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.65) !important;
+                transform: scale(0.8) !important;
             }
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.5) !important;
+                transform: scale(0.72) !important;
             }
             .carousel-slide[data-depth="4"] {
-                transform: scale(0.35) !important;
-                opacity: 0.01 !important;
+                transform: scale(0.64) !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -330,7 +326,7 @@
 
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-track" id="carouselTrack">
-                <!-- ===== ОТЗЫВЫ ВСТАВЛЕНЫ ВРУЧНУЮ (ТОЛЬКО 10 ДЛЯ ПРИМЕРА) ===== -->
+                <!-- ===== 9 ОТЗЫВОВ (ДЛЯ ПРИМЕРА) ===== -->
                 <div class="carousel-slide" data-depth="0">
                     <div class="review-card">
                         <div class="review-header">
@@ -438,7 +434,6 @@
                         <span class="review-game">Играл в live-казино</span>
                     </div>
                 </div>
-                <!-- ===== КОНЕЦ ОТЗЫВОВ ===== -->
             </div>
         </div>
     </section>
@@ -456,7 +451,7 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // ===== КАРУСЕЛЬ (ТОЛЬКО ДВИЖЕНИЕ) =====
+        // ===== КАРУСЕЛЬ =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
 
