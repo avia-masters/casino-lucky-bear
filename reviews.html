@@ -9,7 +9,6 @@
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== СТИЛИ ДЛЯ СТРАНИЦЫ ОТЗЫВОВ ===== */
         .reviews-hero-description {
             max-width: 700px;
             margin: 20px auto 0;
@@ -22,45 +21,76 @@
         .carousel-wrapper {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 30px 0;
+            padding: 40px 0;
             position: relative;
             overflow: hidden;
             height: 420px;
+            perspective: 1000px;
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.1s linear;
+            transition: transform 0.05s linear;
             will-change: transform;
             padding: 20px 0;
+            transform-style: preserve-3d;
+            align-items: center;
             position: relative;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .carousel-slide {
-            flex: 0 0 400px;
+            flex: 0 0 50%;
             padding: 0 10px;
             box-sizing: border-box;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: all 0.1s linear;
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            position: relative;
+        }
+
+        .carousel-slide[data-depth="0"] {
+            opacity: 1 !important;
+            transform: scale(1) translateZ(0px) !important;
+            z-index: 10;
+        }
+
+        .carousel-slide[data-depth="1"] {
+            opacity: 0.6 !important;
+            transform: scale(0.85) translateZ(-60px) !important;
+            z-index: 5;
+        }
+
+        .carousel-slide[data-depth="2"] {
+            opacity: 0.3 !important;
+            transform: scale(0.7) translateZ(-120px) !important;
+            z-index: 3;
+        }
+
+        .carousel-slide[data-depth="3"] {
+            opacity: 0.12 !important;
+            transform: scale(0.55) translateZ(-180px) !important;
+            z-index: 1;
         }
 
         .review-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
             border-radius: 20px;
-            padding: 25px 20px;
-            border: 1px solid rgba(255,255,255,0.06);
-            height: 350px;
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
+            height: 320px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
-        .carousel-slide.active .review-card {
+        .carousel-slide[data-depth="0"] .review-card {
             background: rgba(255,255,255,0.1);
             border-color: rgba(0, 255, 255, 0.25);
             box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
-            transform: scale(1.02);
         }
 
         .review-card .stars {
@@ -92,15 +122,19 @@
         }
 
         .review-card .review-text {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.75);
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0 0 10px 0;
             flex: 1;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
+        }
+
+        .carousel-slide[data-depth="0"] .review-card .review-text {
+            -webkit-line-clamp: 6;
         }
 
         .review-card .review-game {
@@ -139,17 +173,18 @@
         }
 
         @media (max-width: 768px) {
+            .carousel-wrapper {
+                height: 380px;
+                padding: 20px 0;
+            }
+
             .carousel-slide {
-                flex: 0 0 280px;
+                flex: 0 0 70%;
                 padding: 0 8px;
             }
 
-            .carousel-wrapper {
-                height: 380px;
-            }
-
             .review-card {
-                height: 300px;
+                height: 280px;
                 padding: 20px;
             }
 
@@ -159,6 +194,10 @@
 
             .review-card .review-text {
                 font-size: 13px;
+                -webkit-line-clamp: 4;
+            }
+
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 5;
             }
 
@@ -167,24 +206,44 @@
                 letter-spacing: 2px;
             }
 
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.8) translateZ(-40px) !important;
+            }
+
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.65) translateZ(-80px) !important;
+            }
+
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.5) translateZ(-120px) !important;
+            }
+
             .reviews-hero-description {
                 font-size: 15px !important;
                 padding: 0 15px !important;
             }
-        }
 
-        @media (max-width: 480px) {
-            .carousel-slide {
-                flex: 0 0 230px;
-                padding: 0 5px;
+            .reviews-cta h3 {
+                font-size: 22px;
             }
 
+            .reviews-cta p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
             .carousel-wrapper {
                 height: 340px;
             }
 
+            .carousel-slide {
+                flex: 0 0 80%;
+                padding: 0 5px;
+            }
+
             .review-card {
-                height: 260px;
+                height: 250px;
                 padding: 16px;
             }
 
@@ -194,6 +253,10 @@
 
             .review-card .review-text {
                 font-size: 12px;
+                -webkit-line-clamp: 3;
+            }
+
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 4;
             }
 
@@ -204,6 +267,26 @@
 
             .review-card .review-date {
                 font-size: 10px;
+            }
+
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.75) translateZ(-30px) !important;
+            }
+
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.6) translateZ(-60px) !important;
+            }
+
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.45) translateZ(-90px) !important;
+            }
+
+            .reviews-cta h3 {
+                font-size: 19px;
+            }
+
+            .reviews-cta p {
+                font-size: 14px;
             }
         }
     </style>
@@ -272,7 +355,7 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // 50 отзывов
+        // ===== 50 ОТЗЫВОВ =====
         const reviews = [
             { name: "Александр К.", date: "28.07.2026", stars: 5, text: "Играю на Lucky Bear уже три месяца. Выводы быстрые — деньги приходят в течение часа. Бонус 200% на первый депозит действительно дали. Поддержка отвечает быстро, если есть вопросы. Рекомендую.", game: "Anubis Wrath" },
             { name: "Елена В.", date: "25.07.2026", stars: 5, text: "Отличный выбор слотов, особенно порадовал Treasures of Aztec. Пополнение через СБП моментальное. Кэшбэк начисляют еженедельно — приятный бонус. Всё нравится, играю дальше.", game: "Treasures of Aztec" },
@@ -326,25 +409,27 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== КАРУСЕЛЬ (РАБОТАЕТ 100%) =====
+        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ЛЕНТА С 3D ЭФФЕКТОМ =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
-        let currentOffset = 0;
+
+        let offset = 0;
         let isPaused = false;
         let animId = null;
         let lastTime = 0;
-        const SPEED = 0.03;
+        const SPEED = 0.025;
 
-        // Создаем бесконечный массив для плавной прокрутки
-        const extended = [...reviews, ...reviews, ...reviews];
-        const slideWidth = 400 + 20; // ширина слайда + отступ
+        // Создаём бесконечный массив (повторяем 2 раза)
+        const extendedReviews = [...reviews, ...reviews];
+        const totalSlides = extendedReviews.length;
+        const slideWidth = 50; // 50% от ширины контейнера
 
         function renderReviews() {
             track.innerHTML = '';
-            extended.forEach((review, i) => {
+            extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                slide.dataset.index = i;
+                slide.dataset.index = index;
                 slide.innerHTML = `
                     <div class="review-card">
                         <div class="review-header">
@@ -363,23 +448,26 @@
         function updateCarousel() {
             const slides = track.querySelectorAll('.carousel-slide');
             const total = slides.length;
-            
-            // Вычисляем, какой слайд сейчас в центре
-            const centerIndex = (total / 2) + currentOffset / slideWidth;
-            const centerInt = Math.floor(centerIndex);
-            
+
+            // Вычисляем индекс центрального слайда
+            const centerIndex = (total / 2) + offset / slideWidth;
+            const centerInt = Math.round(centerIndex);
+
             slides.forEach((slide, index) => {
                 const distance = index - centerInt;
-                slide.classList.remove('active');
-                if (Math.abs(distance) <= 0.5) {
-                    slide.classList.add('active');
-                }
-                // Прозрачность для дальних слайдов
-                let opacity = 1;
-                if (Math.abs(distance) > 2) opacity = 0.3;
-                else if (Math.abs(distance) > 1.5) opacity = 0.5;
-                else if (Math.abs(distance) > 0.8) opacity = 0.7;
-                slide.style.opacity = opacity;
+                const absDist = Math.abs(distance);
+
+                let depth = 4;
+                if (absDist <= 0.5) depth = 0;
+                else if (absDist <= 1.5) depth = 1;
+                else if (absDist <= 2.5) depth = 2;
+                else if (absDist <= 4) depth = 3;
+
+                slide.dataset.depth = depth;
+                // Принудительно обновляем стили через атрибуты
+                slide.style.opacity = '';
+                slide.style.transform = '';
+                slide.style.zIndex = '';
             });
         }
 
@@ -387,24 +475,22 @@
             if (!lastTime) lastTime = timestamp;
             const delta = timestamp - lastTime;
             lastTime = timestamp;
-            
+
             if (!isPaused) {
-                currentOffset += SPEED * delta;
-                // Бесконечный цикл
-                if (currentOffset > slideWidth) {
-                    currentOffset -= slideWidth;
+                offset += SPEED * delta;
+                if (offset > slideWidth) {
+                    offset -= slideWidth;
                     // Перемещаем первый слайд в конец для бесконечности
                     const first = track.firstElementChild;
                     if (first) {
                         track.appendChild(first);
-                        // Корректируем offset
-                        currentOffset -= slideWidth;
                     }
+                    offset = 0;
                 }
-                track.style.transform = `translateX(-${currentOffset}px)`;
+                track.style.transform = `translateX(-${offset}%)`;
                 updateCarousel();
             }
-            
+
             animId = requestAnimationFrame(animate);
         }
 
@@ -427,16 +513,16 @@
 
         wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-            startOffset = currentOffset;
+            startOffset = offset;
             isSwiping = true;
             pauseAutoPlay(true);
         });
 
         wrapper.addEventListener('touchmove', (e) => {
             if (!isSwiping) return;
-            const diff = (startX - e.touches[0].clientX);
-            currentOffset = startOffset + diff;
-            track.style.transform = `translateX(-${currentOffset}px)`;
+            const diff = (startX - e.touches[0].clientX) / 10;
+            offset = Math.max(0, Math.min(slideWidth, startOffset + diff));
+            track.style.transform = `translateX(-${offset}%)`;
             updateCarousel();
         });
 
@@ -445,18 +531,25 @@
             pauseAutoPlay(false);
         });
 
-        // Запуск
+        // ===== ЗАПУСК =====
         document.addEventListener('DOMContentLoaded', () => {
             renderReviews();
-            track.style.transform = `translateX(-${currentOffset}px)`;
-            animId = requestAnimationFrame(animate);
+            // Устанавливаем начальное смещение
+            const slides = track.querySelectorAll('.carousel-slide');
+            const total = slides.length;
+            const centerIndex = total / 2;
+            offset = centerIndex * slideWidth;
+            track.style.transform = `translateX(-${offset}%)`;
             updateCarousel();
+            animId = requestAnimationFrame(animate);
 
-            // Подсветка меню
+            // Подсветка активного меню
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) link.classList.add('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
             });
         });
 
