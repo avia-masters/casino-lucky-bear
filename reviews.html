@@ -45,6 +45,7 @@
             position: relative;
         }
 
+        /* ===== ОСНОВНЫЕ УРОВНИ ГЛУБИНЫ ===== */
         .carousel-slide[data-depth="0"] {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -67,6 +68,21 @@
             opacity: 0.06 !important;
             transform: scale(0.6) !important;
             z-index: 1;
+        }
+
+        /* ===== ФОНОВЫЕ ОТЗЫВЫ (ЕЩЁ ДАЛЬШЕ) ===== */
+        .carousel-slide[data-depth="4"] {
+            opacity: 0.02 !important;
+            transform: scale(0.45) !important;
+            z-index: 0;
+            filter: blur(2px) !important;
+        }
+
+        .carousel-slide[data-depth="5"] {
+            opacity: 0 !important;
+            transform: scale(0.3) !important;
+            z-index: -1;
+            filter: blur(4px) !important;
         }
 
         .review-card {
@@ -201,6 +217,10 @@
             .carousel-slide[data-depth="3"] {
                 transform: scale(0.55) !important;
             }
+            .carousel-slide[data-depth="4"] {
+                transform: scale(0.4) !important;
+                opacity: 0.01 !important;
+            }
             .reviews-hero-description {
                 font-size: 15px !important;
                 padding: 0 15px !important;
@@ -249,6 +269,10 @@
             }
             .carousel-slide[data-depth="3"] {
                 transform: scale(0.5) !important;
+            }
+            .carousel-slide[data-depth="4"] {
+                transform: scale(0.35) !important;
+                opacity: 0.01 !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -421,11 +445,12 @@
 
             slides.forEach((slide, index) => {
                 const dist = Math.abs(index - centerInt);
-                let depth = 4;
+                let depth = 5;
                 if (dist <= 0.5) depth = 0;
                 else if (dist <= 1.5) depth = 1;
                 else if (dist <= 2.5) depth = 2;
                 else if (dist <= 4) depth = 3;
+                else if (dist <= 6) depth = 4;
                 slide.dataset.depth = depth;
             });
         }
