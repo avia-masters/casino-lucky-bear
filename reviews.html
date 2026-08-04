@@ -297,7 +297,7 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // ===== 50 ОТЗЫВОВ (первые 3 для примера) =====
+        // ===== 50 ОТЗЫВОВ =====
         const reviews = [
             { name: "Александр К.", date: "28.07.2026", stars: 5, text: "Играю на Lucky Bear уже три месяца. Выводы быстрые — деньги приходят в течение часа. Бонус 200% на первый депозит действительно дали. Поддержка отвечает быстро, если есть вопросы. Рекомендую.", game: "Anubis Wrath" },
             { name: "Елена В.", date: "25.07.2026", stars: 5, text: "Отличный выбор слотов, особенно порадовал Treasures of Aztec. Пополнение через СБП моментальное. Кэшбэк начисляют еженедельно — приятный бонус. Всё нравится, играю дальше.", game: "Treasures of Aztec" },
@@ -351,16 +351,15 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== КАРУСЕЛЬ С ПЛАВНОЙ ПРОКРУТКОЙ =====
+        // ===== КАРУСЕЛЬ =====
         let currentIndex = 0;
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
-        let autoPlayInterval = null;
+        let intervalId = null;
         let isPaused = false;
 
         function renderReviews() {
             track.innerHTML = '';
-            // Дублируем отзывы для бесконечного эффекта
             const extendedReviews = [...reviews, ...reviews.slice(0, 3)];
             extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
@@ -406,13 +405,11 @@
             
             track.style.transform = `translateX(-${currentIndex * 60}%)`;
             
-            // Бесконечный цикл
             if (currentIndex >= reviews.length) {
                 setTimeout(() => {
                     track.style.transition = 'none';
                     currentIndex = currentIndex - reviews.length;
                     track.style.transform = `translateX(-${currentIndex * 60}%)`;
-                    // Обновляем классы
                     slides.forEach((slide, index) => {
                         slide.className = 'carousel-slide';
                         if (index === currentIndex) {
@@ -431,29 +428,34 @@
         }
 
         function nextSlide() {
+            if (isPaused) return;
             currentIndex = (currentIndex + 1) % (reviews.length + 3);
             updateCarousel(true);
         }
 
-        function resetAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
+        function startAutoPlay() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
             }
             if (!isPaused) {
-                autoPlayInterval = setInterval(nextSlide, 3500);
+                intervalId = setInterval(nextSlide, 2000);
+            }
+        }
+
+        function stopAutoPlay() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
             }
         }
 
         function pauseAutoPlay(pause) {
             isPaused = pause;
             if (pause) {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                    autoPlayInterval = null;
-                }
+                stopAutoPlay();
             } else {
-                resetAutoPlay();
+                startAutoPlay();
             }
         }
 
@@ -483,6 +485,7 @@
         // ===== СВАЙП ДЛЯ ТЕЛЕФОНА =====
         let startX = 0;
         let isSwiping = false;
+        let swipeTimeout = null;
 
         wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
@@ -501,7 +504,13 @@
                     updateCarousel(true);
                 }
                 pauseAutoPlay(true);
-                setTimeout(() => pauseAutoPlay(false), 3000);
+                if (swipeTimeout) {
+                    clearTimeout(swipeTimeout);
+                    swipeTimeout = null;
+                }
+                swipeTimeout = setTimeout(() => {
+                    pauseAutoPlay(false);
+                }, 3000);
             }
         });
 
@@ -512,9 +521,8 @@
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             renderReviews();
-            resetAutoPlay();
+            startAutoPlay();
 
-            // Подсветка активного меню
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
