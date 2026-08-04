@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP-клуб Lucky Bear — привилегии, кэшбэк, повышенные лимиты</title>
+    <meta name="description" content="VIP-клуб Lucky Bear: 11 уровней, кэшбэк до 15%, увеличенные лимиты вывода, личный менеджер. Стань VIP-игроком и получи эксклюзивные привилегии!" />
+    <link rel="canonical" href="https://casino-lucky-bear.ru/vip.html" />
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* ===== СТИЛИ ДЛЯ VIP-СТРАНИЦЫ ===== */
+        .vip-hero-description {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: rgba(255,255,255,0.68);
+            font-size: 17px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .vip-privileges {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .vip-privilege-card {
+            background: rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 30px 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .vip-privilege-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(0, 255, 255, 0.2);
+        }
+
+        .vip-privilege-card .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .vip-privilege-card h3 {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .vip-privilege-card p {
+            color: rgba(255,255,255,0.65);
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .vip-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .vip-step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .vip-step .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.15);
+            color: #00ffff;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .vip-step h3 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .vip-step p {
+            color: rgba(255,255,255,0.55);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ===== ТАБЛИЦА (СКОПИРОВАНА ИЗ PAYMENT.HTML) ===== */
+        .table-wrapper {
+            max-width: 1000px;
+            margin: 40px auto 0;
+            position: relative;
+            border-radius: 16px;
+            padding: 1px;
+            background: transparent;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .table-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, #00d4ff, #7b68ee, #ffd700, #00fa9a, #00d4ff);
+            background-size: 300% 300%;
+            animation: borderGlow 6s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes borderGlow {0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .table-inner {
+            position: relative;
+            z-index: 1;
+            background: transparent;
+            border-radius: 16px;
+            padding: 20px 15px 25px;
+            overflow: hidden;
+        }
+
+        .table-inner h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .bonus-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            color: #f2f4f5;
+            min-width: 700px;
+            background: transparent;
+        }
+
+        .bonus-table thead th {
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #a0b4c4;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bonus-table tbody td {
+            padding: 10px 6px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 12px;
+        }
+
+        .bonus-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bonus-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+        .table-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .table-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .table-scroll::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 10px;
+        }
+        .table-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .table-button {
+            display: block;
+            width: fit-content;
+            margin: 25px auto 5px;
+            padding: 14px 50px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            border: none;
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 25px rgba(0, 114, 255, 0.5);
+            transition: 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .table-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 35px rgba(0, 114, 255, 0.7);
+        }
+
+        .table-note {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        /* ===== АДАПТАЦИЯ ===== */
+        @media (max-width: 768px) {
+            .vip-privileges {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .vip-steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .bonus-table {
+                font-size: 11px;
+                min-width: 500px;
+            }
+            .bonus-table thead th,
+            .bonus-table tbody td {
+                padding: 8px 4px;
+                font-size: 10px;
+            }
+            .table-inner h3 {
+                font-size: 18px;
+            }
+            .table-button {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+            .table-wrapper {
+                margin: 30px 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bonus-table {font-size: 10px;
+                min-width: 400px;
+            }
+            .bonus-table thead th,
+            .bonus-table tbody td {
+                padding: 6px 3px;
+                font-size: 9px;
+            }
+            .table-inner {
+                padding: 10px 8px 15px;
+            }
+            .table-inner h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bear-background"></div>
+
+    <!-- ===== ХЕДЕР ===== -->
+    <header>
+        <a href="index.html" class="brand-icon">
+            <img src="images/menu-logo.png" alt="LUCKY BEAR">
+        </a>
+        <nav class="nav" id="mobileNav">
+            <a href="how-to-play.html" class="nav-link">Как играть</a>
+            <a href="rules.html" class="nav-link">Правила</a>
+            <a href="games.html" class="nav-link">Игры</a>
+            <a href="bonus.html" class="nav-link">Бонусы</a>
+            <a href="payment.html" class="nav-link">Пополнение</a>
+            <a href="responsible.html" class="nav-link">Советы</a>
+            <a href="vip.html" class="nav-link active">VIP</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </nav>
+        <a href="https://lb777.xyz/5dsgV7" class="bot-button" rel="noreferrer noopener">
+            <img src="images/logo.png" alt="LUCKY BEAR">
+            <span>Играть</span>
+        </a>
+    </header>
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <section class="hero" id="home">
+        <img src="images/logo.png" alt="LUCKY BEAR" class="logo">
+        <div class="title">VIP КЛУБ</div>
+        <div class="subtitle">LUCKY BEAR</div>
+        <p class="vip-hero-description">
+            Стань частью элитного клуба Lucky Bear. Повышенный кэшбэк, увеличенные лимиты вывода, персональный менеджер и эксклюзивные бонусы — всё это доступно нашим VIP-игрокам.
+        </p>
+        <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+            <a href="https://lb777.xyz/5dsgV7" class="main-button" rel="noreferrer noopener">Стать VIP</a>
+        </div>
+    </section>
+
+    <!-- ===== ПРЕДУПРЕЖДЕНИЕ ===== -->
+    <div style="max-width: 900px; margin: 0 auto 30px; padding: 8px 0; text-align: center; font-size: 16px; color: rgba(255,255,255,0.25); letter-spacing: 0.3px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        Участие в азартных играх не гарантирует выигрыш и может привести к потере денежных средств. Играйте ответственно.
+    </div>
+
+    <!-- ===== ПРИВИЛЕГИИ VIP ===== -->
+    <section id="privileges">
+        <h2 class="section-title">Привилегии VIP-клуба</h2>
+        <p class="section-description">
+            Lucky Bear ценит своих игроков. Программа лояльности даёт эксклюзивные преимущества, которые делают игру ещё более выгодной и комфортной.
+        </p>
+
+        <div class="vip-privileges">
+            <div class="vip-privilege-card">
+                <span class="icon">💰</span>
+                <h3>Увеличенные лимиты вывода</h3>
+                <p>Выводите до 5 000 000 ₽ в день без ограничений и задержек. VIP-статус открывает максимальные финансовые возможности.</p>
+            </div>
+            <div class="vip-privilege-card">
+                <span class="icon">🎁</span>
+                <h3>Кэшбэк до 15%</h3>
+                <p>Получайте возврат средств от каждой ставки. Чем выше ваш VIP-уровень, тем больше кэшбэк — до 15% еженедельно.</p>
+            </div>
+            <div class="vip-privilege-card">
+                <span class="icon">👑</span>
+                <h3>Личный менеджер 24/7</h3>
+                <p>Персональный менеджер всегда на связи. Решайте вопросы быстро, получайте индивидуальные предложения и бонусы.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VIP-ТАБЛИЦА (из payment.html) ===== -->
+    <section id="vip-table">
+        <h2 class="section-title">Уровни VIP-программы</h2>
+        <p class="section-description">
+            Повышайте свой статус, пополняя счёт и совершая ставки.Каждый новый уровень открывает дополнительные бонусы и привилегии.
+        </p>
+
+        <div class="table-wrapper">
+            <div class="table-inner">
+                <h3>VIP-программа Lucky Bear</h3>
+                <div class="table-scroll">
+                    <table class="bonus-table">
+                        <thead>
+                            <tr>
+                                <th>VIP уровень</th>
+                                <th>Требование к пополнению</th>
+                                <th>Требование к ставке</th>
+                                <th>Еженедельные бонусы</th>
+                                <th>Ежемесячные бонусы</th>
+                                <th>Награды за уровень</th>
+                                <th>Коэффициент разблокировки</th>
+                                <th>Комиссия за вывод</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>VIP0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0%</td><td>9%</td></tr>
+                            <tr><td>VIP1</td><td>100</td><td>10</td><td>10</td><td>10</td><td>0</td><td>0.1%</td><td>9%</td></tr>
+                            <tr><td>VIP2</td><td>750</td><td>15</td><td>15</td><td>15</td><td>75</td><td>0.2%</td><td>8.5%</td></tr>
+                            <tr><td>VIP3</td><td>1500</td><td>30</td><td>20</td><td>30</td><td>150</td><td>0.25%</td><td>8.5%</td></tr>
+                            <tr><td>VIP4</td><td>7500</td><td>45</td><td>50</td><td>60</td><td>200</td><td>0.3%</td><td>8%</td></tr>
+                            <tr><td>VIP5</td><td>45000</td><td>270</td><td>100</td><td>120</td><td>300</td><td>0.35%</td><td>7.5%</td></tr>
+                            <tr><td>VIP6</td><td>150000</td><td>900</td><td>200</td><td>180</td><td>500</td><td>0.4%</td><td>7%</td></tr>
+                            <tr><td>VIP7</td><td>750000</td><td>4500</td><td>400</td><td>450</td><td>1000</td><td>0.45%</td><td>6.5%</td></tr>
+                            <tr><td>VIP8</td><td>1500000</td><td>9000</td><td>1000</td><td>1200</td><td>2000</td><td>0.45%</td><td>6%</td></tr>
+                            <tr><td>VIP9</td><td>3750000</td><td>22500</td><td>1500</td><td>1800</td><td>3000</td><td>0.45%</td><td>6%</td></tr>
+                            <tr><td>VIP10</td><td>7500000</td><td>45000</td><td>2000</td><td>1800</td><td>5000</td><td>1%</td><td>6%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="https://lb777.xyz/5dsgV7" class="table-button" rel="noreferrer noopener">Пополнить баланс</a>
+                <div class="table-note">* Для повышения VIP-уровня необходимо выполнить условия по пополнению и ставкам</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КАК ПОЛУЧИТЬ VIP ===== -->
+    <section id="how-to-get-vip">
+        <h2 class="section-title">Как получить VIP-статус?</h2>
+        <p class="section-description">
+            Получение VIP-статуса в Lucky Bear — это просто. Выполняйте условия и повышайте свой уровень.
+        </p>
+
+        <div class="vip-steps">
+            <div class="vip-step">
+                <div class="step-number">1</div>
+                <h3>Зарегистрируйтесь</h3>
+                <p>Создайте аккаунт на платформе Lucky Bear. Это займёт меньше минуты.</p>
+            </div>
+            <div class="vip-step">
+                <div class="step-number">2</div>
+                <h3>Пополняйте и играйте</h3>
+                <p>Чем выше сумма пополнений и ставок, тем быстрее вы повышаете свой VIP-уровень.</p>
+            </div>
+            <div class="vip-step">
+                <div class="step-number">3</div>
+                <h3>Получайте привилегии</h3>
+                <p>С каждым новым уровнем открываются бонусы, кэшбэк, увеличенные лимиты и персональный менеджер.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://lb777.xyz/5dsgV7" class="main-button" rel="noreferrer noopener">Начать игру</a>
+        </div>
+    </section>
+
+    <footer>LUCKY BEAR © 2026</footer>
+
+    <script>
+        // ===== ЭФФЕКТ РАСТВОРЕНИЯ ЛОГОТИПА =====
+        const logo = document.querySelector(".logo");
+        const hero = document.querySelector(".hero");
+
+        window.addEventListener("scroll", () => {
+            let scroll = window.scrollY;
+            let opacity = 1 - scroll / 500;
+            let scale = 1 - scroll / 1500;
+
+            if (opacity < 0) opacity = 0;
+            if (scale < 0.7) scale = 0.7;
+
+            logo.style.opacity = opacity;
+            logo.style.transform = scale(${scale});
+        });
+
+        // ===== ПОЯВЛЕНИЕ БЛОКОВ ПРИ СКРОЛЛЕ =====
+        const elements = document.querySelectorAll(
+            ".vip-privilege-card, .vip-step, .table-wrapper, .info-block"
+        );
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        elements.forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(40px)";
+            el.style.transition = "0.7s ease";
+            observer.observe(el);
+        });
+
+        // ===== ПОДСВЕТКА АКТИВНОГО ПУНКТА МЕНЮ =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
