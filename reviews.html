@@ -19,7 +19,7 @@
         }
 
         .carousel-wrapper {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 0;
             position: relative;
@@ -29,7 +29,7 @@
 
         .carousel-track {
             display: flex;
-            transition: transform 0.02s linear;
+            transition: transform 0.05s linear;
             will-change: transform;
             padding: 20px 0;
             position: relative;
@@ -40,10 +40,11 @@
         .carousel-slide {
             flex: 0 0 400px;
             box-sizing: border-box;
+            transition: all 0.25s ease;
             position: relative;
-            transition: all 0.3s ease;
         }
 
+        /* ГЛУБИНА (3D ЭФФЕКТ) */
         .carousel-slide[data-depth="0"] {
             opacity: 1;
             transform: scale(1);
@@ -51,20 +52,20 @@
         }
 
         .carousel-slide[data-depth="1"] {
-            opacity: 0.5;
-            transform: scale(0.85);
+            opacity: 0.55;
+            transform: scale(0.88);
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
-            opacity: 0.2;
-            transform: scale(0.7);
+            opacity: 0.25;
+            transform: scale(0.75);
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
             opacity: 0.08;
-            transform: scale(0.55);
+            transform: scale(0.6);
             z-index: 1;
         }
 
@@ -366,7 +367,7 @@
         let lastTime = 0;
 
         const SLIDE_WIDTH = 420; // ширина слайда + gap
-        const SPEED = 0.04; // пикселей за миллисекунду
+        const SPEED = 0.03; // пикселей за миллисекунду
 
         function renderReviews() {
             track.innerHTML = '';
