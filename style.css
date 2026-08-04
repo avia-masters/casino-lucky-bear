@@ -531,3 +531,141 @@ section, footer {
         margin-bottom: 40px !important;
     }
 }
+/* ============================================================
+   ГЛОБАЛЬНАЯ АДАПТАЦИЯ ДЛЯ ВСЕХ СТРАНИЦ
+   ============================================================ */
+
+/* ===== ОБЩИЕ ПРАВКИ ДЛЯ HERO ===== */
+.hero {
+    padding-top: 110px !important;
+    min-height: 90vh !important;
+    height: auto !important;
+    padding-bottom: 20px !important;
+}
+
+.hero .logo {
+    width: 260px !important;
+    max-width: 50vw !important;
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+}
+
+.hero .title {
+    margin-top: 5px !important;
+}
+
+.hero .subtitle {
+    margin-top: 5px !important;
+}
+
+.hero .hero-description,
+.hero .vip-hero-description {
+    margin-top: 15px !important;
+}
+
+.hero .hero-buttons {
+    margin-top: 25px !important;
+    margin-bottom: 10px !important;
+}
+
+/* ===== ПРЕДУПРЕЖДЕНИЕ ПОСЛЕ HERO ===== */
+.hero + div {
+    margin-top: 10px !important;
+    margin-bottom: 30px !important;
+}
+
+/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ (ДО 768px) ===== */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 100px !important;
+        min-height: 80vh !important;
+        height: auto !important;
+        padding-bottom: 10px !important;
+    }
+
+    .hero .logo {
+        width: 160px !important;
+        max-width: 45vw !important;
+        margin-top: 0 !important;
+        margin-bottom: 5px !important;
+    }
+
+    .hero .title {
+        font-size: 24px !important;
+        margin-top: 5px !important;
+    }
+
+    .hero .subtitle {
+        font-size: 14px !important;
+        margin-top: 5px !important;
+    }
+
+    .hero .hero-description,
+    .hero .vip-hero-description {
+        font-size: 15px !important;
+        padding: 0 15px !important;
+        margin-top: 10px !important;
+        line-height: 1.6 !important;
+    }
+
+    .hero .hero-buttons {
+        margin-top: 15px !important;
+        margin-bottom: 5px !important;
+        gap: 12px !important;
+    }
+
+    .hero .main-button {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+
+    /* Предупреждение */
+    .hero + div {
+        margin-top: 5px !important;
+        margin-bottom: 15px !important;
+        padding: 5px 0 !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ===== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (ДО 400px) ===== */
+@media (max-width: 400px) {
+    .hero {
+        padding-top: 90px !important;
+        min-height: 70vh !important;
+    }
+
+    .hero .logo {
+        width: 130px !important;
+        max-width: 40vw !important;
+    }
+
+    .hero .title {
+        font-size: 20px !important;
+    }
+
+    .hero .subtitle {
+        font-size: 12px !important;
+    }
+
+    .hero .hero-description,
+    .hero .vip-hero-description {
+        font-size: 13px !important;
+        padding: 0 10px !important;
+    }
+
+    .hero .main-button {
+        padding: 10px 18px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ===== ФОНОВЫЕ МЕДВЕДИ НА МОБИЛЬНЫХ ===== */
+@media (max-width: 480px) {
+    .bear-background {
+        top: 120px !important;
+        background-position: 10% 15%, 90% 20%, 10% 80%, 90% 85% !important;
+        background-size: 120px, 140px, 100px, 130px !important;
+        opacity: 0.15 !important;
+    }
+}
