@@ -24,7 +24,8 @@
             padding: 40px 0;
             position: relative;
             overflow: hidden;
-            height: 460px;
+            height: 480px;
+            perspective: 1200px;
         }
 
         .carousel-track {
@@ -35,38 +36,48 @@
             position: relative;
             left: 0;
             gap: 20px;
+            transform-style: preserve-3d;
+            align-items: center;
         }
 
         .carousel-slide {
             flex: 0 0 400px;
             box-sizing: border-box;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             position: relative;
+            transform-style: preserve-3d;
         }
 
-        /* ГЛУБИНА (3D ЭФФЕКТ) */
+        /* ===== 3D ЭФФЕКТ ГЛУБИНЫ ===== */
         .carousel-slide[data-depth="0"] {
-            opacity: 1;
-            transform: scale(1);
+            opacity: 1 !important;
+            transform: scale(1) translateZ(0px) !important;
             z-index: 10;
         }
 
         .carousel-slide[data-depth="1"] {
-            opacity: 0.55;
-            transform: scale(0.88);
+            opacity: 0.5 !important;
+            transform: scale(0.88) translateZ(-60px) !important;
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
-            opacity: 0.25;
-            transform: scale(0.75);
+            opacity: 0.2 !important;
+            transform: scale(0.75) translateZ(-120px) !important;
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
-            opacity: 0.08;
-            transform: scale(0.6);
+            opacity: 0.06 !important;
+            transform: scale(0.6) translateZ(-180px) !important;
             z-index: 1;
+        }
+
+        /* Фоновые отзывы (ещё дальше) */
+        .carousel-slide[data-depth="4"] {
+            opacity: 0 !important;
+            transform: scale(0.4) translateZ(-240px) !important;
+            z-index: 0;
         }
 
         .review-card {
@@ -79,6 +90,7 @@
             flex-direction: column;
             overflow: hidden;
             backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
         }
 
         .carousel-slide[data-depth="0"] .review-card {
@@ -191,6 +203,15 @@
                 font-size: 16px;
                 letter-spacing: 2px;
             }
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.85) translateZ(-40px) !important;
+            }
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.7) translateZ(-80px) !important;
+            }
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.55) translateZ(-120px) !important;
+            }
             .reviews-hero-description {
                 font-size: 15px !important;
                 padding: 0 15px !important;
@@ -230,6 +251,15 @@
             }
             .review-card .review-date {
                 font-size: 10px;
+            }
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.8) translateZ(-30px) !important;
+            }
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.65) translateZ(-60px) !important;
+            }
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.5) translateZ(-90px) !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -358,7 +388,7 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ЛЕНТА =====
+        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ЛЕНТА С 3D ЭФФЕКТОМ =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
         let offset = 0;
