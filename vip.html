@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
+        /* ===== ТОЛЬКО ДЛЯ VIP ===== */
         .vip-hero-description {
             max-width: 700px;
             margin: 20px auto 0;
@@ -78,6 +79,19 @@
             background: rgba(255,255,255,0.08);
         }
 
+        .vip-step .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.12);
+            color: #00ffff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
         .vip-step h3 {
             color: #ffffff;
             font-size: 18px;
@@ -90,19 +104,6 @@
             font-size: 15px;
             line-height: 1.6;
             margin: 0;
-        }
-
-        .vip-step .step-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 255, 255, 0.12);
-            color: #00ffff;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
         }
 
         .vip-info-block {
@@ -144,7 +145,8 @@
             position: relative;
         }
 
-        .vip-info-block ul li::before {content: "—";
+        .vip-info-block ul li::before {
+            content: "—";
             position: absolute;
             left: 0;
             color: #00ffff;
@@ -278,7 +280,8 @@
             position: relative;
             z-index: 2;
         }
-        .table-button:hover {transform: scale(1.03);
+        .table-button:hover {
+            transform: scale(1.03);
             box-shadow: 0 6px 35px rgba(0, 114, 255, 0.7);
         }
 
@@ -289,63 +292,166 @@
             margin-top: 12px;
         }
 
+        /* ===== АДАПТАЦИЯ ТОЛЬКО ДЛЯ VIP ===== */
         @media (max-width: 768px) {
             .vip-privileges {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                margin: 20px auto !important;
             }
+
+            .vip-privilege-card {
+                padding: 20px 18px !important;
+            }
+
+            .vip-privilege-card h3 {
+                font-size: 18px !important;
+            }
+
+            .vip-privilege-card p {
+                font-size: 14px !important;
+            }
+
             .vip-steps {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                margin: 20px auto !important;
             }
+
+            .vip-step {
+                padding: 20px 18px !important;
+            }
+
+            .vip-step h3 {
+                font-size: 16px !important;
+            }
+
+            .vip-step p {
+                font-size: 14px !important;
+            }
+
+            .vip-info-block {
+                padding: 30px 0 !important;
+            }
+
+            .vip-info-block h3 {
+                font-size: 24px !important;
+            }
+
+            .vip-info-block p {
+                font-size: 16px !important;
+                line-height: 1.7 !important;
+            }
+
+            .vip-info-block ul li {
+                font-size: 15px !important;
+            }
+
+            .vip-hero-description {
+                font-size: 15px !important;
+                padding: 0 15px !important;
+            }
+
+            .table-wrapper {
+                margin: 20px 10px 0 !important;
+            }
+
+            .table-inner {
+                padding: 10px 8px 15px !important;
+            }
+
+            .table-inner h3 {
+                font-size: 18px !important;
+                margin-bottom: 12px !important;
+            }
+
             .bonus-table {
-                font-size: 11px;
-                min-width: 500px;
+                font-size: 11px !important;
+                min-width: 500px !important;
             }
+
             .bonus-table thead th,
             .bonus-table tbody td {
-                padding: 8px 4px;
-                font-size: 10px;
+                padding: 8px 4px !important;
+                font-size: 10px !important;
             }
-            .table-inner h3 {
-                font-size: 18px;
-            }
+
             .table-button {
-                padding: 12px 30px;
-                font-size: 14px;
+                padding: 12px 30px !important;
+                font-size: 14px !important;
+                margin-top: 15px !important;
             }
-            .table-wrapper {
-                margin: 30px 10px 0;
+
+            .table-note {
+                font-size: 11px !important;
             }
-            .vip-info-block h3 {
-                font-size: 24px;
+
+            .section-title {
+                font-size: 28px !important;
             }
-            .vip-info-block p {
-                font-size: 16px;
+
+            .section-description {
+                font-size: 16px !important;
+                padding: 0 5px !important;
             }
         }
 
-        @media (max-width: 480px) {
-            .bonus-table {
-                font-size: 10px;
-                min-width: 400px;
+        @media (max-width: 400px) {
+            .vip-privilege-card h3 {
+                font-size: 16px !important;
             }
+
+            .vip-privilege-card p {
+                font-size: 13px !important;
+            }
+
+            .vip-step h3 {
+                font-size: 15px !important;
+            }
+
+            .vip-step p {
+                font-size: 13px !important;
+            }
+
+            .vip-info-block h3 {
+                font-size: 20px !important;
+            }
+
+            .vip-info-block p {
+                font-size: 14px !important;
+            }
+
+            .vip-hero-description {
+                font-size: 13px !important;
+                padding: 0 10px !important;
+            }
+
+            .bonus-table {
+                font-size: 9px !important;
+                min-width: 400px !important;
+            }
+
             .bonus-table thead th,
             .bonus-table tbody td {
-                padding: 6px 3px;
-                font-size: 9px;
+                padding: 6px 3px !important;
+                font-size: 8px !important;
             }
-            .table-inner {
-                padding: 10px 8px 15px;
-            }
+
             .table-inner h3 {
-                font-size: 16px;
+                font-size: 16px !important;
             }
-            .vip-info-block h3 {
-                font-size: 20px;
+
+            .table-button {
+                padding: 10px 20px !important;
+                font-size: 13px !important;
             }
-            .vip-info-block p {
-                font-size: 15px;
+
+            .section-title {
+                font-size: 24px !important;
+            }
+
+            .section-description {
+                font-size: 14px !important;
             }
         }
     </style>
@@ -382,7 +488,7 @@
         <p class="vip-hero-description">
             VIP-клуб Lucky Bear создан для самых активных и преданных игроков. Участие в программе лояльности открывает доступ к эксклюзивным привилегиям: повышенному кэшбэку, увеличенным лимитам на вывод средств, персональному менеджеру и индивидуальным бонусам. Чем выше ваш статус, тем больше возможностей получает каждый игрок. Программа включает 11 уровней, каждый из которых даёт новые преимущества и награды. Стань частью элитного сообщества Lucky Bear и играй с максимальной выгодой.
         </p>
-        <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+        <div class="hero-buttons">
             <a href="https://lb777.xyz/5dsgV7" class="main-button" rel="noreferrer noopener">Стать VIP</a>
         </div>
     </section>
@@ -406,7 +512,7 @@
             </div>
             <div class="vip-privilege-card">
                 <h3>Кэшбэк до 15%</h3>
-                <p>Одно из главных преимуществ VIP-программы — еженедельный кэшбэк. Возврат средств начисляется от суммы всех ставок, сделанных за неделю. Чем выше ваш VIP-уровень, тем больше процент кэшбэка: от 5% на начальных уровнях до 15% на максимальных. Кэшбэк зачисляется автоматически на бонусный счёт в начале каждой недели. Средства можно использовать для ставок на любые игры платформы — слоты, live-казино, быстрые игры и ставки на спорт.</p>
+                <p>Одно из главных преимуществ VIP-программы — еженедельный кэшбэк.Возврат средств начисляется от суммы всех ставок, сделанных за неделю. Чем выше ваш VIP-уровень, тем больше процент кэшбэка: от 5% на начальных уровнях до 15% на максимальных. Кэшбэк зачисляется автоматически на бонусный счёт в начале каждой недели. Средства можно использовать для ставок на любые игры платформы — слоты, live-казино, быстрые игры и ставки на спорт.</p>
             </div>
             <div class="vip-privilege-card">
                 <h3>Личный менеджер 24/7</h3>
@@ -433,7 +539,8 @@
         </div>
 
         <div class="vip-info-block">
-            <h3>Еженедельные и ежемесячные бонусы</h3><p>Помимо кэшбэка, VIP-игроки получают дополнительные бонусы еженедельно и ежемесячно. Бонусы начисляются автоматически в зависимости от вашего уровня и активности. Чем выше уровень, тем больше сумма бонуса. Эти средства можно использовать для игры без дополнительных условий вейджера, что делает игру ещё более выгодной.</p>
+            <h3>Еженедельные и ежемесячные бонусы</h3>
+            <p>Помимо кэшбэка, VIP-игроки получают дополнительные бонусы еженедельно и ежемесячно. Бонусы начисляются автоматически в зависимости от вашего уровня и активности. Чем выше уровень, тем больше сумма бонуса. Эти средства можно использовать для игры без дополнительных условий вейджера, что делает игру ещё более выгодной.</p>
         </div>
 
         <div class="vip-info-block" style="border-bottom: none;">
@@ -455,8 +562,7 @@
                 <div class="table-scroll">
                     <table class="bonus-table">
                         <thead>
-                            <tr>
-                                <th>VIP уровень</th>
+                            <tr><th>VIP уровень</th>
                                 <th>Требование к пополнению</th>
                                 <th>Требование к ставке</th>
                                 <th>Еженедельные бонусы</th>
@@ -482,7 +588,8 @@
                     </table>
                 </div>
                 <a href="https://lb777.xyz/5dsgV7" class="table-button" rel="noreferrer noopener">Пополнить баланс</a>
-                <div class="table-note">Для повышения VIP-уровня необходимо выполнить условия по пополнению и ставкам. Уровни повышаются автоматически при выполнении требований.</div></div>
+                <div class="table-note">Для повышения VIP-уровня необходимо выполнить условия по пополнению и ставкам. Уровни повышаются автоматически при выполнении требований.</div>
+            </div>
         </div>
     </section>
 
@@ -502,7 +609,7 @@
             <div class="vip-step">
                 <div class="step-number">2</div>
                 <h3>Пополняйте счёт и совершайте ставки</h3>
-                <p>Для повышения VIP-уровня необходимо выполнить требования по пополнению счёта и общей сумме ставок. Каждый уровень имеет свои условия, которые вы можете видеть в таблице выше. Чем выше сумма пополнений и ставок, тем быстрее вы будете подниматься по уровням. Пополнение счёта доступно в рублях через банковские переводы и СБП, а также в криптовалюте. Все способы пополнения мгновенны и безопасны.</p>
+                <p>Для повышения VIP-уровня необходимо выполнить требования по пополнению счёта и общей сумме ставок. Каждый уровень имеет свои условия, которые вы можете видеть в таблице выше. Чем выше сумма пополнений и ставок, тем быстрее вы будете подниматься по уровням.Пополнение счёта доступно в рублях через банковские переводы и СБП, а также в криптовалюте. Все способы пополнения мгновенны и безопасны.</p>
             </div>
             <div class="vip-step">
                 <div class="step-number">3</div>
@@ -572,6 +679,6 @@
                 }
             });
         });
-    </script>
+     </script>
 </body>
 </html>
