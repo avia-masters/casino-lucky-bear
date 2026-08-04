@@ -24,27 +24,27 @@
             padding: 40px 0;
             position: relative;
             overflow: hidden;
-            height: 420px;
-            perspective: 1000px;
+            height: 440px;
+            perspective: 1200px;
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.05s linear;
+            transition: transform 0.1s linear;
             will-change: transform;
             padding: 20px 0;
             transform-style: preserve-3d;
             align-items: center;
             position: relative;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) !important;
         }
 
         .carousel-slide {
-            flex: 0 0 50%;
+            flex: 0 0 420px;
             padding: 0 10px;
             box-sizing: border-box;
-            transition: all 0.1s linear;
+            transition: all 0.15s linear;
             transform-style: preserve-3d;
             will-change: transform, opacity;
             position: relative;
@@ -57,20 +57,20 @@
         }
 
         .carousel-slide[data-depth="1"] {
-            opacity: 0.6 !important;
-            transform: scale(0.85) translateZ(-60px) !important;
+            opacity: 0.55 !important;
+            transform: scale(0.85) translateZ(-80px) !important;
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
-            opacity: 0.3 !important;
-            transform: scale(0.7) translateZ(-120px) !important;
+            opacity: 0.25 !important;
+            transform: scale(0.7) translateZ(-160px) !important;
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
-            opacity: 0.12 !important;
-            transform: scale(0.55) translateZ(-180px) !important;
+            opacity: 0.1 !important;
+            transform: scale(0.55) translateZ(-240px) !important;
             z-index: 1;
         }
 
@@ -80,7 +80,7 @@
             padding: 28px 24px;
             border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s ease;
-            height: 320px;
+            height: 340px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -91,6 +91,7 @@
             background: rgba(255,255,255,0.1);
             border-color: rgba(0, 255, 255, 0.25);
             box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
+            transform: scale(1.02);
         }
 
         .review-card .stars {
@@ -179,12 +180,12 @@
             }
 
             .carousel-slide {
-                flex: 0 0 70%;
+                flex: 0 0 300px;
                 padding: 0 8px;
             }
 
             .review-card {
-                height: 280px;
+                height: 290px;
                 padding: 20px;
             }
 
@@ -207,15 +208,15 @@
             }
 
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.8) translateZ(-40px) !important;
+                transform: scale(0.8) translateZ(-50px) !important;
             }
 
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.65) translateZ(-80px) !important;
+                transform: scale(0.65) translateZ(-100px) !important;
             }
 
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.5) translateZ(-120px) !important;
+                transform: scale(0.5) translateZ(-150px) !important;
             }
 
             .reviews-hero-description {
@@ -238,7 +239,7 @@
             }
 
             .carousel-slide {
-                flex: 0 0 80%;
+                flex: 0 0 240px;
                 padding: 0 5px;
             }
 
@@ -409,7 +410,7 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ЛЕНТА С 3D ЭФФЕКТОМ =====
+        // ===== ГЛАВНАЯ ЛОГИКА КАРУСЕЛИ =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
 
@@ -417,15 +418,16 @@
         let isPaused = false;
         let animId = null;
         let lastTime = 0;
-        const SPEED = 0.025;
+        const SPEED = 0.03;
 
-        // Создаём бесконечный массив (повторяем 2 раза)
-        const extendedReviews = [...reviews, ...reviews];
-        const totalSlides = extendedReviews.length;
-        const slideWidth = 50; // 50% от ширины контейнера
+        // Подготавливаем данные
+        const slideWidth = 420 + 20; // ширина слайда + отступы
+        const totalSlides = reviews.length;
 
         function renderReviews() {
             track.innerHTML = '';
+            // Показываем все отзывы + дублируем первые 3 в конце
+            const extendedReviews = [...reviews, ...reviews.slice(0, 3)];
             extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
@@ -449,7 +451,7 @@
             const slides = track.querySelectorAll('.carousel-slide');
             const total = slides.length;
 
-            // Вычисляем индекс центрального слайда
+            // Вычисляем центральный индекс
             const centerIndex = (total / 2) + offset / slideWidth;
             const centerInt = Math.round(centerIndex);
 
@@ -464,10 +466,6 @@
                 else if (absDist <= 4) depth = 3;
 
                 slide.dataset.depth = depth;
-                // Принудительно обновляем стили через атрибуты
-                slide.style.opacity = '';
-                slide.style.transform = '';
-                slide.style.zIndex = '';
             });
         }
 
@@ -478,6 +476,8 @@
 
             if (!isPaused) {
                 offset += SPEED * delta;
+
+                // Бесконечный цикл: когда offset доходит до ширины слайда, сбрасываем
                 if (offset > slideWidth) {
                     offset -= slideWidth;
                     // Перемещаем первый слайд в конец для бесконечности
@@ -485,9 +485,9 @@
                     if (first) {
                         track.appendChild(first);
                     }
-                    offset = 0;
                 }
-                track.style.transform = `translateX(-${offset}%)`;
+
+                track.style.transform = `translateX(calc(-50% - ${offset}px))`;
                 updateCarousel();
             }
 
@@ -520,9 +520,11 @@
 
         wrapper.addEventListener('touchmove', (e) => {
             if (!isSwiping) return;
-            const diff = (startX - e.touches[0].clientX) / 10;
-            offset = Math.max(0, Math.min(slideWidth, startOffset + diff));
-            track.style.transform = `translateX(-${offset}%)`;
+            const diff = (startX - e.touches[0].clientX);
+            offset = startOffset + diff;
+            if (offset < 0) offset = 0;
+            if (offset > slideWidth) offset = slideWidth;
+            track.style.transform = `translateX(calc(-50% - ${offset}px))`;
             updateCarousel();
         });
 
@@ -539,7 +541,7 @@
             const total = slides.length;
             const centerIndex = total / 2;
             offset = centerIndex * slideWidth;
-            track.style.transform = `translateX(-${offset}%)`;
+            track.style.transform = `translateX(calc(-50% - ${offset}px))`;
             updateCarousel();
             animId = requestAnimationFrame(animate);
 
@@ -566,7 +568,6 @@
             logo.style.opacity = opacity;
             logo.style.transform = `scale(${scale})`;
         });
-        
     </script>
 </body>
 </html>
