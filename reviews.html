@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* ===== ВСЕ СТИЛИ ДЛЯ КАРУСЕЛИ ВНУТРИ СТРАНИЦЫ ===== */
         .reviews-hero-description {
             max-width: 700px;
             margin: 20px auto 0;
@@ -45,7 +46,7 @@
             position: relative;
         }
 
-        /* ===== ОСНОВНЫЕ УРОВНИ ГЛУБИНЫ ===== */
+        /* ===== ГЛУБИНА ===== */
         .carousel-slide[data-depth="0"] {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -70,7 +71,6 @@
             z-index: 1;
         }
 
-        /* ===== ФОНОВЫЕ ОТЗЫВЫ ===== */
         .carousel-slide[data-depth="4"] {
             opacity: 0.015 !important;
             transform: scale(0.45) !important;
@@ -183,6 +183,7 @@
             margin-bottom: 20px;
         }
 
+        /* ===== АДАПТАЦИЯ ===== */
         @media (max-width: 768px) {
             .carousel-slide {
                 flex: 0 0 280px;
