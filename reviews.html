@@ -27,83 +27,54 @@
             overflow: hidden;
             touch-action: pan-y;
             height: 420px;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.05s linear;
+            transition: none;
             will-change: transform;
             padding: 20px 0;
             transform-style: preserve-3d;
             align-items: center;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .carousel-slide {
             flex: 0 0 50%;
             padding: 0 8px;
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: all 0.1s linear;
             transform-style: preserve-3d;
             will-change: transform, opacity;
+            position: relative;
         }
 
         /* ===== ЭФФЕКТ 3D ДУГИ ===== */
         .carousel-slide[data-depth="0"] {
-            opacity: 0.95;
+            opacity: 1;
             transform: scale(1) translateZ(0px);
             z-index: 10;
         }
 
         .carousel-slide[data-depth="1"] {
             opacity: 0.6;
-            transform: scale(0.85) translateZ(-50px) translateX(0px);
+            transform: scale(0.85) translateZ(-60px);
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
-            opacity: 0.35;
-            transform: scale(0.7) translateZ(-100px) translateX(0px);
+            opacity: 0.3;
+            transform: scale(0.7) translateZ(-120px);
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
-            opacity: 0.15;
-            transform: scale(0.55) translateZ(-150px) translateX(0px);
+            opacity: 0.12;
+            transform: scale(0.55) translateZ(-180px);
             z-index: 1;
-        }
-
-        /* Боковые отзывы чуть смещены по X, чтобы создать дугу */
-        .carousel-slide[data-side="left"] {
-            transform-origin: right center;
-        }
-
-        .carousel-slide[data-side="right"] {
-            transform-origin: left center;
-        }
-
-        .carousel-slide[data-depth="1"][data-side="left"] {
-            transform: scale(0.85) translateZ(-50px) translateX(-10px);
-        }
-
-        .carousel-slide[data-depth="1"][data-side="right"] {
-            transform: scale(0.85) translateZ(-50px) translateX(10px);
-        }
-
-        .carousel-slide[data-depth="2"][data-side="left"] {
-            transform: scale(0.7) translateZ(-100px) translateX(-20px);
-        }
-
-        .carousel-slide[data-depth="2"][data-side="right"] {
-            transform: scale(0.7) translateZ(-100px) translateX(20px);
-        }
-
-        .carousel-slide[data-depth="3"][data-side="left"] {
-            transform: scale(0.55) translateZ(-150px) translateX(-30px);
-        }
-
-        .carousel-slide[data-depth="3"][data-side="right"] {
-            transform: scale(0.55) translateZ(-150px) translateX(30px);
         }
 
         .review-card {
@@ -120,9 +91,9 @@
         }
 
         .carousel-slide[data-depth="0"] .review-card {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(0, 255, 255, 0.2);
-            box-shadow: 0 0 60px rgba(0, 255, 255, 0.05);
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(0, 255, 255, 0.25);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
         }
 
         .review-card .stars {
@@ -239,15 +210,15 @@
             }
 
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.8) translateZ(-30px) !important;
+                transform: scale(0.8) translateZ(-40px) !important;
             }
 
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.65) translateZ(-60px) !important;
+                transform: scale(0.65) translateZ(-80px) !important;
             }
 
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.5) translateZ(-90px) !important;
+                transform: scale(0.5) translateZ(-120px) !important;
             }
 
             .reviews-hero-description {
@@ -302,15 +273,15 @@
             }
 
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.75) translateZ(-20px) !important;
+                transform: scale(0.75) translateZ(-30px) !important;
             }
 
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.6) translateZ(-40px) !important;
+                transform: scale(0.6) translateZ(-60px) !important;
             }
 
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.45) translateZ(-60px) !important;
+                transform: scale(0.45) translateZ(-90px) !important;
             }
 
             .reviews-cta h3 {
@@ -442,16 +413,18 @@
         ];
 
         // ===== КАРУСЕЛЬ С 3D ЭФФЕКТОМ =====
-        let currentOffset = 0;
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
-        let animationId = null;
+        let offset = 0;
         let isPaused = false;
-        let lastTimestamp = 0;
-        const SPEED = 0.03; // пикселей за миллисекунду
+        let animationId = null;
+        let lastTime = 0;
+        const SPEED = 0.02; // пикселей за миллисекунду
 
-        // Создаем бесконечный массив отзывов (дублируем 3 раза для плавности)
+        // Создаём бесконечный массив (повторяем 3 раза)
         const extendedReviews = [...reviews, ...reviews, ...reviews];
+        const totalSlides = extendedReviews.length;
+        const slideWidth = 50; // 50% от ширины контейнера
 
         function renderReviews() {
             track.innerHTML = '';
@@ -459,8 +432,6 @@
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.dataset.index = index;
-                slide.dataset.depth = '0';
-                slide.dataset.side = 'center';
                 slide.innerHTML = `
                     <div class="review-card">
                         <div class="review-header">
@@ -474,98 +445,58 @@
                 `;
                 track.appendChild(slide);
             });
-            updateDepth();
         }
 
-        function updateDepth() {
+        function updateCarousel() {
             const slides = track.querySelectorAll('.carousel-slide');
-            const totalSlides = slides.length;
-            const centerIndex = totalSlides / 2;
+            const total = slides.length;
+            // Вычисляем индекс центрального слайда (с учётом смещения)
+            const centerIndex = (total / 2) + offset / slideWidth;
+            const centerInt = Math.round(centerIndex);
             
             slides.forEach((slide, index) => {
-                const distance = index - centerIndex + currentOffset;
-                const absDistance = Math.abs(distance);
-                
-                // Определяем глубину (0 - центр, 1 - рядом, 2 - дальше, 3 - самые дальние)
+                const distance = index - centerInt;
+                const absDist = Math.abs(distance);
                 let depth = 0;
-                let side = 'center';
-                
-                if (absDistance < 0.8) {
-                    depth = 0;
-                    side = 'center';
-                } else if (absDistance < 1.8) {
-                    depth = 1;
-                    side = distance > 0 ? 'right' : 'left';
-                } else if (absDistance < 2.8) {
-                    depth = 2;
-                    side = distance > 0 ? 'right' : 'left';
-                } else if (absDistance < 4) {
-                    depth = 3;
-                    side = distance > 0 ? 'right' : 'left';
-                } else {
-                    // Скрываем очень далекие отзывы
+                if (absDist <= 0.5) depth = 0;
+                else if (absDist <= 1.5) depth = 1;
+                else if (absDist <= 2.5) depth = 2;
+                else if (absDist <= 4) depth = 3;
+                else {
                     slide.style.opacity = '0';
                     slide.style.transform = 'scale(0.3) translateZ(-200px)';
                     return;
                 }
                 
                 slide.dataset.depth = depth;
-                slide.dataset.side = side;
-                slide.style.opacity = '';
-                
-                // Применяем трансформацию в зависимости от глубины и стороны
-                let transform = '';
-                let opacity = 1;
+                // Применяем стили в зависимости от глубины
                 let scale = 1;
                 let translateZ = 0;
-                let translateX = 0;
-                
+                let opacity = 1;
                 switch(depth) {
-                    case 0:
-                        scale = 1;
-                        translateZ = 0;
-                        translateX = 0;
-                        opacity = 0.95;
-                        break;
-                    case 1:
-                        scale = 0.85;
-                        translateZ = -50;
-                        translateX = side === 'left' ? -10 : 10;
-                        opacity = 0.6;
-                        break;
-                    case 2:
-                        scale = 0.7;
-                        translateZ = -100;
-                        translateX = side === 'left' ? -20 : 20;
-                        opacity = 0.35;
-                        break;
-                    case 3:
-                        scale = 0.55;
-                        translateZ = -150;
-                        translateX = side === 'left' ? -30 : 30;
-                        opacity = 0.15;
-                        break;
+                    case 0: scale = 1; translateZ = 0; opacity = 1; break;
+                    case 1: scale = 0.85; translateZ = -60; opacity = 0.6; break;
+                    case 2: scale = 0.7; translateZ = -120; opacity = 0.3; break;
+                    case 3: scale = 0.55; translateZ = -180; opacity = 0.12; break;
                 }
-                
-                slide.style.transform = `scale(${scale}) translateZ(${translateZ}px) translateX(${translateX}px)`;
+                slide.style.transform = `scale(${scale}) translateZ(${translateZ}px)`;
                 slide.style.opacity = opacity;
                 slide.style.zIndex = 10 - depth;
             });
         }
 
         function animate(timestamp) {
-            if (!lastTimestamp) lastTimestamp = timestamp;
-            const delta = timestamp - lastTimestamp;
-            lastTimestamp = timestamp;
+            if (!lastTime) lastTime = timestamp;
+            const delta = timestamp - lastTime;
+            lastTime = timestamp;
             
             if (!isPaused) {
-                currentOffset += SPEED * delta;
-                updateDepth();
-                
-                // Сбрасываем смещение, чтобы не уйти в бесконечность
-                if (currentOffset > 1) {
-                    currentOffset = 0;
+                offset += SPEED * delta;
+                // Бесконечный цикл: когда offset доходит до ширины одного слайда, сбрасываем
+                if (offset > slideWidth) {
+                    offset -= slideWidth;
                 }
+                updateCarousel();
             }
             
             animationId = requestAnimationFrame(animate);
@@ -576,38 +507,32 @@
         }
 
         // ===== ОСТАНОВКА ПРИ ХОВЕРЕ =====
-        wrapper.addEventListener('mouseenter', () => {
-            pauseAutoPlay(true);
-        });
-        wrapper.addEventListener('mouseleave', () => {
-            pauseAutoPlay(false);
-        });
+        wrapper.addEventListener('mouseenter', () => pauseAutoPlay(true));
+        wrapper.addEventListener('mouseleave', () => pauseAutoPlay(false));
 
         // ===== ОСТАНОВКА ПРИ КАСАНИИ НА ТЕЛЕФОНЕ =====
-        wrapper.addEventListener('touchstart', () => {
-            pauseAutoPlay(true);
-        });
-        wrapper.addEventListener('touchend', () => {
-            pauseAutoPlay(false);
-        });
+        wrapper.addEventListener('touchstart', () => pauseAutoPlay(true));
+        wrapper.addEventListener('touchend', () => pauseAutoPlay(false));
 
-        // ===== СВАЙП ДЛЯ ТЕЛЕФОНА =====
+        // ===== СВАЙП =====
         let startX = 0;
-        let isSwiping = false;
         let startOffset = 0;
+        let isSwiping = false;
 
         wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
+            startOffset = offset;
             isSwiping = true;
-            startOffset = currentOffset;
             pauseAutoPlay(true);
         });
 
         wrapper.addEventListener('touchmove', (e) => {
             if (!isSwiping) return;
-            const diff = (startX - e.touches[0].clientX) / 500; // чувствительность
-            currentOffset = startOffset + diff;
-            updateDepth();
+            const diff = (startX - e.touches[0].clientX) / 5; // чувствительность
+            offset = startOffset + diff;
+            if (offset < 0) offset = 0;
+            if (offset > slideWidth) offset = slideWidth;
+            updateCarousel();
         });
 
         wrapper.addEventListener('touchend', () => {
@@ -618,6 +543,7 @@
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             renderReviews();
+            updateCarousel();
             animationId = requestAnimationFrame(animate);
 
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
