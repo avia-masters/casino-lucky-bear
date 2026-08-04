@@ -22,69 +22,91 @@
         .carousel-wrapper {
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 30px 0;
             position: relative;
             overflow: hidden;
             touch-action: pan-y;
+            height: 420px;
+            perspective: 1000px;
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.1s linear;
+            transition: none;
             will-change: transform;
             padding: 20px 0;
+            transform-style: preserve-3d;
+            align-items: center;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .carousel-slide {
-            flex: 0 0 60%;
-            padding: 0 12px;
-            opacity: 0.3;
-            transform: scale(0.85);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
+            flex: 0 0 50%;
+            padding: 0 10px;
             box-sizing: border-box;
+            transition: all 0.1s linear;
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            position: relative;
         }
 
-        .carousel-slide.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
+        /* ===== ЭФФЕКТ 3D ДУГИ ===== */
+        .carousel-slide[data-depth="0"] {
+            opacity: 1 !important;
+            transform: scale(1) translateZ(0px) !important;
+            z-index: 10;
         }
 
-        .carousel-slide.prev,
-        .carousel-slide.next {
-            opacity: 0.6;
-            transform: scale(0.92);
-            pointer-events: auto;
+        .carousel-slide[data-depth="1"] {
+            opacity: 0.6 !important;
+            transform: scale(0.85) translateZ(-60px) !important;
+            z-index: 5;
+        }
+
+        .carousel-slide[data-depth="2"] {
+            opacity: 0.3 !important;
+            transform: scale(0.7) translateZ(-120px) !important;
+            z-index: 3;
+        }
+
+        .carousel-slide[data-depth="3"] {
+            opacity: 0.1 !important;
+            transform: scale(0.55) translateZ(-180px) !important;
+            z-index: 1;
+        }
+
+        .carousel-slide[data-depth="4"] {
+            opacity: 0 !important;
+            transform: scale(0.4) translateZ(-240px) !important;
+            z-index: 0;
         }
 
         .review-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
             border-radius: 20px;
-            padding: 30px 25px;
-            border: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s ease;
-            height: 350px;
+            height: 320px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
-        .review-card:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(0, 255, 255, 0.15);
-        }
-
-        .carousel-slide.active .review-card {
+        .carousel-slide[data-depth="0"] .review-card {
+            background: rgba(255,255,255,0.1);
             border-color: rgba(0, 255, 255, 0.25);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.06);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
         }
 
         .review-card .stars {
             color: #f0c040;
-            font-size: 20px;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
             flex-shrink: 0;
         }
 
@@ -92,41 +114,45 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
             flex-shrink: 0;
         }
 
         .review-card .review-name {
             color: #ffffff;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
         }
 
         .review-card .review-date {
             color: rgba(255,255,255,0.3);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .review-card .review-text {
-            color: rgba(255,255,255,0.72);
-            font-size: 15px;
-            line-height: 1.8;
-            margin: 0 0 12px 0;
+            color: rgba(255,255,255,0.75);
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0 0 10px 0;
             flex: 1;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
+        }
+
+        .carousel-slide[data-depth="0"] .review-card .review-text {
+            -webkit-line-clamp: 6;
         }
 
         .review-card .review-game {
             display: inline-block;
             background: rgba(0, 255, 255, 0.08);
             color: #7ab7ef;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             flex-shrink: 0;
             align-self: flex-start;
@@ -156,28 +182,49 @@
         }
 
         @media (max-width: 768px) {
+            .carousel-wrapper {
+                height: 380px;
+                padding: 20px 0;
+            }
+
             .carousel-slide {
-                flex: 0 0 80%;
+                flex: 0 0 70%;
                 padding: 0 8px;
             }
 
             .review-card {
-                height: 300px;
+                height: 280px;
                 padding: 20px;
             }
 
             .review-card .review-name {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .review-card .review-text {
-                font-size: 14px;
+                font-size: 13px;
+                -webkit-line-clamp: 4;
+            }
+
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 5;
             }
 
             .review-card .stars {
-                font-size: 17px;
-                letter-spacing: 3px;
+                font-size: 16px;
+                letter-spacing: 2px;
+            }
+
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.8) translateZ(-40px) !important;
+            }
+
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.65) translateZ(-80px) !important;
+            }
+
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.5) translateZ(-120px) !important;
             }
 
             .reviews-hero-description {
@@ -195,13 +242,17 @@
         }
 
         @media (max-width: 400px) {
+            .carousel-wrapper {
+                height: 340px;
+            }
+
             .carousel-slide {
-                flex: 0 0 90%;
+                flex: 0 0 80%;
                 padding: 0 5px;
             }
 
             .review-card {
-                height: 260px;
+                height: 250px;
                 padding: 16px;
             }
 
@@ -210,17 +261,33 @@
             }
 
             .review-card .review-text {
-                font-size: 13px;
+                font-size: 12px;
+                -webkit-line-clamp: 3;
+            }
+
+            .carousel-slide[data-depth="0"] .review-card .review-text {
                 -webkit-line-clamp: 4;
             }
 
             .review-card .stars {
-                font-size: 15px;
+                font-size: 14px;
                 letter-spacing: 2px;
             }
 
             .review-card .review-date {
-                font-size: 11px;
+                font-size: 10px;
+            }
+
+            .carousel-slide[data-depth="1"] {
+                transform: scale(0.75) translateZ(-30px) !important;
+            }
+
+            .carousel-slide[data-depth="2"] {
+                transform: scale(0.6) translateZ(-60px) !important;
+            }
+
+            .carousel-slide[data-depth="3"] {
+                transform: scale(0.45) translateZ(-90px) !important;
             }
 
             .reviews-cta h3 {
@@ -297,7 +364,7 @@
     <footer>LUCKY BEAR © 2026</footer>
 
     <script>
-        // ===== 50 ОТЗЫВОВ =====
+        // ===== 50 ОТЗЫВОВ (все 50, как в прошлый раз) =====
         const reviews = [
             { name: "Александр К.", date: "28.07.2026", stars: 5, text: "Играю на Lucky Bear уже три месяца. Выводы быстрые — деньги приходят в течение часа. Бонус 200% на первый депозит действительно дали. Поддержка отвечает быстро, если есть вопросы. Рекомендую.", game: "Anubis Wrath" },
             { name: "Елена В.", date: "25.07.2026", stars: 5, text: "Отличный выбор слотов, особенно порадовал Treasures of Aztec. Пополнение через СБП моментальное. Кэшбэк начисляют еженедельно — приятный бонус. Всё нравится, играю дальше.", game: "Treasures of Aztec" },
@@ -351,18 +418,22 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== БЕСКОНЕЧНАЯ КАРУСЕЛЬ =====
-        let currentIndex = 0;
+        // ===== БЕСКОНЕЧНАЯ ПЛАВНАЯ ЛЕНТА С 3D ЭФФЕКТОМ =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
-        let autoPlayInterval = null;
+        let offset = 0;
         let isPaused = false;
+        let animationId = null;
+        let lastTime = 0;
+        const SPEED = 0.025; // скорость движения (пикселей за миллисекунду)
 
-        // Дублируем отзывы для бесконечного эффекта
+        // Создаём бесконечный массив (повторяем 2 раза)
+        const extendedReviews = [...reviews, ...reviews];
+        const totalSlides = extendedReviews.length;
+        const slideWidth = 50; // 50% от ширины контейнера
+
         function renderReviews() {
             track.innerHTML = '';
-            // Показываем все отзывы + дублируем первые 3 в конце
-            const extendedReviews = [...reviews, ...reviews.slice(0, 3)];
             extendedReviews.forEach((review, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
@@ -380,140 +451,114 @@
                 `;
                 track.appendChild(slide);
             });
-            currentIndex = 0;
-            updateCarousel(false);
         }
 
-        function updateCarousel(animate = true) {
+        function updateCarousel() {
             const slides = track.querySelectorAll('.carousel-slide');
-            const totalSlides = slides.length;
+            const total = slides.length;
+            
+            // Вычисляем индекс центрального слайда с учётом смещения
+            const rawCenter = (total / 2) + offset / slideWidth;
+            const centerInt = Math.round(rawCenter);
             
             slides.forEach((slide, index) => {
-                slide.className = 'carousel-slide';
-                if (index === currentIndex) {
-                    slide.classList.add('active');
-                } else if (index === currentIndex - 1 || (currentIndex === 0 && index === totalSlides - 1)) {
-                    slide.classList.add('prev');
-                } else if (index === currentIndex + 1 || (currentIndex === totalSlides - 1 && index === 0)) {
-                    slide.classList.add('next');
-                }
+                const distance = index - centerInt;
+                const absDist = Math.abs(distance);
+                
+                let depth = 4; // по умолчанию скрыт
+                if (absDist <= 0.5) depth = 0;
+                else if (absDist <= 1.5) depth = 1;
+                else if (absDist <= 2.5) depth = 2;
+                else if (absDist <= 4) depth = 3;
+                else depth = 4;
+                
+                slide.dataset.depth = depth;
+                // Стили уже заданы через CSS, просто обновляем атрибут
             });
-            
-            if (!animate) {
-                track.style.transition = 'none';
-            } else {
-                track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            }
-            
-            track.style.transform = `translateX(-${currentIndex * 60}%)`;
-            
-            // Бесконечный цикл
-            if (currentIndex >= reviews.length) {
-                setTimeout(() => {
-                    track.style.transition = 'none';
-                    currentIndex = currentIndex - reviews.length;
-                    track.style.transform = `translateX(-${currentIndex * 60}%)`;
-                    // Обновляем классы
-                    slides.forEach((slide, index) => {
-                        slide.className = 'carousel-slide';
-                        if (index === currentIndex) {
-                            slide.classList.add('active');
-                        } else if (index === currentIndex - 1 || (currentIndex === 0 && index === slides.length - 1)) {
-                            slide.classList.add('prev');
-                        } else if (index === currentIndex + 1 || (currentIndex === slides.length - 1 && index === 0)) {
-                            slide.classList.add('next');
-                        }
-                    });
-                    setTimeout(() => {
-                        track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    }, 50);
-                }, 50);
-            }
         }
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % (reviews.length + 3);
-            updateCarousel(true);
-        }
-
-        function resetAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
-            }
+        function animate(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            const delta = timestamp - lastTime;
+            lastTime = timestamp;
+            
             if (!isPaused) {
-                autoPlayInterval = setInterval(nextSlide, 2000);
+                offset += SPEED * delta;
+                // Бесконечный цикл
+                if (offset > slideWidth) {
+                    offset -= slideWidth;
+                    // Сдвигаем трек без анимации для бесконечности
+                    track.style.transition = 'none';
+                    // Перемещаем первые слайды в конец
+                    const slides = track.querySelectorAll('.carousel-slide');
+                    if (slides.length > 0) {
+                        // Переносим первый слайд в конец
+                        const firstSlide = slides[0];
+                        track.appendChild(firstSlide);
+                        // Сбрасываем смещение
+                        offset = 0;
+                        // Возвращаем анимацию
+                        setTimeout(() => {
+                            track.style.transition = 'none';
+                        }, 50);
+                    }
+                }
+                updateCarousel();
             }
+            
+            animationId = requestAnimationFrame(animate);
         }
 
         function pauseAutoPlay(pause) {
             isPaused = pause;
-            if (pause) {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                    autoPlayInterval = null;
-                }
-            } else {
-                resetAutoPlay();
-            }
         }
 
         // ===== ОСТАНОВКА ПРИ ХОВЕРЕ =====
-        wrapper.addEventListener('mouseenter', () => {
-            pauseAutoPlay(true);
-        });
-        wrapper.addEventListener('mouseleave', () => {
-            pauseAutoPlay(false);
-        });
+        wrapper.addEventListener('mouseenter', () => pauseAutoPlay(true));
+        wrapper.addEventListener('mouseleave', () => pauseAutoPlay(false));
 
         // ===== ОСТАНОВКА ПРИ КАСАНИИ НА ТЕЛЕФОНЕ =====
-        let touchTimeout = null;
-        wrapper.addEventListener('touchstart', () => {
-            pauseAutoPlay(true);
-            if (touchTimeout) {
-                clearTimeout(touchTimeout);
-                touchTimeout = null;
-            }
-        });
-        wrapper.addEventListener('touchend', () => {
-            pauseAutoPlay(false);
-        });
+        wrapper.addEventListener('touchstart', () => pauseAutoPlay(true));
+        wrapper.addEventListener('touchend', () => pauseAutoPlay(false));
 
-        // ===== СВАЙП ДЛЯ ТЕЛЕФОНА =====
+        // ===== СВАЙП =====
         let startX = 0;
+        let startOffset = 0;
         let isSwiping = false;
 
         wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
+            startOffset = offset;
             isSwiping = true;
+            pauseAutoPlay(true);
         });
 
         wrapper.addEventListener('touchmove', (e) => {
             if (!isSwiping) return;
-            const diff = startX - e.touches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                isSwiping = false;
-                if (diff > 0) {
-                    nextSlide();
-                } else {
-                    currentIndex = (currentIndex - 1 + (reviews.length + 3)) % (reviews.length + 3);
-                    updateCarousel(true);
-                }
-                pauseAutoPlay(true);
-                setTimeout(() => pauseAutoPlay(false), 3000);
-            }
+            const diff = (startX - e.touches[0].clientX) / 5;
+            offset = startOffset + diff;
+            if (offset < 0) offset = 0;
+            if (offset > slideWidth) offset = slideWidth;
+            updateCarousel();
         });
 
         wrapper.addEventListener('touchend', () => {
             isSwiping = false;
+            pauseAutoPlay(false);
         });
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             renderReviews();
-            resetAutoPlay();
+            updateCarousel();
+            // Устанавливаем начальную позицию
+            const slides = track.querySelectorAll('.carousel-slide');
+            const total = slides.length;
+            const centerIndex = total / 2;
+            // Сдвигаем трек так, чтобы центр был виден
+            track.style.transform = `translateX(-${centerIndex * slideWidth}%)`;
+            animationId = requestAnimationFrame(animate);
 
-            // Подсветка активного меню
             const currentPage = window.location.pathname.split('/').pop() || 'reviews.html';
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
