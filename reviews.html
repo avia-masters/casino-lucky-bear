@@ -8,6 +8,8 @@
     <link rel="canonical" href="https://casino-lucky-bear.ru/reviews.html" />
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="style.css">
+    <!-- Подключаем Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         .reviews-hero-description {
             max-width: 700px;
@@ -18,29 +20,77 @@
             text-align: center;
         }
 
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+        .carousel-wrapper {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 0 auto;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+            height: 480px;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            padding: 20px 0;
+        }
+
+        .swiper-wrapper {
+            align-items: center;
+        }
+
+        .swiper-slide {
+            width: 400px;
+            opacity: 0.3;
+            transform: scale(0.85);
+            transition: all 0.4s ease;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .swiper-slide-prev,
+        .swiper-slide-next {
+            opacity: 0.6;
+            transform: scale(0.92);
+        }
+
+        /* Фоновые отзывы (ещё дальше) */
+        .swiper-slide-prev ~ .swiper-slide,
+        .swiper-slide-next ~ .swiper-slide {
+            opacity: 0.15;
+            transform: scale(0.7);
+            filter: blur(1px);
+        }
+
+        .swiper-slide-prev ~ .swiper-slide ~ .swiper-slide,
+        .swiper-slide-next ~ .swiper-slide ~ .swiper-slide {
+            opacity: 0.05;
+            transform: scale(0.5);
+            filter: blur(2px);
         }
 
         .review-card {
             background: rgba(255,255,255,0.06);
             border-radius: 20px;
-            padding: 25px;
+            padding: 28px 24px;
             border: 1px solid rgba(255,255,255,0.08);
-            transition: all 0.3s ease;
+            height: 350px;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
         }
 
-        .review-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(0, 255, 255, 0.2);
+        .swiper-slide-active .review-card {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(0, 255, 255, 0.25);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
         }
 
         .review-card .stars {
@@ -48,6 +98,7 @@
             font-size: 18px;
             letter-spacing: 3px;
             margin-bottom: 8px;
+            flex-shrink: 0;
         }
 
         .review-card .review-header {
@@ -56,6 +107,7 @@
             align-items: center;
             margin-bottom: 10px;
             flex-wrap: wrap;
+            flex-shrink: 0;
         }
 
         .review-card .review-name {
@@ -70,11 +122,19 @@
         }
 
         .review-card .review-text {
-            color: rgba(255,255,255,0.72);
+            color: rgba(255,255,255,0.75);
             font-size: 14px;
             line-height: 1.7;
-            margin: 0 0 12px 0;
+            margin: 0 0 10px 0;
             flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+        }
+
+        .swiper-slide-active .review-card .review-text {
+            -webkit-line-clamp: 6;
         }
 
         .review-card .review-game {
@@ -85,6 +145,7 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 500;
+            flex-shrink: 0;
             align-self: flex-start;
         }
 
@@ -111,20 +172,15 @@
             margin-bottom: 20px;
         }
 
-        @media (max-width: 992px) {
-            .reviews-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
+        @media (max-width: 768px) {
+            .carousel-wrapper {
+                height: 400px;
             }
-        }
-
-        @media (max-width: 600px) {
-            .reviews-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0 15px;
+            .swiper-slide {
+                width: 280px;
             }
             .review-card {
+                height: 300px;
                 padding: 20px;
             }
             .review-card .review-name {
@@ -132,6 +188,10 @@
             }
             .review-card .review-text {
                 font-size: 13px;
+                -webkit-line-clamp: 4;
+            }
+            .swiper-slide-active .review-card .review-text {
+                -webkit-line-clamp: 5;
             }
             .review-card .stars {
                 font-size: 16px;
@@ -150,7 +210,14 @@
         }
 
         @media (max-width: 400px) {
+            .carousel-wrapper {
+                height: 360px;
+            }
+            .swiper-slide {
+                width: 220px;
+            }
             .review-card {
+                height: 260px;
                 padding: 16px;
             }
             .review-card .review-name {
@@ -158,7 +225,10 @@
             }
             .review-card .review-text {
                 font-size: 12px;
-                line-height: 1.6;
+                -webkit-line-clamp: 3;
+            }
+            .swiper-slide-active .review-card .review-text {
+                -webkit-line-clamp: 4;
             }
             .review-card .stars {
                 font-size: 14px;
@@ -208,7 +278,7 @@
             Более 50 реальных отзывов игроков о Lucky Bear. Узнайте, что говорят пользователи о выводах, бонусах, поддержке и игре. Присоединяйтесь к сообществу довольных игроков.
         </p>
         <div class="hero-buttons">
-            <a href="#reviews-list" class="main-button" rel="noreferrer noopener">Читать отзывы</a>
+            <a href="#carousel" class="main-button" rel="noreferrer noopener">Читать отзывы</a>
         </div>
     </section>
 
@@ -216,13 +286,17 @@
         Участие в азартных играх не гарантирует выигрыш и может привести к потере денежных средств. Играйте ответственно.
     </div>
 
-    <section id="reviews-list">
+    <section id="carousel">
         <h2 class="section-title">Отзывы игроков</h2>
         <p class="section-description">
             Реальные истории и мнения игроков Lucky Bear. Здесь вы найдёте честные отзывы о выводах, бонусах, поддержке и игре.
         </p>
 
-        <div class="reviews-grid" id="reviewsGrid"></div>
+        <div class="carousel-wrapper">
+            <div class="swiper" id="reviewsSwiper">
+                <div class="swiper-wrapper" id="swiperWrapper"></div>
+            </div>
+        </div>
     </section>
 
     <section style="padding-top: 20px;">
@@ -237,6 +311,8 @@
 
     <footer>LUCKY BEAR © 2026</footer>
 
+    <!-- Подключаем Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         // ===== 50 ОТЗЫВОВ =====
         const reviews = [
@@ -292,30 +368,69 @@
             { name: "Олег Н.", date: "22.03.2026", stars: 5, text: "Отличный выбор слотов! Играю в основном в Wild Bounty Snowdown и Treasures of Aztec. Вывод мгновенный, бонусы начисляют. Супер!", game: "Wild Bounty Snowdown" }
         ];
 
-        // ===== ОТОБРАЖЕНИЕ ОТЗЫВОВ =====
-        const grid = document.getElementById('reviewsGrid');
+        // ===== ИНИЦИАЛИЗАЦИЯ SWIPER =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.getElementById('swiperWrapper');
+            
+            // Рендерим отзывы
+            reviews.forEach(review => {
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+                slide.innerHTML = `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">${review.name}</span>
+                            <span class="review-date">${review.date}</span>
+                        </div>
+                        <div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div>
+                        <p class="review-text">${review.text}</p>
+                        <span class="review-game">Играл(а) в ${review.game}</span>
+                    </div>
+                `;
+                wrapper.appendChild(slide);
+            });
 
-        reviews.forEach(review => {
-            const card = document.createElement('div');
-            card.className = 'review-card';
-            card.innerHTML = `
-                <div class="review-header">
-                    <span class="review-name">${review.name}</span>
-                    <span class="review-date">${review.date}</span>
-                </div>
-                <div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div>
-                <p class="review-text">${review.text}</p>
-                <span class="review-game">Играл(а) в ${review.game}</span>
-            `;
-            grid.appendChild(card);
-        });
+            // Запускаем Swiper
+            const swiper = new Swiper('#reviewsSwiper', {
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                loop: true,
+                speed: 800,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                    },
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                },
+                on: {
+                    touchStart: function() {
+                        this.autoplay.stop();
+                    },
+                    touchEnd: function() {
+                        this.autoplay.start();
+                    }
+                }
+            });
 
-        // ===== ПОДСВЕТКА МЕНЮ =====
-        document.addEventListener('DOMContentLoaded', () => {
+            // Подсветка активного меню
             const page = window.location.pathname.split('/').pop() || 'reviews.html';
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === page) link.classList.add('active');
+                if (link.getAttribute('href') === page) {
+                    link.classList.add('active');
+                }
             });
         });
 
