@@ -25,7 +25,6 @@
             position: relative;
             overflow: hidden;
             height: 480px;
-            perspective: 1200px;
         }
 
         .carousel-track {
@@ -34,10 +33,9 @@
             will-change: transform;
             padding: 20px 0;
             position: relative;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             gap: 20px;
-            transform-style: preserve-3d;
-            align-items: center;
         }
 
         .carousel-slide {
@@ -45,39 +43,31 @@
             box-sizing: border-box;
             transition: all 0.3s ease;
             position: relative;
-            transform-style: preserve-3d;
         }
 
         /* ===== 3D ЭФФЕКТ ГЛУБИНЫ ===== */
         .carousel-slide[data-depth="0"] {
             opacity: 1 !important;
-            transform: scale(1) translateZ(0px) !important;
+            transform: scale(1) !important;
             z-index: 10;
         }
 
         .carousel-slide[data-depth="1"] {
             opacity: 0.5 !important;
-            transform: scale(0.88) translateZ(-60px) !important;
+            transform: scale(0.88) !important;
             z-index: 5;
         }
 
         .carousel-slide[data-depth="2"] {
             opacity: 0.2 !important;
-            transform: scale(0.75) translateZ(-120px) !important;
+            transform: scale(0.75) !important;
             z-index: 3;
         }
 
         .carousel-slide[data-depth="3"] {
             opacity: 0.06 !important;
-            transform: scale(0.6) translateZ(-180px) !important;
+            transform: scale(0.6) !important;
             z-index: 1;
-        }
-
-        /* Фоновые отзывы (ещё дальше) */
-        .carousel-slide[data-depth="4"] {
-            opacity: 0 !important;
-            transform: scale(0.4) translateZ(-240px) !important;
-            z-index: 0;
         }
 
         .review-card {
@@ -204,13 +194,13 @@
                 letter-spacing: 2px;
             }
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.85) translateZ(-40px) !important;
+                transform: scale(0.85) !important;
             }
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.7) translateZ(-80px) !important;
+                transform: scale(0.7) !important;
             }
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.55) translateZ(-120px) !important;
+                transform: scale(0.55) !important;
             }
             .reviews-hero-description {
                 font-size: 15px !important;
@@ -253,13 +243,13 @@
                 font-size: 10px;
             }
             .carousel-slide[data-depth="1"] {
-                transform: scale(0.8) translateZ(-30px) !important;
+                transform: scale(0.8) !important;
             }
             .carousel-slide[data-depth="2"] {
-                transform: scale(0.65) translateZ(-60px) !important;
+                transform: scale(0.65) !important;
             }
             .carousel-slide[data-depth="3"] {
-                transform: scale(0.5) translateZ(-90px) !important;
+                transform: scale(0.5) !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -397,7 +387,7 @@
         let lastTime = 0;
 
         const SLIDE_WIDTH = 420; // ширина слайда + gap
-        const SPEED = 0.03; // пикселей за миллисекунду
+        const SPEED = 0.025; // пикселей за миллисекунду
 
         function renderReviews() {
             track.innerHTML = '';
