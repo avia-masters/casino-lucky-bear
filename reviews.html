@@ -30,7 +30,7 @@
 
         .carousel-track {
             display: flex;
-            transition: transform 0.05s linear;
+            transition: transform 0.08s linear;
             will-change: transform;
             padding: 20px 0;
             position: relative;
@@ -46,6 +46,7 @@
             position: relative;
         }
 
+        /* ===== ОТЗЫВЫ ЯРКИЕ ===== */
         .carousel-slide.active {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -54,22 +55,22 @@
 
         .carousel-slide.prev,
         .carousel-slide.next {
-            opacity: 0.7 !important;
+            opacity: 0.8 !important;
             transform: scale(0.95) !important;
             z-index: 5;
         }
 
         .carousel-slide.far {
-            opacity: 0.4 !important;
-            transform: scale(0.9) !important;
+            opacity: 0.6 !important;
+            transform: scale(0.92) !important;
             z-index: 1;
         }
 
         .review-card {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.08);
             border-radius: 20px;
             padding: 28px 24px;
-            border: 2px solid rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.12);
             height: 350px;
             display: flex;
             flex-direction: column;
@@ -79,7 +80,7 @@
         }
 
         .carousel-slide.active .review-card {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.15);
             border-color: #00ffff !important;
             box-shadow: 0 0 50px rgba(0, 255, 255, 0.25), inset 0 0 30px rgba(0, 255, 255, 0.05);
         }
@@ -108,12 +109,12 @@
         }
 
         .review-card .review-date {
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.4);
             font-size: 12px;
         }
 
         .review-card .review-text {
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.8);
             font-size: 14px;
             line-height: 1.7;
             margin: 0 0 10px 0;
@@ -193,7 +194,7 @@
                 transform: scale(0.93) !important;
             }
             .carousel-slide.far {
-                transform: scale(0.88) !important;
+                transform: scale(0.9) !important;
             }
             .reviews-hero-description {
                 font-size: 15px !important;
@@ -240,7 +241,7 @@
                 transform: scale(0.91) !important;
             }
             .carousel-slide.far {
-                transform: scale(0.86) !important;
+                transform: scale(0.88) !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -300,7 +301,7 @@
 
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-track" id="carouselTrack">
-                <!-- ===== ОТЗЫВЫ (9 ШТУК ДЛЯ ПРИМЕРА) ===== -->
+                <!-- ===== ОТЗЫВЫ (9 ШТУК) ===== -->
                 <div class="carousel-slide active">
                     <div class="review-card">
                         <div class="review-header">
@@ -433,7 +434,7 @@
 
     <script src="lang.js"></script>
     <script>
-        // ===== КАРУСЕЛЬ =====
+        // ===== КАРУСЕЛЬ (БЕСКОНЕЧНАЯ, ПЛАВНАЯ) =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
 
@@ -441,14 +442,12 @@
         let isPaused = false;
         let animId = null;
         let lastTime = 0;
-        const SPEED = 0.07;
+        const SPEED = 0.06;
         const SLIDE_WIDTH = 420;
 
-        // ===== БЕСКОНЕЧНЫЙ ЦИКЛ =====
         function initCarousel() {
             const slides = track.querySelectorAll('.carousel-slide');
             const total = slides.length;
-            // Дублируем первый и последний слайд
             const firstClone = slides[0].cloneNode(true);
             const lastClone = slides[total - 1].cloneNode(true);
             track.appendChild(firstClone);
@@ -489,13 +488,12 @@
                 const total = slides.length;
                 const maxOffset = (total - 2) * SLIDE_WIDTH;
 
-                // Бесконечный цикл
                 if (offset > maxOffset) {
                     offset = SLIDE_WIDTH;
                     track.style.transition = 'none';
                     track.style.transform = `translateX(-${offset}px)`;
                     setTimeout(() => {
-                        track.style.transition = 'transform 0.05s linear';
+                        track.style.transition = 'transform 0.08s linear';
                     }, 50);
                 } else {
                     track.style.transform = `translateX(-${offset}px)`;
@@ -509,13 +507,11 @@
             isPaused = p;
         }
 
-        // ===== ОСТАНОВКА =====
         wrapper.addEventListener('mouseenter', () => pause(true));
         wrapper.addEventListener('mouseleave', () => pause(false));
         wrapper.addEventListener('touchstart', () => pause(true));
         wrapper.addEventListener('touchend', () => pause(false));
 
-        // ===== СВАЙП =====
         let startX = 0,
             startOffset = 0,
             swiping = false;
@@ -545,7 +541,6 @@
             pause(false);
         });
 
-        // ===== ЗАПУСК =====
         document.addEventListener('DOMContentLoaded', () => {
             initCarousel();
             animId = requestAnimationFrame(animate);
