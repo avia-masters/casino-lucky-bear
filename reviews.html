@@ -45,7 +45,6 @@
             position: relative;
         }
 
-        /* ===== ГЛУБИНА (БЕЗ ТУСКЛОСТИ) ===== */
         .carousel-slide.active {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -54,14 +53,14 @@
 
         .carousel-slide.prev,
         .carousel-slide.next {
-            opacity: 0.85 !important;
-            transform: scale(0.96) !important;
+            opacity: 0.5 !important;
+            transform: scale(0.92) !important;
             z-index: 5;
         }
 
         .carousel-slide.far {
-            opacity: 0.7 !important;
-            transform: scale(0.92) !important;
+            opacity: 0.2 !important;
+            transform: scale(0.84) !important;
             z-index: 1;
         }
 
@@ -78,7 +77,6 @@
             transition: all 0.3s ease;
         }
 
-        /* ===== АКТИВНЫЙ ОТЗЫВ — ЯРКАЯ ПОДСВЕТКА ===== */
         .carousel-slide.active .review-card {
             background: rgba(255, 255, 255, 0.12);
             border-color: #00ffff !important;
@@ -191,10 +189,10 @@
             }
             .carousel-slide.prev,
             .carousel-slide.next {
-                transform: scale(0.94) !important;
+                transform: scale(0.9) !important;
             }
             .carousel-slide.far {
-                transform: scale(0.9) !important;
+                transform: scale(0.82) !important;
             }
             .reviews-hero-description {
                 font-size: 15px !important;
@@ -238,10 +236,10 @@
             }
             .carousel-slide.prev,
             .carousel-slide.next {
-                transform: scale(0.92) !important;
+                transform: scale(0.88) !important;
             }
             .carousel-slide.far {
-                transform: scale(0.88) !important;
+                transform: scale(0.8) !important;
             }
             .reviews-cta h3 {
                 font-size: 19px;
@@ -259,18 +257,18 @@
         <a href="index.html" class="brand-icon">
             <img src="images/menu-logo.png" alt="LUCKY BEAR">
         </a>
-       <nav class="nav" id="mobileNav">
-    <a href="how-to-play.html" class="nav-link">Как играть</a>
-    <a href="rules.html" class="nav-link">Правила</a>
-    <a href="games.html" class="nav-link">Игры</a>
-    <a href="bonus.html" class="nav-link">Бонусы</a>
-    <a href="payment.html" class="nav-link">Пополнение</a>
-    <a href="responsible.html" class="nav-link">Советы</a>
-    <a href="vip.html" class="nav-link">VIP</a>
-    <a href="blog.html" class="nav-link">Блог</a>
-    <a href="reviews.html" class="nav-link">Отзывы</a>
-    <a href="faq.html" class="nav-link">FAQ</a>
-</nav>
+        <nav class="nav" id="mobileNav">
+            <a href="how-to-play.html" class="nav-link">Как играть</a>
+            <a href="rules.html" class="nav-link">Правила</a>
+            <a href="games.html" class="nav-link">Игры</a>
+            <a href="bonus.html" class="nav-link">Бонусы</a>
+            <a href="payment.html" class="nav-link">Пополнение</a>
+            <a href="responsible.html" class="nav-link">Советы</a>
+            <a href="vip.html" class="nav-link">VIP</a>
+            <a href="blog.html" class="nav-link">Блог</a>
+            <a href="reviews.html" class="nav-link">Отзывы</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </nav>
         <a href="https://lb777.xyz/5dsgV7" class="bot-button" rel="noreferrer noopener">
             <img src="images/logo.png" alt="LUCKY BEAR">
             <span>Играть</span>
@@ -301,7 +299,7 @@
 
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-track" id="carouselTrack">
-                <!-- ===== 9 ОТЗЫВОВ ===== -->
+                <!-- ===== ОТЗЫВЫ (9 ШТУК ДЛЯ ПРИМЕРА) ===== -->
                 <div class="carousel-slide active">
                     <div class="review-card">
                         <div class="review-header">
@@ -423,8 +421,16 @@
         </div>
     </section>
 
-    <footer>LUCKY BEAR © 2026</footer>
+    <footer>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <span data-lang="footer_text">LUCKY BEAR © 2026</span>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <button class="lang-btn" data-lang="ru" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px; transition: 0.3s; padding: 0 5px;">RU</button>
+            <button class="lang-btn" data-lang="en" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px; transition: 0.3s; padding: 0 5px;">EN</button>
+        </div>
+    </footer>
 
+    <script src="lang.js"></script>
     <script>
         // ===== КАРУСЕЛЬ =====
         const track = document.getElementById('carouselTrack');
@@ -436,9 +442,22 @@
         let lastTime = 0;
         const SPEED = 0.07;
         const SLIDE_WIDTH = 420;
+        let slides = track.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        // ===== БЕСКОНЕЧНЫЙ ЦИКЛ: ДУБЛИРУЕМ СЛАЙДЫ =====
+        function duplicateSlides() {
+            const cloneFirst = slides[0].cloneNode(true);
+            const cloneLast = slides[totalSlides - 1].cloneNode(true);
+            track.appendChild(cloneFirst);
+            track.insertBefore(cloneLast, slides[0]);
+            slides = track.querySelectorAll('.carousel-slide');
+            // Смещаем offset на один слайд вправо, чтобы первый реальный слайд был в центре
+            offset = SLIDE_WIDTH;
+            track.style.transform = `translateX(-${offset}px)`;
+        }
 
         function updateClasses() {
-            const slides = track.querySelectorAll('.carousel-slide');
             const total = slides.length;
             const center = (total / 2) + offset / SLIDE_WIDTH;
             const centerInt = Math.round(center);
@@ -464,10 +483,14 @@
 
             if (!isPaused) {
                 offset += SPEED * delta;
-                const total = track.querySelectorAll('.carousel-slide').length;
-                const maxOffset = (total / 3) * SLIDE_WIDTH;
+                const maxOffset = (totalSlides + 2) * SLIDE_WIDTH;
                 if (offset > maxOffset) {
-                    offset -= maxOffset / 2;
+                    offset = SLIDE_WIDTH;
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(-${offset}px)`;
+                    setTimeout(() => {
+                        track.style.transition = 'transform 0.05s linear';
+                    }, 50);
                 }
                 track.style.transform = `translateX(-${offset}px)`;
                 updateClasses();
@@ -510,6 +533,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
+            duplicateSlides();
             updateClasses();
             animId = requestAnimationFrame(animate);
 
