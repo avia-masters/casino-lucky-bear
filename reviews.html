@@ -46,7 +46,6 @@
             position: relative;
         }
 
-        /* ===== ГЛУБИНА (ЯРКИЕ ОТЗЫВЫ) ===== */
         .carousel-slide.active {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -434,7 +433,7 @@
 
     <script src="lang.js"></script>
     <script>
-        // ===== КАРУСЕЛЬ (БЕСКОНЕЧНАЯ, БЕЗ СБОЕВ) =====
+        // ===== КАРУСЕЛЬ =====
         const track = document.getElementById('carouselTrack');
         const wrapper = document.getElementById('carouselWrapper');
 
@@ -445,10 +444,11 @@
         const SPEED = 0.07;
         const SLIDE_WIDTH = 420;
 
-        // Дублируем слайды для бесконечности
+        // ===== БЕСКОНЕЧНЫЙ ЦИКЛ =====
         function initCarousel() {
             const slides = track.querySelectorAll('.carousel-slide');
             const total = slides.length;
+            // Дублируем первый и последний слайд
             const firstClone = slides[0].cloneNode(true);
             const lastClone = slides[total - 1].cloneNode(true);
             track.appendChild(firstClone);
@@ -488,7 +488,8 @@
                 const slides = track.querySelectorAll('.carousel-slide');
                 const total = slides.length;
                 const maxOffset = (total - 2) * SLIDE_WIDTH;
-                
+
+                // Бесконечный цикл
                 if (offset > maxOffset) {
                     offset = SLIDE_WIDTH;
                     track.style.transition = 'none';
@@ -508,12 +509,13 @@
             isPaused = p;
         }
 
+        // ===== ОСТАНОВКА =====
         wrapper.addEventListener('mouseenter', () => pause(true));
         wrapper.addEventListener('mouseleave', () => pause(false));
-
         wrapper.addEventListener('touchstart', () => pause(true));
         wrapper.addEventListener('touchend', () => pause(false));
 
+        // ===== СВАЙП =====
         let startX = 0,
             startOffset = 0,
             swiping = false;
@@ -543,6 +545,7 @@
             pause(false);
         });
 
+        // ===== ЗАПУСК =====
         document.addEventListener('DOMContentLoaded', () => {
             initCarousel();
             animId = requestAnimationFrame(animate);
